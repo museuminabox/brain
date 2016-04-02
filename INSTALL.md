@@ -31,6 +31,19 @@
 
 Or use the pre-rolled images.
 
+## Connecting to WiFi
+
+To add new WiFi network credentials to the brain you will need a working network connection to the brain already.  So either add the settings before you move it from a known WiFi setup, or connect it to the network via Ethernet first.
+
+ 1. Get a command line connection to the brain
+     ssh pi@brain-1.local
+ 1. Run the WiFi config console
+     sudo wicd-curses
+ 1. Find the network that you want to configure on the list.  Press the -> key to move to the configuration screen.  Use the down cursor key to find the "Automatically connect to this network" setting, then press the space bar to enable it "[X]" rather than "[ ]".  If the network requires encryption then cursor down to the "Key:" field and fill in the password there.
+ 1. Hit "F10" to save the settings.
+ 1. Type "Q" to quit from the WiFi config app.
+ 1. Next time you boot up, it should choose the newly configured WiFi.  (You'll need to unplug the Ethernet if you've used that, otherwise it'll use that in preference)
+
 ## Writing new tags
 
 ### Writing the metadata to the tags
