@@ -27,7 +27,10 @@
 1. Install Node RED (if it wasn't already on the Raspbian image)
 1. Install rfid-sl030 and ndef node.js modules
 1. Copy contents of [miab](miab) to /home/pi
-1. Import relevant flow depending on the sort of brain you're creating
+1. Copy flows_brain.json to /root/.node-red/ (you will need to rename it to flows_<hostname>.json depending on the hostname of your Pi)
+1. Install [simple_sl030_rfid_reader]() and build `get_first_ndef_text_record` for it
+1. Copy `bootprogress` to `/etc/init.d` to indicate progress during boot-up
+1. Set `bootprogress` to run - `sudo update-rc.d bootprogress defaults`
 
 Or use the pre-rolled images.
 
