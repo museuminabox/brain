@@ -65,7 +65,7 @@ To add new WiFi network credentials to the brain you will need a working network
 
 ### Copying content over to the Brain
 1. Open the "transmit" app (on Mac)
-1. Create a new favourite, with the server of brain-1.local (or brain-2.local), username pi, password raspberry
+1. Create a new favourite, with the server of brain-1.local (or brain-2.local), protocol set to "SFTP" username pi, password raspberry
 1. Connect to it, copy the audio and video files into the respective miab/audio and miab/video folders
 1. Repeat the process for all the other brains
 
