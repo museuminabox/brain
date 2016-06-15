@@ -1,0 +1,20 @@
+---
+- name: Museum in a Box Brain on a Raspberry Pi
+  hosts: brain
+  vars:
+    brain_name: brain-1
+  remote_user: pi
+  become: yes
+  become_method: sudo
+  roles:
+    - base-nodered
+
+  pre_tasks:
+    - name: Update apt
+      apt: upgrade=dist update_cache=yes
+      become: true
+
+  tasks:
+  - name: Install WiFi management
+    apt: name=wicd-curses state=present
+
