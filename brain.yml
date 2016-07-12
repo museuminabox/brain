@@ -7,7 +7,7 @@
   become: yes
   become_method: sudo
   roles:
-    - base-nodered
+    - rpi-rfid-nodered
 
   pre_tasks:
     - name: Update apt
@@ -17,4 +17,22 @@
   tasks:
   - name: Install WiFi management
     apt: name=wicd-curses state=present
-
+  #FIXME Copy wifi settings across
+  - name: Copy miab folder across
+    synchronize: src=miab dest=/home/pi
+  - name: Copy across the flow file
+    copy: src=flows_brain.json dest=/root/.node-red/flows_brain.json
+    notify:
+      - restart nodered
+  - name: Update location of the flow file
+    replace: dest=/root/.node-red/settings.js regexp='\/\/(flowFile.) .*$' replace="\1'flows_brain.json',"
+    notify:
+      - restart nodered
+  - name: Copy across boot progress LED script
+    copy: src=bootprogress.service dest=/lib/systemd/system/bootprogress.service
+  - name: Set the boot progress script to start at boot
+    service: name=bootprogress enabled=yes
+  - name: Copy across ndef program configuration service script
+    copy: src=miab-ndef.service dest=/lib/systemd/system/miab-ndef.service
+  - name: Set the ndef program configuration service to start at boot
+    service: name=miab-ndef enabled=yes

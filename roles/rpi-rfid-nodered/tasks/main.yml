@@ -1,0 +1,10 @@
+# Install a base NodeRED system (on a Raspberry Pi)
+---
+# FIXME use base-nodered as starting point, then install
+  - name: Install RFID/NFC NodeRED node
+    npm: name=node-red-contrib-nfc global=yes
+  - name: Set NodeRED to run as root
+    replace: dest=/lib/systemd/system/nodered.service regexp='User=pi' replace='User=root'
+    notify:
+      - restart nodered
+

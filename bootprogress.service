@@ -1,0 +1,24 @@
+# systemd service file to show MiaB brain progress
+
+[Unit]
+Description=Museum in a Box boot progress
+Wants=local-fs.target
+
+[Service]
+Type=simple
+# Run as normal pi user - feel free to change...
+User=pi
+Group=pi
+Nice=5
+#WorkingDirectory=/usr/lib/node_modules/node-red/
+ExecStart=/home/pi/miab/bootprogress
+# Use SIGINT to stop
+KillSignal=SIGINT
+# Auto restart on crash
+#Restart=on-failure
+# Tag things in the log
+SyslogIdentifier=MiaB-Boot
+#StandardOutput=syslog
+
+[Install]
+WantedBy=multi-user.target
