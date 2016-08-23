@@ -17,15 +17,13 @@
   tasks:
   - name: Install WiFi management
     apt: name=wicd-curses state=present
+  - name: Install rsync
+    apt: name=rsync state=present
   #FIXME Copy wifi settings across
   - name: Copy miab folder across
     synchronize: src=miab dest=/home/pi
-  - name: Copy across the flow file
-    copy: src=flows_brain.json dest=/root/.node-red/flows_brain.json
-    notify:
-      - restart nodered
-  - name: Update location of the flow file
-    replace: dest=/root/.node-red/settings.js regexp='\/\/(flowFile.) .*$' replace="\1'flows_brain.json',"
+  - name: Copy Node RED flow and config across
+    synchronize: src=node-red-config/ dest=/root/.node-red/
     notify:
       - restart nodered
   - name: Copy across boot progress LED script
