@@ -1,0 +1,12 @@
+ctrl_interface=/var/run/wpa_supplicant
+network={
+scan_ssid=1
+ssid="YOUR WIFI NETWORK"
+psk="YOUR WIFI PASSWORD"
+}
+network={
+ssid="YOUR WIFI NETWORK"
+key_mgmt=NONE
+wep_key0="YOUR WIFI PASSWORD"
+wep_tx_keyidx=0
+}

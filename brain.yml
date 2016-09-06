@@ -15,11 +15,10 @@
       become: true
 
   tasks:
-  - name: Install WiFi management
-    apt: name=wicd-curses state=present
   - name: Install rsync
     apt: name=rsync state=present
-  #FIXME Copy wifi settings across
+  - name: Copy wifi settings across
+    copy: src=wpa_supplicant.conf dest=/etc/wpa_supplicant/wpa_supplicant.conf
   - name: Copy miab folder across
     synchronize: src=miab dest=/home/pi
   - name: Copy Node RED flow and config across
