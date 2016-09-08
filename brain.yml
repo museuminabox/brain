@@ -2,7 +2,7 @@
 - name: Museum in a Box Brain on a Raspberry Pi
   hosts: brain
   vars:
-    brain_name: brain-1
+    brain_name: brain
   remote_user: pi
   become: yes
   become_method: sudo
@@ -15,6 +15,10 @@
       become: true
 
   tasks:
+  - name: Change Pis name to brain
+    hostname: name="{{ brain_name }}"
+  - name: Update hosts file too
+    replace: dest=/etc/hosts regexp='raspberrypi' replace="{{ brain_name }}"
   - name: Install rsync
     apt: name=rsync state=present
   - name: Copy wifi settings across
