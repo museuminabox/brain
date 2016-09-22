@@ -54,3 +54,5 @@
     copy: src=miab-ndef.service dest=/lib/systemd/system/miab-ndef.service
   - name: Set the ndef program configuration service to start at boot
     service: name=miab-ndef enabled=yes
+  - name: Ensure we have the volume turned up to max
+    command: amixer cset numid=1 -- 400
