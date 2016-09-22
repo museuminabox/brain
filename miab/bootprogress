@@ -7,7 +7,7 @@ then
         echo 10 > /sys/class/gpio/export
         echo out > /sys/class/gpio/gpio10/direction
         echo 1 > /sys/class/gpio/gpio10/value
-        aplay /home/pi/miab/booting.wav&
+        play /home/pi/miab/booting.wav&
         sleep 5
         echo 23 > /sys/class/gpio/export
         echo out > /sys/class/gpio/gpio23/direction
