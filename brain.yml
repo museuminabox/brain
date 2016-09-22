@@ -1,0 +1,52 @@
+---
+- name: Museum in a Box Brain on a Raspberry Pi
+  hosts: brain
+  vars:
+    brain_name: brain
+  remote_user: pi
+  become: yes
+  become_method: sudo
+  roles:
+    - rpi-rfid-nodered
+
+  pre_tasks:
+    - name: Update apt
+      apt: upgrade=dist update_cache=yes
+      become: true
+
+  tasks:
+  - name: Change Pis name to brain
+    hostname: name="{{ brain_name }}"
+  - name: Update hosts file too
+    replace: dest=/etc/hosts regexp='raspberrypi' replace="{{ brain_name }}"
+  - name: Install rsync
+    apt: name=rsync state=present
+  - name: Copy wifi settings across
+    copy: src=wpa_supplicant.conf dest=/etc/wpa_supplicant/wpa_supplicant.conf
+  - name: Copy miab folder across
+    synchronize: src=miab dest=/home/pi
+  - name: Copy Node RED flow and config across
+    synchronize: src=node-red-config/ dest=/root/.node-red/
+    notify:
+      - restart nodered
+  - name: Copy across boot progress LED script
+    copy: src=bootprogress.service dest=/lib/systemd/system/bootprogress.service
+  - name: Set the boot progress script to start at boot
+    service: name=bootprogress enabled=yes
+  - name: Copy across script to set up the right sound card on boot
+    copy: src=setup-soundcard.service dest=/lib/systemd/system/setup-soundcard.service
+  - name: Set the soundcard setup script to start at boot
+    service: name=setup-soundcard enabled=yes
+  - name: Enable the DAC in case we're running on a Pi Zero
+    lineinfile: dest=/etc/modules line=i2c-dev
+  - name: Add the DAC device overlay
+    blockinfile:
+      dest: /boot/config.txt
+      block: |
+        dtparam=i2c_arm=on
+        dtparam=i2s=on
+        dtoverlay=hifiberry-dac
+  - name: Copy across ndef program configuration service script
+    copy: src=miab-ndef.service dest=/lib/systemd/system/miab-ndef.service
+  - name: Set the ndef program configuration service to start at boot
+    service: name=miab-ndef enabled=yes

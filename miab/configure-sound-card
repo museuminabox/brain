@@ -1,0 +1,19 @@
+#! /bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Work out which version of Pi we're running on
+PI_VERSION=`python $DIR/raspi_version.py | grep Model`
+
+# Get the asound hardware card info the for the possible hardware we're using
+ALSA_CARD=`aplay -l | grep ALSA | cut -c 6 | uniq`
+HIFIBERRY_CARD=`aplay -l | grep hifiberry | cut -c 6 | uniq`
+
+# If we're on a Pi Zero, assume we're using a Phat DAC, otherwise assume ALSA
+if [[ "$PI_VERSION" == *Zero* ]]
+then
+  USE_SOUND_CARD=$HIFIBERRY_CARD
+else
+  USE_SOUND_CARD=$ALSA_CARD
+fi
+echo -e "pcm.!default  {\n\ttype hw card $USE_SOUND_CARD\n}\nctl.!default {\n\ttype hw card $USE_SOUND_CARD\n}" > /etc/asound.conf

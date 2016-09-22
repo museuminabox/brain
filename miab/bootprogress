@@ -1,0 +1,32 @@
+#! /bin/sh
+
+# Tell the user that we're working on things...
+if [ -d /home/pi/miab ]
+then
+        # Turn on the progress LEDs
+        echo 10 > /sys/class/gpio/export
+        echo out > /sys/class/gpio/gpio10/direction
+        echo 1 > /sys/class/gpio/gpio10/value
+        aplay /home/pi/miab/booting.wav&
+        sleep 5
+        echo 23 > /sys/class/gpio/export
+        echo out > /sys/class/gpio/gpio23/direction
+        echo 1 > /sys/class/gpio/gpio23/value
+        sleep 5
+        echo 22 > /sys/class/gpio/export
+        echo out > /sys/class/gpio/gpio22/direction
+        echo 1 > /sys/class/gpio/gpio22/value
+        sleep 5
+        echo 27 > /sys/class/gpio/export
+        echo out > /sys/class/gpio/gpio27/direction
+        echo 1 > /sys/class/gpio/gpio27/value
+        sleep 4
+        echo 17 > /sys/class/gpio/export
+        echo out > /sys/class/gpio/gpio17/direction
+        echo 1 > /sys/class/gpio/gpio17/value
+        sleep 3
+        echo 18 > /sys/class/gpio/export
+        echo out > /sys/class/gpio/gpio18/direction
+        echo 1 > /sys/class/gpio/gpio18/value
+fi
+exit 0

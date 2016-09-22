@@ -1,0 +1,4 @@
+---
+ - name: restart nodered
+   service: name=nodered state=restarted
+

@@ -23,6 +23,8 @@
 
 ## Installation
 
+### Manual Install
+
 1. Install latest Raspbian
 1. Install Node RED (if it wasn't already on the Raspbian image)
 1. Install rfid-sl030 and ndef node.js modules
@@ -31,6 +33,20 @@
 1. Install [simple_sl030_rfid_reader]() and build `get_first_ndef_text_record` for it
 1. Copy `bootprogress` to `/etc/init.d` to indicate progress during boot-up
 1. Set `bootprogress` to run - `sudo update-rc.d bootprogress defaults`
+
+### Ansible Install
+
+1. Install [Ansible](https://www.ansible.com/get-started) on your computer
+1. Install the latest [Raspbian lite image](https://www.raspberrypi.org/downloads/raspbian/) onto a micro-SD card
+1. Boot the Raspberry Pi with the micro-SD card, while plugged into a network via Ethernet
+1. Find out the IP address of the Raspberry Pi
+1. Copy your SSH credentials onto the Pi
+  ```ssh-copy-id pi@<ip-address-of-the-pi>```
+1. Edit the ```hosts``` file so ansible knows which computer to configure.  Change the IP address in it to match the one you just found out.
+1. Check you can run commands on the Pi using Ansible
+   ```ansible brain -i hosts -a "hostname" -u pi```
+1. Update the brain
+   ```ansible-playbook brain.yml -i hosts```
 
 Or use the pre-rolled images.
 

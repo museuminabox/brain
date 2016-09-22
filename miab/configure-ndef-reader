@@ -1,0 +1,5 @@
+#! /bin/sh
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PI_VERSION=`python $DIR/rpi_version.py`
+cp "$DIR/get_first_ndef_text_record.pi$PI_VERSION" get_first_ndef_text_record

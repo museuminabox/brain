@@ -1,0 +1,23 @@
+# systemd service file to configure MiaB ndef reader program
+
+[Unit]
+Description=Configure Museum in a Box NDEF reader
+Wants=local-fs.target
+
+[Service]
+Type=simple
+User=root
+Group=pi
+Nice=5
+WorkingDirectory=/home/pi/miab/
+ExecStart=/home/pi/miab/configure-ndef-reader
+# Use SIGINT to stop
+KillSignal=SIGINT
+# Auto restart on crash
+#Restart=on-failure
+# Tag things in the log
+SyslogIdentifier=MiaB-ndef
+#StandardOutput=syslog
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,10 @@
+# Install a base NodeRED system (on a Raspberry Pi)
+---
+  - name: Install NodeRED
+    apt: name=nodered state=present
+  - name: Install npm
+    apt: name=npm state=present
+  - name: Upgrade npm to v2.x
+    npm: name=npm global=yes version=2.x
+  - name: Start NodeRED on boot
+    service: name=nodered state=started enabled=yes
