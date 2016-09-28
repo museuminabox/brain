@@ -1,0 +1,12 @@
+{
+    "name": "radio serial",
+    "dependencies": {
+        "microbit": "*",
+        "microbit-radio": "*"
+    },
+    "description": "",
+    "files": [
+        "main.ts",
+        "README.md"
+    ]
+}
