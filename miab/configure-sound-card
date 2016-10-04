@@ -16,4 +16,4 @@ then
 else
   USE_SOUND_CARD=$ALSA_CARD
 fi
-echo -e "pcm.!default  {\n\ttype hw card $USE_SOUND_CARD\n}\nctl.!default {\n\ttype hw card $USE_SOUND_CARD\n}" > /etc/asound.conf
+echo -e "pcm.!default  {\n\ttype asym\n\tplayback.pcm {\n\t\ttype hw card $USE_SOUND_CARD\n\t}\n\tcapture.pcm {\n\t\ttype hw card 2\n\t}\n}\nctl.!default {\n\ttype hw card $USE_SOUND_CARD\n}" > /etc/asound.conf
