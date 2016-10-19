@@ -37,10 +37,6 @@
     copy: src=bootprogress.service dest=/lib/systemd/system/bootprogress.service
   - name: Set the boot progress script to start at boot
     service: name=bootprogress enabled=yes
-  - name: Copy across script to set up the right sound card on boot
-    copy: src=setup-soundcard.service dest=/lib/systemd/system/setup-soundcard.service
-  - name: Set the soundcard setup script to start at boot
-    service: name=setup-soundcard enabled=yes
   - name: Enable the DAC in case we're running on a Pi Zero
     lineinfile: dest=/etc/modules line=i2c-dev
   - name: Add the DAC device overlay
@@ -50,9 +46,26 @@
         dtparam=i2c_arm=on
         dtparam=i2s=on
         dtoverlay=hifiberry-dac
+  - name: Copy across script to set up the right sound card on boot
+    copy: src=setup-soundcard.service dest=/lib/systemd/system/setup-soundcard.service
+  - name: Set the soundcard setup script to start at boot
+    service: name=setup-soundcard enabled=yes
   - name: Copy across ndef program configuration service script
     copy: src=miab-ndef.service dest=/lib/systemd/system/miab-ndef.service
   - name: Set the ndef program configuration service to start at boot
     service: name=miab-ndef enabled=yes
   - name: Ensure we have the volume turned up to max
     command: amixer cset numid=1 -- 400
+  - name: Restart Pi so the soundcard is set up before we set the mic level
+    shell: sleep 2 && shutdown -r now "Ansible updates triggered"
+    async: 1
+    poll: 0
+    ignore_errors: true
+  - name: Waiting for server to come back
+    local_action: wait_for host={{ inventory_hostname }}
+                  state=started
+    sudo: false
+  - name: Ensure we have the mic gain turned up
+    command: amixer -c 2 cset numid=6 -- 10
+  - name: Save the mic gain setting
+    command: alsactl store 2
