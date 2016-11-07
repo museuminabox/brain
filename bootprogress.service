@@ -6,9 +6,8 @@ Wants=local-fs.target
 
 [Service]
 Type=simple
-# Run as normal pi user - feel free to change...
-User=pi
-Group=pi
+User=root
+Group=gpio
 Nice=5
 #WorkingDirectory=/usr/lib/node_modules/node-red/
 ExecStart=/home/pi/miab/bootprogress
