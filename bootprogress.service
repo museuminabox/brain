@@ -9,7 +9,6 @@ Type=simple
 User=root
 Group=gpio
 Nice=5
-#WorkingDirectory=/usr/lib/node_modules/node-red/
 ExecStart=/home/pi/miab/bootprogress
 # Use SIGINT to stop
 KillSignal=SIGINT

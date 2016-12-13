@@ -16,4 +16,4 @@ then
 else
   USE_SOUND_CARD=$ALSA_CARD
 fi
-echo -e "pcm.!default  {\n\ttype hw card $USE_SOUND_CARD\n}\nctl.!default {\n\ttype hw card $USE_SOUND_CARD\n}" > /etc/asound.conf
+echo -e "pcm.softvol {\n\ttype softvol\n\tslave {\n\t\tpcm \"plughw:$USE_SOUND_CARD\"\n\t}\n\tcontrol {\n\t\tname \"Master\"\n\t\tcard $USE_SOUND_CARD\n\t}\n}\npcm.!default  {\n\ttype plug\n\tslave.pcm \"softvol\"\n}\nctl.!default {\n\ttype hw card $USE_SOUND_CARD\n}" > /etc/asound.conf

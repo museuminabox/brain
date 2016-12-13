@@ -41,6 +41,10 @@
     copy: src=setup-soundcard.service dest=/lib/systemd/system/setup-soundcard.service
   - name: Set the soundcard setup script to start at boot
     service: name=setup-soundcard enabled=yes
+  - name: Copy across script to run the volume control automatically
+    copy: src=soft-vol.service dest=/lib/systemd/system/soft-vol.service
+  - name: Set the soundcard setup script to start at boot
+    service: name=soft-vol enabled=yes
   - name: Enable the DAC in case we're running on a Pi Zero
     lineinfile: dest=/etc/modules line=i2c-dev
   - name: Add the DAC device overlay
