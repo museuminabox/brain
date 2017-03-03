@@ -4,23 +4,24 @@
 if [ -d /home/pi/miab ]
 then
         # Turn on the progress LEDs
+        play /home/pi/miab/booting.wav
+        sleep 2
         echo 10 > /sys/class/gpio/export
         echo out > /sys/class/gpio/gpio10/direction
         echo 1 > /sys/class/gpio/gpio10/value
-        play /home/pi/miab/booting.wav&
-        sleep 5
+        sleep 2
         echo 23 > /sys/class/gpio/export
         echo out > /sys/class/gpio/gpio23/direction
         echo 1 > /sys/class/gpio/gpio23/value
-        sleep 5
+        sleep 2
         echo 22 > /sys/class/gpio/export
         echo out > /sys/class/gpio/gpio22/direction
         echo 1 > /sys/class/gpio/gpio22/value
-        sleep 5
+        sleep 2
         echo 27 > /sys/class/gpio/export
         echo out > /sys/class/gpio/gpio27/direction
         echo 1 > /sys/class/gpio/gpio27/value
-        sleep 4
+        sleep 2
         echo 17 > /sys/class/gpio/export
         echo out > /sys/class/gpio/gpio17/direction
         echo 1 > /sys/class/gpio/gpio17/value
