@@ -48,7 +48,13 @@
 1. Update the brain
    ```ansible-playbook brain.yml -i hosts```
 
-Or use the pre-rolled images.
+Or use the pre-rolled images...
+
+1. Download one of our image files
+1. Unzip it, so you end up with a brain-YYYYMMDD.img file
+1. Write the .img file to the SD card, following the steps on the Raspberry Pi website - [Mac](https://www.raspberrypi.org/documentation/installation/installing-images/mac.md)/[Windows](https://www.raspberrypi.org/documentation/installation/installing-images/windows.md)/[Linux](https://www.raspberrypi.org/documentation/installation/installing-images/linux.md)
+1. Put the SD card into the Raspberry Pi on the Brain and boot it up
+1. Visit [http://brain.local:1880/setup](http://brain.local:1880/setup) to configure the brain
 
 ## Connecting to WiFi
 
