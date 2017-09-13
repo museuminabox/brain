@@ -1,0 +1,27 @@
+# systemd service file to start Resin.io WiFi access point for WiFi config
+
+[Unit]
+Description=Script to run the WiFi hotspot if we don't recognise any WiFi
+Wants=local-fs.target
+
+[Service]
+Type=simple
+# Run as normal pi user - feel free to change...
+User=root
+Group=root
+WorkingDirectory=/usr/src/app
+Nice=5
+Environment="DEVICE_TYPE=raspberrypi3"
+Environment="PORTAL_INTERFACE=wlan0"
+Environment="PORTAL_SSID=museuminabox"
+ExecStart=/usr/src/app/start
+# Use SIGINT to stop
+KillSignal=SIGINT
+# Auto restart on crash
+Restart=on-failure
+# Tag things in the log
+SyslogIdentifier=WiFi-config
+#StandardOutput=syslog
+
+[Install]
+WantedBy=multi-user.target

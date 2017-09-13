@@ -1,7 +1,5 @@
-# Install a base NodeRED system (on a Raspberry Pi)
+# Install resin-wifi-connect to set up a WiFi hotspot to allow network configuring
 ---
-  - name: Install docker
-    apt: name=docker state=present
   - name: Install git
     apt: name=git state=present
   - name: Install dnsmasq
