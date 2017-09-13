@@ -38,6 +38,7 @@
 
 1. Install [Ansible](https://www.ansible.com/get-started) on your computer
 1. Install the latest [Raspbian lite image](https://www.raspberrypi.org/downloads/raspbian/) onto a micro-SD card
+1. Create a file called `ssh` on the `/boot` partition of the SD card.  The contents don't matter, it's just to enable the SSH server.  E.g. on Ubuntu `touch /media/myusername/boot/ssh`
 1. Boot the Raspberry Pi with the micro-SD card, while plugged into a network via Ethernet
 1. Find out the IP address of the Raspberry Pi
 1. Copy your SSH credentials onto the Pi
