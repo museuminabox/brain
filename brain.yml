@@ -8,6 +8,7 @@
   become_method: sudo
   roles:
     - rpi-rfid-nodered
+    - user-configurable-wifi
 
   pre_tasks:
     - name: Update apt
