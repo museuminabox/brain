@@ -49,6 +49,8 @@
 1. Update the brain
    ```ansible-playbook brain.yml -i hosts```
 
+### Pre-rolled Image Install
+
 Or use the pre-rolled images...
 
 1. Download one of our image files
