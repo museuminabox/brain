@@ -1,0 +1,7 @@
+#! /bin/bash
+
+ps aux | grep wifi-connect | grep -v grep
+if [[ $? == 1 ]]; then
+  echo "No wifi-connect found, spawn it"
+  wifi-connect --clear=true --portal-ssid MuseumInABox
+fi

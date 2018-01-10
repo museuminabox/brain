@@ -2,20 +2,8 @@
 ---
   - name: Install git
     apt: name=git state=present
-  - name: Install dnsmasq
-    apt: name=dnsmasq state=present
-  - name: Install hostapd
-    apt: name=hostapd state=present
-  - name: Install iproute2
-    apt: name=iproute2 state=present
-  - name: Install iw
-    apt: name=iw state=present
-  - name: Install libdbus-1-dev
-    apt: name=libdbus-1-dev state=present
-  - name: Install libexpat-dev
-    apt: name=libexpat-dev state=present
-  - name: Install rfkill
-    apt: name=rfkill state=present
   - name: Install Resin.io's WiFi connector
     git: repo=git://github.com/resin-io/resin-wifi-connect.git dest=/home/pi/resin-wifi-connect
     become: false
+  - name: Run wifi-connect install script
+    command: /home/pi/resin-wifi-connect/scripts/raspbian-install.sh -y
