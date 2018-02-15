@@ -1,0 +1,9 @@
+# Install resin-wifi-connect to set up a WiFi hotspot to allow network configuring
+---
+  - name: Install git
+    apt: name=git state=present
+  - name: Install Resin.io's WiFi connector
+    git: repo=git://github.com/resin-io/resin-wifi-connect.git dest=/home/pi/resin-wifi-connect
+    become: false
+  - name: Run wifi-connect install script
+    command: /home/pi/resin-wifi-connect/scripts/raspbian-install.sh -y

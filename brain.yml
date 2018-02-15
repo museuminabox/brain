@@ -8,6 +8,8 @@
   become_method: sudo
   roles:
     - rpi-rfid-nodered
+    - user-configurable-wifi
+    - nm-wireless
 
   pre_tasks:
     - name: Update apt
@@ -25,8 +27,6 @@
     apt: name=omxplayer state=present
   - name: Install rsync
     apt: name=rsync state=present
-  - name: Copy wifi settings across
-    copy: src=wpa_supplicant.conf dest=/etc/wpa_supplicant/wpa_supplicant.conf
   - name: Copy miab folder across
     synchronize: src=miab dest=/home/pi
   - name: Copy Node RED flow and config across
