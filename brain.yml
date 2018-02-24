@@ -37,6 +37,10 @@
     copy: src=bootprogress.service dest=/lib/systemd/system/bootprogress.service
   - name: Set the boot progress script to start at boot
     service: name=bootprogress enabled=yes
+  - name: Get script to work out our Raspberry Pi version
+    get_url:
+      url: https://github.com/tompreston/raspi-version/raw/master/raspi_version.py
+      dest: /home/pi/miab/raspi_version.py
   - name: Copy across script to set up the right sound card on boot
     copy: src=setup-soundcard.service dest=/lib/systemd/system/setup-soundcard.service
   - name: Set the soundcard setup script to start at boot
