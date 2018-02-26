@@ -8,12 +8,14 @@ POST https://museuminabox.herokuapp.com/boops
 
 ### Submits
 
+Example of a Boop submission currently:
+
 JSON:
 ```
   { 
-    "created_at": date_of_boop, 
-    "box_id": id_of_this_box, 
-    "print_id": id_of_the_object_just_booped
+    "created_at": "2018-02-26T14:46:15.704Z", 
+    "box_id": 64, 
+    "print_id": "347"
   }
 ```
 
