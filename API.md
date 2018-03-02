@@ -37,6 +37,8 @@ Nothing.  Status code should indicate success or failure, but the returned body 
 
 ## Retrieve list of available boxes
 
+DEPRECATED.  Used in the initial brain bootstrapping workflow, now superseded by the Create Box by UUID workflow.
+
 GET http://museuminabox.herokuapp.com/boxes.json
 
 ### Returned
@@ -53,6 +55,18 @@ JSON:
   ]
 ```
 
+## Create box by UUID
+
+POST http://museuminabox.herokuapp.com/boxes.json
+
+### Submits
+
+UUID for the box to be created, as parameter `id`
+
+### Returned
+
+JSON of box details for the newly created box, as would be returned by the Retrieve box details API.
+ 
 ## Retrieve box details
 
 GET http://museuminabox.herokuapp.com/boxes/:box_id.json
