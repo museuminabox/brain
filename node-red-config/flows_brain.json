@@ -95,6 +95,24 @@
         ]
     },
     {
+        "id": "c4a92f1b.12287",
+        "type": "subflow",
+        "name": "Record boop end",
+        "info": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 40,
+                "wires": [
+                    {
+                        "id": "8267637c.60b6d"
+                    }
+                ]
+            }
+        ],
+        "out": []
+    },
+    {
         "id": "e75d45d3.2600d8",
         "type": "debug",
         "z": "e8d65b2b.201058",
@@ -113,7 +131,8 @@
         "name": "",
         "method": "POST",
         "ret": "txt",
-        "url": "https://museuminabox.herokuapp.com/boops",
+        "url": "https://museuminabox.herokuapp.com/boopstart",
+        "tls": "",
         "x": 427,
         "y": 55,
         "wires": [
@@ -127,7 +146,7 @@
         "type": "function",
         "z": "e8d65b2b.201058",
         "name": "Build JSON for request",
-        "func": "var old_payload = msg.payload;\nmsg.payload = { \"created_at\": new Date().toJSON(), \"box_id\": context.global.box_settings.id, \"print_id\": old_payload.id };\nheaders = { \"Content-Type\": \"application/json\" };\nreturn msg;",
+        "func": "// Store which print we're booping, so we've got it\n// to hand when the boop ends\ncontext.global.current_print_id = msg.payload.id;\nvar old_payload = msg.payload;\nmsg.payload = { \"created_at\": new Date().toJSON(), \"box_id\": context.global.box_settings.id, \"print_id\": old_payload.id };\nheaders = { \"Content-Type\": \"application/json\" };\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 207,
@@ -136,7 +155,7 @@
             [
                 "2140470b.9fc3a8",
                 "e75d45d3.2600d8",
-                "63ecce13.be265"
+                "4672f700.22b518"
             ]
         ]
     },
@@ -151,8 +170,8 @@
         "multi": "one",
         "ret": "\\n",
         "temp": "created_at,box_id,print_id",
-        "x": 405,
-        "y": 192,
+        "x": 410,
+        "y": 200,
         "wires": [
             [
                 "64ebaf01.219d"
@@ -168,8 +187,8 @@
         "appendNewline": false,
         "createDir": false,
         "overwriteFile": "false",
-        "x": 609,
-        "y": 192,
+        "x": 630,
+        "y": 200,
         "wires": []
     },
     {
@@ -232,7 +251,8 @@
                 "4de42538.df29cc"
             ],
             [
-                "3b6d686d.3eb03"
+                "3b6d686d.3eb03",
+                "cd38ed8b.96293"
             ]
         ]
     },
@@ -343,7 +363,7 @@
         "crontab": "",
         "once": true,
         "x": 140,
-        "y": 400,
+        "y": 440,
         "wires": [
             [
                 "a9a1a5d6.e1f4a8"
@@ -375,7 +395,7 @@
         "console": "false",
         "complete": "false",
         "x": 513,
-        "y": 401,
+        "y": 441,
         "wires": []
     },
     {
@@ -521,7 +541,7 @@
         "type": "subflow:2c85e1fd.fde9ae",
         "z": "b5898652.b556e",
         "x": 316,
-        "y": 400.5,
+        "y": 440.5,
         "wires": [
             [
                 "7866ff92.1495d8",
@@ -905,7 +925,7 @@
         "useSpawn": "",
         "name": "We're ready now!",
         "x": 522,
-        "y": 448,
+        "y": 488,
         "wires": [
             [],
             [],
@@ -942,7 +962,7 @@
         "format": "handlebars",
         "template": "1",
         "x": 531,
-        "y": 503,
+        "y": 543,
         "wires": [
             [
                 "9f3230dc.005a2"
@@ -959,7 +979,7 @@
         "level": "0",
         "out": "out",
         "x": 733,
-        "y": 503,
+        "y": 543,
         "wires": []
     },
     {
@@ -1160,5 +1180,124 @@
                 "d172acd7.e12a9"
             ]
         ]
+    },
+    {
+        "id": "56e9e07d.b8e298",
+        "type": "debug",
+        "z": "c4a92f1b.12287",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 750,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "16eb7750.bd4371",
+        "type": "http request",
+        "z": "c4a92f1b.12287",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "https://museuminabox.herokuapp.com/boopend",
+        "tls": "",
+        "x": 497,
+        "y": 40,
+        "wires": [
+            [
+                "56e9e07d.b8e298"
+            ]
+        ]
+    },
+    {
+        "id": "8267637c.60b6d",
+        "type": "function",
+        "z": "c4a92f1b.12287",
+        "name": "Build JSON for request",
+        "func": "msg.payload = { \"created_at\": new Date().toJSON(), \"box_id\": context.global.box_settings.id, \"print_id\": context.global.current_print_id };\nheaders = { \"Content-Type\": \"application/json\" };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 270,
+        "y": 40,
+        "wires": [
+            [
+                "16eb7750.bd4371",
+                "56e9e07d.b8e298",
+                "5fc3acce.0dc5f4"
+            ]
+        ]
+    },
+    {
+        "id": "c0859e1a.68e45",
+        "type": "csv",
+        "z": "c4a92f1b.12287",
+        "name": "",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": false,
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "created_at,box_id,print_id",
+        "x": 450,
+        "y": 180,
+        "wires": [
+            [
+                "1747ab.9e412055"
+            ]
+        ]
+    },
+    {
+        "id": "1747ab.9e412055",
+        "type": "file",
+        "z": "c4a92f1b.12287",
+        "name": "",
+        "filename": "/home/pi/miab/boops_log.csv",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "false",
+        "x": 670,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "4672f700.22b518",
+        "type": "function",
+        "z": "e8d65b2b.201058",
+        "name": "Note that it is a start",
+        "func": "// Note that this is a start rather than an end\nmsg.payload.start_or_end = \"start\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 200,
+        "y": 200,
+        "wires": [
+            [
+                "63ecce13.be265"
+            ]
+        ]
+    },
+    {
+        "id": "5fc3acce.0dc5f4",
+        "type": "function",
+        "z": "c4a92f1b.12287",
+        "name": "Note that it is an end",
+        "func": "// Note that this is a start rather than an end\nmsg.payload.start_or_end = \"end\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 260,
+        "y": 180,
+        "wires": [
+            [
+                "c0859e1a.68e45"
+            ]
+        ]
+    },
+    {
+        "id": "cd38ed8b.96293",
+        "type": "subflow:c4a92f1b.12287",
+        "z": "b5898652.b556e",
+        "x": 560,
+        "y": 380,
+        "wires": []
     }
 ]

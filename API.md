@@ -4,7 +4,11 @@ These are the calls the box expects to be able to call in the cloud service, in 
 
 ## Record Boop
 
-POST https://museuminabox.herokuapp.com/boops
+POST https://museuminabox.herokuapp.com/boopstart at the start of the Boop
+
+POST https://museuminabox.herokuapp.com/boopend at the end of the Boop
+
+DEPRECATED: POST https://museuminabox.herokuapp.com/boops This is the old pre-v1 API to record (the start of) a Boop
 
 ### Submits
 
