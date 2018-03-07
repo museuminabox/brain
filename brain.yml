@@ -2,7 +2,7 @@
 - name: Museum in a Box Brain on a Raspberry Pi
   hosts: brain
   vars:
-    brain_name: brain
+    brain_name: box
   remote_user: pi
   become: yes
   become_method: sudo

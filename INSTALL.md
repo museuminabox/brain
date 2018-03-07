@@ -57,7 +57,7 @@ Or use the pre-rolled images...
 1. Unzip it, so you end up with a brain-YYYYMMDD.img file
 1. Write the .img file to the SD card, following the steps on the Raspberry Pi website - [Mac](https://www.raspberrypi.org/documentation/installation/installing-images/mac.md)/[Windows](https://www.raspberrypi.org/documentation/installation/installing-images/windows.md)/[Linux](https://www.raspberrypi.org/documentation/installation/installing-images/linux.md)
 1. Put the SD card into the Raspberry Pi on the Brain and boot it up
-1. Visit [http://brain.local:1880/setup](http://brain.local:1880/setup) to configure the brain
+1. Visit [http://box.local:1880/setup](http://box.local:1880/setup) to configure the brain
 
 ## Connecting to WiFi
 
@@ -90,7 +90,7 @@ To add new WiFi network credentials to the brain you will need a working network
 
 ### Copying content over to the Brain
 1. Open the "transmit" app (on Mac)
-1. Create a new favourite, with the server of brain.local, protocol set to "SFTP" username pi, password raspberry
+1. Create a new favourite, with the server of box.local, protocol set to "SFTP" username pi, password raspberry
 1. Connect to it, copy the audio and video files into the respective miab/audio and miab/video folders
 1. Repeat the process for all the other brains
 
