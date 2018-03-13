@@ -974,7 +974,7 @@
         "type": "rpi-gpio out",
         "z": "b5898652.b556e",
         "name": "Green \"ready\" LED",
-        "pin": "18",
+        "pin": "11",
         "set": true,
         "level": "0",
         "out": "out",
