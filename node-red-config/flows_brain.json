@@ -131,7 +131,7 @@
         "name": "",
         "method": "POST",
         "ret": "txt",
-        "url": "https://museuminabox.herokuapp.com/boopstart",
+        "url": "https://heart.museuminabox.org/api/boopstart",
         "tls": "",
         "x": 427,
         "y": 55,
@@ -394,8 +394,8 @@
         "active": true,
         "console": "false",
         "complete": "false",
-        "x": 513,
-        "y": 441,
+        "x": 750,
+        "y": 440,
         "wires": []
     },
     {
@@ -446,7 +446,7 @@
         "type": "subflow:afe19cbf.f80a18",
         "z": "b5898652.b556e",
         "x": 110,
-        "y": 580,
+        "y": 680,
         "wires": []
     },
     {
@@ -545,8 +545,8 @@
         "wires": [
             [
                 "7866ff92.1495d8",
-                "50e784a7.b2a4b4",
-                "50c51caf.62ed44"
+                "50c51caf.62ed44",
+                "a362cb60.df26e"
             ]
         ]
     },
@@ -628,7 +628,7 @@
         "type": "function",
         "z": "afe19cbf.f80a18",
         "name": "Build URL",
-        "func": "msg.url = \"http://museuminabox.herokuapp.com/boxes/\"+context.global.box_settings.id+\"/list.json\";\nmsg.method = \"GET\";\nreturn msg;",
+        "func": "msg.url = \"https://heart.museuminabox.org/api/boxes/\"+context.global.box_settings.id+\"/list.json\";\nmsg.method = \"GET\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 224,
@@ -835,7 +835,7 @@
         "type": "function",
         "z": "2c85e1fd.fde9ae",
         "name": "Build URL",
-        "func": "// Return an entirely new message in case the existing\n// one has any remnants of prior web requests\nreturn { \n    url: \"http://museuminabox.herokuapp.com/boxes/\"+context.global.box_settings.id+\"/list.json\",\n    method: \"GET\"\n};\n",
+        "func": "// Return an entirely new message in case the existing\n// one has any remnants of prior web requests\nreturn { \n    url: \"https://heart.museuminabox.org/api/boxes/\"+context.global.box_settings.id+\"/list.json\",\n    method: \"GET\"\n};\n",
         "outputs": 1,
         "noerr": 0,
         "x": 420,
@@ -924,12 +924,18 @@
         "append": "/home/pi/miab/ready.wav",
         "useSpawn": "",
         "name": "We're ready now!",
-        "x": 522,
-        "y": 488,
+        "x": 710,
+        "y": 600,
         "wires": [
-            [],
-            [],
-            []
+            [
+                "7866ff92.1495d8"
+            ],
+            [
+                "7866ff92.1495d8"
+            ],
+            [
+                "7866ff92.1495d8"
+            ]
         ]
     },
     {
@@ -961,8 +967,8 @@
         "field": "payload",
         "format": "handlebars",
         "template": "1",
-        "x": 531,
-        "y": 543,
+        "x": 520,
+        "y": 480,
         "wires": [
             [
                 "9f3230dc.005a2"
@@ -978,8 +984,8 @@
         "set": true,
         "level": "0",
         "out": "out",
-        "x": 733,
-        "y": 543,
+        "x": 730,
+        "y": 480,
         "wires": []
     },
     {
@@ -1127,7 +1133,7 @@
         "type": "function",
         "z": "afe19cbf.f80a18",
         "name": "Build URL",
-        "func": "// Generate a UUID\n// Derived from https://gist.github.com/jed/982883\n//var uuidv4 = ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c => (c^crypto.randomBytes(1)[0]&15>>c/4).toString(16));\nvar uuidv4 = ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c => (c^Math.random() * 16>>c/4).toString(16));\n\nmsg.url = \"https://museuminabox.herokuapp.com/boxes.json\";\nmsg.method = \"POST\";\nmsg.payload = \"id=\"+uuidv4;\nreturn msg;",
+        "func": "// Generate a UUID\n// Derived from https://gist.github.com/jed/982883\n//var uuidv4 = ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c => (c^crypto.randomBytes(1)[0]&15>>c/4).toString(16));\nvar uuidv4 = ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c => (c^Math.random() * 16>>c/4).toString(16));\n\nmsg.url = \"https://heart.museuminabox.org/api/boxes.json\";\nmsg.method = \"POST\";\nmsg.payload = \"id=\"+uuidv4;\nreturn msg;",
         "outputs": "1",
         "noerr": 0,
         "x": 120,
@@ -1200,7 +1206,7 @@
         "name": "",
         "method": "POST",
         "ret": "txt",
-        "url": "https://museuminabox.herokuapp.com/boopend",
+        "url": "https://heart.museuminabox.org/api/boopend",
         "tls": "",
         "x": 497,
         "y": 40,
@@ -1299,5 +1305,28 @@
         "x": 560,
         "y": 380,
         "wires": []
+    },
+    {
+        "id": "a362cb60.df26e",
+        "type": "delay",
+        "z": "b5898652.b556e",
+        "name": "Allow time for the \"object not present, kill all audio\" check for RFID at startup to run",
+        "pauseType": "delay",
+        "timeout": "100",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 350,
+        "y": 540,
+        "wires": [
+            [
+                "50e784a7.b2a4b4"
+            ]
+        ]
     }
 ]
