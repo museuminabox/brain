@@ -43,8 +43,9 @@ Returns the ID of the Boop that was created.
 {
   "boop_id": 12345
 }
+```
 
-### Error reponse
+### Error reponse 
 
 400 status code (for example).
 
@@ -72,6 +73,7 @@ JSON:
   "created_at": "2018-02-26T14:46:15.704Z", 
   "boop_id": 12345
 }
+```
 
 ### Success response
 
@@ -83,6 +85,7 @@ Returns the ID of the Boop that was updated.
 {
   "boop_id": 12345
 }
+```
 
 ### Error reponse
 
