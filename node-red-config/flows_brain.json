@@ -1133,7 +1133,7 @@
         "type": "function",
         "z": "afe19cbf.f80a18",
         "name": "Build URL",
-        "func": "// Generate a UUID\n// Derived from https://gist.github.com/jed/982883\n//var uuidv4 = ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c => (c^crypto.randomBytes(1)[0]&15>>c/4).toString(16));\nvar uuidv4 = ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c => (c^Math.random() * 16>>c/4).toString(16));\n\nmsg.url = \"https://heart.museuminabox.org/api/boxes.json\";\nmsg.method = \"POST\";\nmsg.payload = \"id=\"+uuidv4;\nreturn msg;",
+        "func": "// Generate a UUID\n// Derived from https://gist.github.com/jed/982883\n//var uuidv4 = ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c => (c^crypto.randomBytes(1)[0]&15>>c/4).toString(16));\nvar uuidv4 = ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c => (c^Math.random() * 16>>c/4).toString(16));\n\nmsg.url = \"https://heart.museuminabox.org/api/boxes.json\";\nmsg.method = \"POST\";\nmsg.payload = \"id=\"+uuidv4;\nmsg.headers = [];\nmsg.headers[\"content-type\"] = \"application/x-www-form-urlencoded\";\nreturn msg;",
         "outputs": "1",
         "noerr": 0,
         "x": 120,
