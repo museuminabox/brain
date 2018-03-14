@@ -2,13 +2,11 @@
 
 These are the calls the box expects to be able to call in the cloud service, in order to administer the box.
 
-## Record Boop
+## Record Boop Start
 
 POST https://museuminabox.herokuapp.com/boopstart at the start of the Boop
 
-POST https://museuminabox.herokuapp.com/boopend at the end of the Boop
-
-DEPRECATED: POST https://museuminabox.herokuapp.com/boops This is the old pre-v1 API to record (the start of) a Boop
+NO LONGER WORKING: POST https://museuminabox.herokuapp.com/boops This is the old pre-v1 API to record (the start of) a Boop
 
 ### Submits
 
@@ -35,9 +33,72 @@ JSON:
 }
 ```
 
-### Returned
+### Success response
 
-Nothing.  Status code should indicate success or failure, but the returned body is ignored.
+200 status code.
+
+Returns the ID of the Boop that was created.
+
+```
+{
+  "boop_id": 12345
+}
+
+### Error reponse
+
+400 status code (for example).
+
+JSON returned will be like:
+
+```
+{
+  "success": false,
+  "errors": [
+    "Something went wrong",
+    "And here's another error message"
+  ]
+}
+```
+
+## Record Boop End
+
+POST https://museuminabox.herokuapp.com/boopend at the end of the Boop
+
+### Submits
+
+JSON:
+```
+{ 
+  "created_at": "2018-02-26T14:46:15.704Z", 
+  "boop_id": 12345
+}
+
+### Success response
+
+200 status code.
+
+Returns the ID of the Boop that was updated.
+
+```
+{
+  "boop_id": 12345
+}
+
+### Error reponse
+
+400 status code (for example).
+
+JSON returned will be like:
+
+```
+{
+  "success": false,
+  "errors": [
+    "Something went wrong",
+    "And here's another error message"
+  ]
+}
+```
 
 ## Retrieve list of available boxes
 
@@ -46,6 +107,7 @@ DEPRECATED.  Used in the initial brain bootstrapping workflow, now superseded by
 GET http://museuminabox.herokuapp.com/boxes.json
 
 ### Returned
+
 JSON:
 ```
 [
