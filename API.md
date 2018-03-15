@@ -2,9 +2,11 @@
 
 These are the calls the box expects to be able to call in the cloud service, in order to administer the box.
 
+Previously the paths did not start with `/api/`. The old URLs should now redirect to the new paths that do start with `/api/`.
+
 ## Record Boop Start
 
-POST https://museuminabox.herokuapp.com/boopstart at the start of the Boop
+POST https://museuminabox.herokuapp.com/api/boopstart at the start of the Boop
 
 NO LONGER WORKING: POST https://museuminabox.herokuapp.com/boops This is the old pre-v1 API to record (the start of) a Boop
 
@@ -63,7 +65,7 @@ JSON returned will be like:
 
 ## Record Boop End
 
-POST https://museuminabox.herokuapp.com/boopend at the end of the Boop
+POST https://museuminabox.herokuapp.com/api/boopend at the end of the Boop
 
 ### Submits
 
@@ -106,7 +108,7 @@ JSON returned will be like:
 
 ## Create box by UUID
 
-POST http://museuminabox.herokuapp.com/boxes.json
+POST http://museuminabox.herokuapp.com/api/boxes.json
 
 ### Submits
 
@@ -138,7 +140,7 @@ JSON returned will be like:
  
 ## Retrieve box details
 
-GET http://museuminabox.herokuapp.com/boxes/:box_id.json
+GET http://museuminabox.herokuapp.com/api/boxes/:box_id.json
 
 `box_id` can be the Box's database ID or its UUID (for newer boxes).
 
@@ -158,7 +160,7 @@ The JSON response will be something like:
 
 ## Retrieve list of prints for this box
 
-GET http://museuminabox.herokuapp.com/boxes/:box_id/list.json
+GET http://museuminabox.herokuapp.com/api/boxes/:box_id/list.json
 
 `box_id` can be the Box's database ID or its UUID (for newer boxes).
  
@@ -188,7 +190,7 @@ GET http://museuminabox.herokuapp.com/boxes/:box_id/list.json
 
 DEPRECATED.  Used in the initial brain bootstrapping workflow, now superseded by the Create Box by UUID workflow.
 
-GET http://museuminabox.herokuapp.com/boxes.json
+GET http://museuminabox.herokuapp.com/api/boxes.json
 
 ### Returned
 
