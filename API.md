@@ -160,9 +160,7 @@ The JSON response will be something like:
 
 ## Synchronize box information for a given box
 
-POST http://museuminabox.herokuapp.com/api/boxes/:box_id/sync.json
-
-`box_id` can be the Box's database ID or its UUID (for newer boxes).
+POST http://museuminabox.herokuapp.com/api/boxes/:box_uuid/sync.json
  
 ### Submits
 
