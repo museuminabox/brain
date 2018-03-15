@@ -11,8 +11,8 @@
         "info": "",
         "in": [
             {
-                "x": 62,
-                "y": 54,
+                "x": 60,
+                "y": 60,
                 "wires": [
                     {
                         "id": "b3d2ad66.618708"
@@ -120,8 +120,8 @@
         "active": true,
         "console": "false",
         "complete": "false",
-        "x": 680,
-        "y": 135,
+        "x": 470,
+        "y": 160,
         "wires": []
     },
     {
@@ -130,14 +130,15 @@
         "z": "e8d65b2b.201058",
         "name": "",
         "method": "POST",
-        "ret": "txt",
+        "ret": "obj",
         "url": "https://heart.museuminabox.org/api/boopstart",
         "tls": "",
-        "x": 427,
-        "y": 55,
+        "x": 430,
+        "y": 60,
         "wires": [
             [
-                "e75d45d3.2600d8"
+                "e75d45d3.2600d8",
+                "e40cb3f0.0a948"
             ]
         ]
     },
@@ -146,11 +147,11 @@
         "type": "function",
         "z": "e8d65b2b.201058",
         "name": "Build JSON for request",
-        "func": "// Store which print we're booping, so we've got it\n// to hand when the boop ends\ncontext.global.current_print_id = msg.payload.id;\nvar old_payload = msg.payload;\nmsg.payload = { \"created_at\": new Date().toJSON(), \"box_id\": context.global.box_settings.id, \"print_id\": old_payload.id };\nheaders = { \"Content-Type\": \"application/json\" };\nreturn msg;",
+        "func": "// Store which print we're booping, so we've got it\n// to hand for the CSV file when the boop ends\ncontext.global.current_print_id = msg.payload.id;\nvar old_payload = msg.payload;\nmsg.payload = { \"created_at\": new Date().toJSON(), \"box_id\": context.global.box_settings.id, \"print_id\": old_payload.id };\nheaders = { \"Content-Type\": \"application/json\" };\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 207,
-        "y": 54,
+        "x": 210,
+        "y": 60,
         "wires": [
             [
                 "2140470b.9fc3a8",
@@ -432,7 +433,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "<html>\n    <head>\n        <title>Configure this brain</title>\n    </head>\n    <body>\n        <h1>Configure this brain</h1>\n        <p>This box's ID is: {{context.global.box_settings.id}}</p>\n        <p>If you want to discard this box ID (or create one from scratch) then hit the button below...</p>\n        <form method=\"POST\">\n            <input type=\"submit\" value=\"Create a new box\">\n        </form>\n    </body>\n</html>",
+        "template": "<html>\n    <head>\n        <title>Configure this brain</title>\n    </head>\n    <body>\n        <h1>Configure this brain</h1>\n        {{#context.global.box_settings.id}}\n        <p>This box's ID is: {{context.global.box_settings.id}}</p>\n        <p>Its hardware ID is: {{context.global.box_settings.hardware_id}}</p>\n        <p>If you want to discard this box ID (or create one from scratch) then hit the button below...</p>\n        {{/context.global.box_settings.id}}\n        {{^context.global.box_settings.id}}\n        <p>To create a new box then hit the button below...</p>\n        {{/context.global.box_settings.id}}\n        <form method=\"POST\">\n            <label for=\"hardware_id\">Hardware ID (on the underside of the case):</label>\n            <input type=\"text\" name=\"hardware_id\" value=\"{{context.global.box_settings.hardware_id}}\" /><br />\n            <label for=\"exterior\">Exterior (box material, colour):</label>\n            <input type=\"text\" name=\"exterior\" value=\"{{context.global.box_settings.exterior}}\" /><br />\n            <input type=\"submit\" value=\"Create a new box\" />\n        </form>\n    </body>\n</html>",
         "x": 561,
         "y": 60,
         "wires": [
@@ -1133,14 +1134,15 @@
         "type": "function",
         "z": "afe19cbf.f80a18",
         "name": "Build URL",
-        "func": "// Generate a UUID\n// Derived from https://gist.github.com/jed/982883\n//var uuidv4 = ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c => (c^crypto.randomBytes(1)[0]&15>>c/4).toString(16));\nvar uuidv4 = ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c => (c^Math.random() * 16>>c/4).toString(16));\n\nmsg.url = \"https://heart.museuminabox.org/api/boxes.json\";\nmsg.method = \"POST\";\nmsg.payload = \"id=\"+uuidv4;\nmsg.headers = [];\nmsg.headers[\"content-type\"] = \"application/x-www-form-urlencoded\";\nreturn msg;",
+        "func": "// Generate a UUID\n// Derived from https://gist.github.com/jed/982883\n//var uuidv4 = ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c => (c^crypto.randomBytes(1)[0]&15>>c/4).toString(16));\nvar uuidv4 = ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c => (c^Math.random() * 16>>c/4).toString(16));\n\nmsg.url = \"https://heart.museuminabox.org/api/boxes.json\";\nmsg.method = \"POST\";\nmsg.payload = \"id=\"+uuidv4+\"&hardware_id=\"+msg.payload.hardware_id+\"&exterior=\"+msg.payload.exterior;\nmsg.headers = [];\nmsg.headers[\"content-type\"] = \"application/x-www-form-urlencoded\";\nreturn msg;",
         "outputs": "1",
         "noerr": 0,
         "x": 120,
         "y": 220,
         "wires": [
             [
-                "7a5faf27.1b8938"
+                "7a5faf27.1b8938",
+                "ec30111e.2defa8"
             ]
         ]
     },
@@ -1221,7 +1223,7 @@
         "type": "function",
         "z": "c4a92f1b.12287",
         "name": "Build JSON for request",
-        "func": "msg.payload = { \"created_at\": new Date().toJSON(), \"box_id\": context.global.box_settings.id, \"print_id\": context.global.current_print_id };\nheaders = { \"Content-Type\": \"application/json\" };\nreturn msg;",
+        "func": "// See if there's a boop to finish\nif (context.global.current_boop_id) {\n    msg.payload = { \"created_at\": new Date().toJSON(), \"box_id\": context.global.box_settings.id, \"boop_id\": context.global.current_boop_id };\n    headers = { \"Content-Type\": \"application/json\" };\n    return msg;\n} else {\n    // There isn't one, it's most likely to be \n    return null;\n}",
         "outputs": 1,
         "noerr": 0,
         "x": 270,
@@ -1327,6 +1329,34 @@
             [
                 "50e784a7.b2a4b4"
             ]
+        ]
+    },
+    {
+        "id": "ec30111e.2defa8",
+        "type": "debug",
+        "z": "afe19cbf.f80a18",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 410,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "e40cb3f0.0a948",
+        "type": "function",
+        "z": "e8d65b2b.201058",
+        "name": "Store the returned boop_id for when the boop ends",
+        "func": "context.global.current_boop_id = msg.payload.boop_id;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 640,
+        "y": 120,
+        "wires": [
+            []
         ]
     }
 ]
