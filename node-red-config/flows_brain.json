@@ -72,19 +72,19 @@
         "info": "",
         "in": [
             {
-                "x": 76,
-                "y": 71,
+                "x": 40,
+                "y": 40,
                 "wires": [
                     {
-                        "id": "72069fd0.ea825"
+                        "id": "db927f2e.1204d8"
                     }
                 ]
             }
         ],
         "out": [
             {
-                "x": 780,
-                "y": 60,
+                "x": 770,
+                "y": 90,
                 "wires": [
                     {
                         "id": "8165cef1.12886",
@@ -343,8 +343,8 @@
         "name": "Read in our settings",
         "filename": "/home/pi/miab/box-config.json",
         "format": "utf8",
-        "x": 230,
-        "y": 70,
+        "x": 220,
+        "y": 100,
         "wires": [
             [
                 "5dc010f1.5ecf08",
@@ -379,8 +379,8 @@
         "func": "context.global.box_settings = msg.payload;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 606,
-        "y": 69,
+        "x": 596,
+        "y": 99,
         "wires": [
             [
                 "6c987ced.c3ae94"
@@ -613,9 +613,10 @@
         "type": "http request",
         "z": "afe19cbf.f80a18",
         "name": "Download prints list for this box",
-        "method": "GET",
+        "method": "use",
         "ret": "obj",
         "url": "",
+        "tls": "",
         "x": 433,
         "y": 376,
         "wires": [
@@ -629,7 +630,7 @@
         "type": "function",
         "z": "afe19cbf.f80a18",
         "name": "Build URL",
-        "func": "msg.url = \"https://heart.museuminabox.org/api/boxes/\"+context.global.box_settings.id+\"/list.json\";\nmsg.method = \"GET\";\nreturn msg;",
+        "func": "msg.url = \"https://heart.museuminabox.org/api/boxes/\"+context.global.box_settings.id+\"/sync.json\";\nmsg.method = \"POST\";\nmsg.payload = { \"software_version\": context.global.software_version };\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 224,
@@ -649,7 +650,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "<html>\n    <head>\n        <title>Write Print Tags</title>\n        <style type=\"text/css\">\n            li img { width: 10%; }\n        </style>\n    </head>\n    <body>\n        <h1>Write Print Tags</h1>\n        <p>Place a print onto the brain, then click the \"Write tag\" button to write the tag.</p>\n        <ul>\n            <li><img src=\"\"> Configure WiFi admin totem\n                <form action=\"/tag\" method=\"post\" id=\"tagWiFi\">\n                    <input type=\"hidden\" name=\"url\" value=\"http://www.museuminabox.org\" />\n                    <input type=\"hidden\" name=\"configure\" value=\"wifi\" />\n                    <input type=\"submit\" name=\"write\" value=\"Write tag\" onclick=\"$('#msgWiFi').text('Working...'); $.post('/tag', $('#tagWiFi').serialize()) .done(function() { $('#msgWiFi').text('Ok') }) .fail(function() { $('#msgWiFi').text('Failed') }); return false;\" />\n                    <span id=\"msgWiFi\"></span>\n                </form>\n            </li>\n        {{#payload}}\n            <li><img src=\"{{{image_url}}}\"> {{name}}\n                <form action=\"/tag\" method=\"post\" id=\"tag{{id}}\">\n                    <input type=\"hidden\" name=\"url\" value=\"{{url}}\" />\n                    <input type=\"hidden\" name=\"id\" value=\"{{id}}\" />\n                    <input type=\"hidden\" name=\"audio\" value=\"{{brain_filename_audio}}\" />\n                    <input type=\"submit\" name=\"write\" value=\"Write tag\" onclick=\"$('#msg{{id}}').text('Working...'); $.post('/tag', $('#tag{{id}}').serialize()) .done(function() { $('#msg{{id}}').text('Ok') }) .fail(function() { $('#msg{{id}}').text('Failed') }); return false;\" />\n                    <span id=\"msg{{id}}\"></span>\n                </form>\n            </li>\n        {{/payload}}\n        </ul>\n    </body>\n    <script src=\"vendor/vendor.js\"></script>\n</html>\n",
+        "template": "<html>\n    <head>\n        <title>Write Print Tags</title>\n        <style type=\"text/css\">\n            li img { width: 10%; }\n        </style>\n    </head>\n    <body>\n        <h1>Write Print Tags</h1>\n        <p>Place a print onto the brain, then click the \"Write tag\" button to write the tag.</p>\n        <ul>\n            <li><img src=\"\"> Configure WiFi admin totem\n                <form action=\"/tag\" method=\"post\" id=\"tagWiFi\">\n                    <input type=\"hidden\" name=\"url\" value=\"http://www.museuminabox.org\" />\n                    <input type=\"hidden\" name=\"configure\" value=\"wifi\" />\n                    <input type=\"submit\" name=\"write\" value=\"Write tag\" onclick=\"$('#msgWiFi').text('Working...'); $.post('/tag', $('#tagWiFi').serialize()) .done(function() { $('#msgWiFi').text('Ok') }) .fail(function() { $('#msgWiFi').text('Failed') }); return false;\" />\n                    <span id=\"msgWiFi\"></span>\n                </form>\n            </li>\n        {{#payload.prints}}\n            <li><img src=\"{{{image_url}}}\"> {{name}}\n                <form action=\"/tag\" method=\"post\" id=\"tag{{id}}\">\n                    <input type=\"hidden\" name=\"url\" value=\"{{url}}\" />\n                    <input type=\"hidden\" name=\"id\" value=\"{{id}}\" />\n                    <input type=\"hidden\" name=\"audio\" value=\"{{brain_filename_audio}}\" />\n                    <input type=\"submit\" name=\"write\" value=\"Write tag\" onclick=\"$('#msg{{id}}').text('Working...'); $.post('/tag', $('#tag{{id}}').serialize()) .done(function() { $('#msg{{id}}').text('Ok') }) .fail(function() { $('#msg{{id}}').text('Failed') }); return false;\" />\n                    <span id=\"msg{{id}}\"></span>\n                </form>\n            </li>\n        {{/payload.prints}}\n        </ul>\n    </body>\n    <script src=\"vendor/vendor.js\"></script>\n</html>\n",
         "x": 674,
         "y": 376,
         "wires": [
@@ -679,8 +680,8 @@
         "type": "json",
         "z": "2c85e1fd.fde9ae",
         "name": "",
-        "x": 424,
-        "y": 69,
+        "x": 414,
+        "y": 99,
         "wires": [
             [
                 "8165cef1.12886"
@@ -836,11 +837,11 @@
         "type": "function",
         "z": "2c85e1fd.fde9ae",
         "name": "Build URL",
-        "func": "// Return an entirely new message in case the existing\n// one has any remnants of prior web requests\nreturn { \n    url: \"https://heart.museuminabox.org/api/boxes/\"+context.global.box_settings.id+\"/list.json\",\n    method: \"GET\"\n};\n",
+        "func": "// Return an entirely new message in case the existing\n// one has any remnants of prior web requests\nreturn { \n    url: \"https://heart.museuminabox.org/api/boxes/\"+context.global.box_settings.id+\"/sync.json\",\n    method: \"POST\",\n    payload: { \"software_version\": context.global.software_version }\n};\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 420,
-        "y": 160,
+        "x": 410,
+        "y": 190,
         "wires": [
             [
                 "6d4612aa.78327c",
@@ -856,8 +857,8 @@
         "method": "GET",
         "ret": "obj",
         "url": "",
-        "x": 673,
-        "y": 159,
+        "x": 663,
+        "y": 189,
         "wires": [
             [
                 "e27f63df.ebfb4",
@@ -870,11 +871,11 @@
         "type": "function",
         "z": "2c85e1fd.fde9ae",
         "name": "Extract the audio content URLs",
-        "func": "var urls = [];\nfor (i=0; i < msg.payload.length; i++)\n{\n    urls.push({ topic:\"url\", payload:msg.payload[i].brain_url_audio });\n}\nreturn [urls];",
+        "func": "var urls = [];\nfor (i=0; i < msg.payload.prints.length; i++)\n{\n    urls.push({ topic:\"url\", payload:msg.payload.prints[i].brain_url_audio });\n}\nreturn [urls];",
         "outputs": 1,
         "noerr": 0,
-        "x": 475,
-        "y": 282,
+        "x": 465,
+        "y": 312,
         "wires": [
             [
                 "761e4520.6ac67c"
@@ -891,8 +892,8 @@
         "useSpawn": "",
         "timer": "",
         "name": "Download media files",
-        "x": 722,
-        "y": 281,
+        "x": 712,
+        "y": 311,
         "wires": [
             [],
             [],
@@ -1019,7 +1020,7 @@
         "active": true,
         "console": "false",
         "complete": "false",
-        "x": 690,
+        "x": 670,
         "y": 380,
         "wires": []
     },
@@ -1042,8 +1043,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 250,
-        "y": 340,
+        "x": 240,
+        "y": 370,
         "wires": [
             [
                 "e27f63df.ebfb4"
@@ -1357,6 +1358,38 @@
         "y": 120,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "db927f2e.1204d8",
+        "type": "file in",
+        "z": "2c85e1fd.fde9ae",
+        "name": "Read in software version",
+        "filename": "/home/pi/miab/version.txt",
+        "format": "utf8",
+        "sendError": true,
+        "x": 230,
+        "y": 40,
+        "wires": [
+            [
+                "1f296186.205446"
+            ]
+        ]
+    },
+    {
+        "id": "1f296186.205446",
+        "type": "function",
+        "z": "2c85e1fd.fde9ae",
+        "name": "Store software version",
+        "func": "context.global.software_version = msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 480,
+        "y": 40,
+        "wires": [
+            [
+                "72069fd0.ea825"
+            ]
         ]
     }
 ]

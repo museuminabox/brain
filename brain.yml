@@ -64,3 +64,7 @@
     service: name=miab-ndef enabled=yes
   - name: Ensure we have the volume turned up to max
     command: amixer cset numid=1 -- 200
+  - name: Record the exact commit that we're deploying from
+    copy:
+      dest: /home/pi/miab/commit.txt
+      content: "{{ lookup('pipe', 'git describe --all --long | cut -d / -f 2') }}"

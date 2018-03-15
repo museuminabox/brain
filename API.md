@@ -158,31 +158,47 @@ The JSON response will be something like:
 }
 ```
 
-## Retrieve list of prints for this box
+## Synchronize box information for a given box
 
-GET http://museuminabox.herokuapp.com/api/boxes/:box_id/list.json
+POST http://museuminabox.herokuapp.com/api/boxes/:box_id/sync.json
 
 `box_id` can be the Box's database ID or its UUID (for newer boxes).
  
+### Submits
+
+JSON:
 ```
-[
-  {
-    "id": 12,
-    "url": "https://museuminabox.herokuapp.com/boxes/12/",
-    "brain_type": "audio",
-    "image_url": "https://museuminabox.s3.amazonaws.com/prints/images/95e5e0bd-a724-4ba2-8004-a2abb92896a5.jpg",
-    "brain_filename_audio": "b1bd2c2c-ce86-4360-a195-60a40353ac72.wav",
-    "brain_url_audio": "https://museuminabox.s3.amazonaws.com/prints/audio/b1bd2c2c-ce86-4360-a195-60a40353ac72.wav"
-   },
-   {
-    "id": "8e12b719-3c76-4a6a-9465-1087697acc61",
-    "url": "https://museuminabox.herokuapp.com/boxes/34/",
-    "brain_type": "audio",
-    "image_url": "https://museuminabox.s3.amazonaws.com/prints/images/95e5e0bd-a724-4ba2-8004-a2abb92896a5.jpg",
-    "brain_filename_audio": "b1bd2c2c-ce86-4360-a195-60a40353ac72.wav",
-    "brain_url_audio": "https://museuminabox.s3.amazonaws.com/prints/audio/b1bd2c2c-ce86-4360-a195-60a40353ac72.wav"
-  },
-]
+{ 
+  "software_version": "0.9.0", 
+}
+```
+
+### Success response
+
+200 status code.
+
+JSON:
+```
+{
+  "prints": [
+    {
+      "id": 12,
+      "url": "https://museuminabox.herokuapp.com/boxes/12/",
+      "brain_type": "audio",
+      "image_url": "https://museuminabox.s3.amazonaws.com/prints/images/95e5e0bd-a724-4ba2-8004-a2abb92896a5.jpg",
+      "brain_filename_audio": "b1bd2c2c-ce86-4360-a195-60a40353ac72.wav",
+      "brain_url_audio": "https://museuminabox.s3.amazonaws.com/prints/audio/b1bd2c2c-ce86-4360-a195-60a40353ac72.wav"
+     },
+     {
+      "id": "8e12b719-3c76-4a6a-9465-1087697acc61",
+      "url": "https://museuminabox.herokuapp.com/boxes/34/",
+      "brain_type": "audio",
+      "image_url": "https://museuminabox.s3.amazonaws.com/prints/images/95e5e0bd-a724-4ba2-8004-a2abb92896a5.jpg",
+      "brain_filename_audio": "b1bd2c2c-ce86-4360-a195-60a40353ac72.wav",
+      "brain_url_audio": "https://museuminabox.s3.amazonaws.com/prints/audio/b1bd2c2c-ce86-4360-a195-60a40353ac72.wav"
+    },
+  ]
+}
 ```
 
 
