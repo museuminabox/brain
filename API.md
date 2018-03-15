@@ -166,17 +166,19 @@ GET http://museuminabox.herokuapp.com/boxes/:box_id/list.json
 [
   {
     "id": 12,
-    "hardware_id": "Box 34",
     "url": "https://museuminabox.herokuapp.com/boxes/12/",
-    "name": "My great box",
-    "brain_type": "audio"
+    "brain_type": "audio",
+    "image_url": "https://museuminabox.s3.amazonaws.com/prints/images/95e5e0bd-a724-4ba2-8004-a2abb92896a5.jpg",
+    "brain_filename_audio": "b1bd2c2c-ce86-4360-a195-60a40353ac72.wav",
+    "brain_url_audio": "https://museuminabox.s3.amazonaws.com/prints/audio/b1bd2c2c-ce86-4360-a195-60a40353ac72.wav"
    },
    {
     "id": "8e12b719-3c76-4a6a-9465-1087697acc61",
-    "hardware_id": "v123",
     "url": "https://museuminabox.herokuapp.com/boxes/34/",
-    "name": "Another box",
-    "brain_type": "video"
+    "brain_type": "audio",
+    "image_url": "https://museuminabox.s3.amazonaws.com/prints/images/95e5e0bd-a724-4ba2-8004-a2abb92896a5.jpg",
+    "brain_filename_audio": "b1bd2c2c-ce86-4360-a195-60a40353ac72.wav",
+    "brain_url_audio": "https://museuminabox.s3.amazonaws.com/prints/audio/b1bd2c2c-ce86-4360-a195-60a40353ac72.wav"
   },
 ]
 ```
