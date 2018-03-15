@@ -116,6 +116,7 @@ JSON:
 [
   {
     "id": box_id, 
+    "hardware_id": "The box hardware ID",
     "url": box_details_url,
     "name": "Name of the Box",
     "brain_type": "audio"  // LEGACY, used to be either "audio" or "video", currently "audio" is the only type supported
@@ -132,7 +133,8 @@ POST http://museuminabox.herokuapp.com/boxes.json
 
 ### Submits
 
-UUID for the box to be created, as parameter `id`
+* UUID for the box to be created, as parameter `id`.
+* The Hardware ID, as entered by the user. A string as parameter `hardware_id`.
 
 ### Success response
 
@@ -184,12 +186,14 @@ GET http://museuminabox.herokuapp.com/boxes/:box_id/list.json
 [
   {
     "id": 12,
+    "hardware_id": "Box 34",
     "url": "https://museuminabox.herokuapp.com/boxes/12/",
     "name": "My great box",
     "brain_type": "audio"
    },
    {
     "id": "8e12b719-3c76-4a6a-9465-1087697acc61",
+    "hardware_id": "v123",
     "url": "https://museuminabox.herokuapp.com/boxes/34/",
     "name": "Another box",
     "brain_type": "video"
