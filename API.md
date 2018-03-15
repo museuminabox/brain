@@ -28,7 +28,7 @@ JSON:
 ```
 { 
   "created_at": "2018-02-26T14:46:15.704Z", 
-  "box_id": '1277209b-7e87-4023-a852-617e79ae6b18', 
+  "box_id": "1277209b-7e87-4023-a852-617e79ae6b18", 
   "print_id": "347"
 }
 ```
@@ -103,29 +103,6 @@ JSON returned will be like:
 }
 ```
 
-## Retrieve list of available boxes
-
-DEPRECATED.  Used in the initial brain bootstrapping workflow, now superseded by the Create Box by UUID workflow.
-
-GET http://museuminabox.herokuapp.com/boxes.json
-
-### Returned
-
-JSON:
-```
-[
-  {
-    "id": box_id, 
-    "hardware_id": "The box hardware ID",
-    "url": box_details_url,
-    "name": "Name of the Box",
-    "brain_type": "audio"  // LEGACY, used to be either "audio" or "video", currently "audio" is the only type supported
-  },
-  ...
-]
-```
-
-`box_id` will be a UUID for boxes that have them, otherwise the internal numeric database ID.
 
 ## Create box by UUID
 
@@ -135,6 +112,7 @@ POST http://museuminabox.herokuapp.com/boxes.json
 
 * UUID for the box to be created, as parameter `id`.
 * The Hardware ID, as entered by the user. A string as parameter `hardware_id`.
+* The box's exterior description. A string as parameter `exterior`.
 
 ### Success response
 
@@ -169,6 +147,8 @@ The JSON response will be something like:
 ```
 {
   "id": "8e12b719-3c76-4a6a-9465-1087697acc61",
+  "hardware_id": "0001",
+  "exterior": "Shiny yellow plastic",
   "created_at": "2018-02-22T12:00:00Z",
   "updated_at": "2018-02-22T12:00:00Z",
   "brain_type": "audio",
@@ -200,3 +180,28 @@ GET http://museuminabox.herokuapp.com/boxes/:box_id/list.json
   },
 ]
 ```
+
+
+## Retrieve list of available boxes
+
+DEPRECATED.  Used in the initial brain bootstrapping workflow, now superseded by the Create Box by UUID workflow.
+
+GET http://museuminabox.herokuapp.com/boxes.json
+
+### Returned
+
+JSON:
+```
+[
+  {
+    "id": box_id, 
+    "hardware_id": "The box hardware ID",
+    "url": box_details_url,
+    "name": "Name of the Box",
+    "brain_type": "audio"  // LEGACY, used to be either "audio" or "video", currently "audio" is the only type supported
+  },
+  ...
+]
+```
+
+`box_id` will be a UUID for boxes that have them, otherwise the internal numeric database ID.
