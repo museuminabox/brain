@@ -77,9 +77,13 @@ This isn't necessarily the *only* way to assemble the Brain, but the general ord
 
 ### Assemble "base of the skull"
 
+1. Assemble an [audio circuit](#Wiring_the_audio_circuit)
+1. Assemble an amp-to-speaker wiring loom
+1. Carefully bend the terminals on the speaker so that they form a right-angle
 1. Test assemble the speaker frame and then glue it together with the speaker inside
-1. Bolt Raspberry Pi into the base
-1. Bolt feet onto the base
+1. Plug in the 3.5mm audio jack to connect the audio circuit to the Raspberry Pi
+1. Fit the rivets into the base first
+1. Push Raspberry Pi down onto the rivets in the base
 
 ### Assemble "top of the skull"
 
@@ -88,8 +92,8 @@ This isn't necessarily the *only* way to assemble the Brain, but the general ord
 1. Solder the right-angle header onto the RFID reader
 1. Test assemble the RFID reader frame, and then glue together
 1. Check the fit for the pieces making up the main box
-1. Glue together the pieces for the main box, apart from the base with the t-nuts
-1. Once the main box is dry, glue in the base with the t-nuts
+1. Glue together the pieces for the main box, apart from the top
+1. Once the main box is dry, glue in the top
 1. Sand down the box (if it's not acrylic)
 1. Apply one or two coats of Danish oil to the box (similarly if it's not acrylic)
 
@@ -109,14 +113,14 @@ This isn't necessarily the *only* way to assemble the Brain, but the general ord
   * Tip: red
   * Ring 1: white
   * Ring 2: green
-  * Sleeve: blue
+  * Sleeve: blue or black
 1. Assuming you're using the same [3.5mm switched audio jack](http://www.digikey.co.uk/product-detail/en/cui-inc/SJ1-3535/CP1-3535-ND/738693) as we do, then connect the following connections to wire the 4-pole TRRS plug to the aux audio jack:
   * Tip (red) to connection 2
   * Ring 1 (white) to connection 3
   * Ring 2 (black/green) to connection 1
   * Sleeve is left unconnected
 1. If you're using the same amplifier board as us, you should desolder the audio jack from it.  When you have, the connections&mdash;when viewed from underneath, from left to right&mdash;are tip \ sleeve / ring (on a TRS stereo jack)
-1. Wire the output connections of the aux jack to the amplifier, with ~12cm of cable.  We'll leave the ground connection unconnected as it will prevent a ground loop with the ground connection for power.
+1. Wire the output connections of the aux jack to the amplifier, with ~20cm of cable.  We'll leave the ground connection unconnected as it will prevent a ground loop with the ground connection for power.
   * Connection 4 (red) to the left audio input
   * Connection 5 (white) to the right audio input
 
@@ -137,11 +141,6 @@ This isn't necessarily the *only* way to assemble the Brain, but the general ord
 
 ### Assembly
 1. Fasten the USB extension cable into the main box
-1. Mount the speakers into their frame
-1. Mount the RFID reader into the frame
-1. Mount the Raspberry Pi to the base
-1. Glue the frame onto the base
-1. Check the fit of the amp and 3.5mm jack socket in the main box
 1. Connect up all the electronics and make sure it's all working before it gets installed fully
 1. Fit the amp and 3.5mm jack socket into the main box
 1. Hot-glue the boot progress board into the main box
