@@ -83,8 +83,8 @@
         ],
         "out": [
             {
-                "x": 770,
-                "y": 90,
+                "x": 760,
+                "y": 100,
                 "wires": [
                     {
                         "id": "8165cef1.12886",
@@ -854,9 +854,10 @@
         "type": "http request",
         "z": "2c85e1fd.fde9ae",
         "name": "Download prints list for this box",
-        "method": "GET",
+        "method": "use",
         "ret": "obj",
         "url": "",
+        "tls": "",
         "x": 663,
         "y": 189,
         "wires": [
