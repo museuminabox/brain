@@ -83,8 +83,8 @@
         ],
         "out": [
             {
-                "x": 760,
-                "y": 100,
+                "x": 770,
+                "y": 90,
                 "wires": [
                     {
                         "id": "8165cef1.12886",
@@ -411,7 +411,7 @@
         "y": 61,
         "wires": [
             [
-                "16dd1e16.1b381a"
+                "6f669a6b.b3c81c"
             ]
         ]
     },
@@ -433,8 +433,8 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "<html>\n    <head>\n        <title>Configure this brain</title>\n    </head>\n    <body>\n        <h1>Configure this brain</h1>\n        {{#context.global.box_settings.id}}\n        <p>This box's ID is: {{context.global.box_settings.id}}</p>\n        <p>Its hardware ID is: {{context.global.box_settings.hardware_id}}</p>\n        <p>If you want to discard this box ID (or create one from scratch) then hit the button below...</p>\n        {{/context.global.box_settings.id}}\n        {{^context.global.box_settings.id}}\n        <p>To create a new box then hit the button below...</p>\n        {{/context.global.box_settings.id}}\n        <form method=\"POST\">\n            <label for=\"hardware_id\">Hardware ID (on the underside of the case):</label>\n            <input type=\"text\" name=\"hardware_id\" value=\"{{context.global.box_settings.hardware_id}}\" /><br />\n            <label for=\"exterior\">Exterior (box material, colour):</label>\n            <input type=\"text\" name=\"exterior\" value=\"{{context.global.box_settings.exterior}}\" /><br />\n            <input type=\"submit\" value=\"Create a new box\" />\n        </form>\n    </body>\n</html>",
-        "x": 561,
+        "template": "<html>\n    <head>\n        <title>Configure this brain</title>\n    </head>\n    <body>\n        <h1>Configure this brain</h1>\n        {{#payload}}\n            <p><strong>\n                {{payload}}\n            </strong></p>\n            <p>If you want to discard this box ID (or create one from scratch) then hit the button below...</p>\n        {{/payload}}\n        {{^payload}}\n        <p>To create a new box then hit the button below...</p>\n        {{/payload}}\n        <p>If you're looking to upgrade an existing box then head over to <a href=\"/upgrade\">/upgrade</a></p>\n        <form method=\"POST\">\n            <label for=\"hardware_id\">Hardware ID (on the underside of the case):</label>\n            <input type=\"text\" name=\"hardware_id\" value=\"{{context.global.box_settings.hardware_id}}\" /><br />\n            <label for=\"exterior\">Exterior (box material, colour):</label>\n            <input type=\"text\" name=\"exterior\" value=\"{{context.global.box_settings.exterior}}\" /><br />\n            <input type=\"submit\" value=\"Create a new box\" />\n        </form>\n    </body>\n</html>",
+        "x": 600,
         "y": 60,
         "wires": [
             [
@@ -458,7 +458,7 @@
         "func": "msg.headers = { \"Content-Type\": \"text/html\" };\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 783,
+        "x": 830,
         "y": 60,
         "wires": [
             [
@@ -471,7 +471,7 @@
         "type": "http response",
         "z": "afe19cbf.f80a18",
         "name": "",
-        "x": 978,
+        "x": 1318,
         "y": 322,
         "wires": []
     },
@@ -499,7 +499,7 @@
         "func": "// We successfully downloaded the config\n// so redirect to the /prints page\nmsg.headers = { \"Location\": \"/prints\" };\nmsg.statusCode = 302;\nmsg.payload = \"Redirect to /prints\";\nreturn msg;",
         "outputs": "1",
         "noerr": 0,
-        "x": 635,
+        "x": 975,
         "y": 277,
         "wires": [
             [
@@ -516,8 +516,8 @@
         "ret": "obj",
         "url": "",
         "tls": "",
-        "x": 320,
-        "y": 220,
+        "x": 380,
+        "y": 260,
         "wires": [
             [
                 "d3e4fb5.c7e2f08"
@@ -533,7 +533,7 @@
         "appendNewline": true,
         "createDir": false,
         "overwriteFile": "true",
-        "x": 694,
+        "x": 1034,
         "y": 190,
         "wires": []
     },
@@ -565,7 +565,7 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 649,
+        "x": 989,
         "y": 233,
         "wires": [
             [
@@ -577,7 +577,7 @@
         "id": "58f4c569.64f99c",
         "type": "subflow:2c85e1fd.fde9ae",
         "z": "afe19cbf.f80a18",
-        "x": 814,
+        "x": 1154,
         "y": 232,
         "wires": [
             []
@@ -591,8 +591,8 @@
         "url": "/prints",
         "method": "get",
         "swaggerDoc": "",
-        "x": 88,
-        "y": 377,
+        "x": 124,
+        "y": 501,
         "wires": [
             [
                 "7a0c0b65.061d24"
@@ -604,8 +604,8 @@
         "type": "http response",
         "z": "afe19cbf.f80a18",
         "name": "",
-        "x": 855,
-        "y": 485,
+        "x": 891,
+        "y": 609,
         "wires": []
     },
     {
@@ -617,8 +617,8 @@
         "ret": "obj",
         "url": "",
         "tls": "",
-        "x": 433,
-        "y": 376,
+        "x": 469,
+        "y": 500,
         "wires": [
             [
                 "45f2b710.48f8e8"
@@ -633,8 +633,8 @@
         "func": "msg.url = \"https://heart.museuminabox.org/api/boxes/\"+context.global.box_settings.id+\"/sync.json\";\nmsg.method = \"POST\";\nmsg.payload = { \"software_version\": context.global.software_version };\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 224,
-        "y": 376,
+        "x": 260,
+        "y": 500,
         "wires": [
             [
                 "6ce2c335.50aee4"
@@ -651,8 +651,8 @@
         "format": "handlebars",
         "syntax": "mustache",
         "template": "<html>\n    <head>\n        <title>Write Print Tags</title>\n        <style type=\"text/css\">\n            li img { width: 10%; }\n        </style>\n    </head>\n    <body>\n        <h1>Write Print Tags</h1>\n        <p>Place a print onto the brain, then click the \"Write tag\" button to write the tag.</p>\n        <ul>\n            <li><img src=\"\"> Configure WiFi admin totem\n                <form action=\"/tag\" method=\"post\" id=\"tagWiFi\">\n                    <input type=\"hidden\" name=\"url\" value=\"http://www.museuminabox.org\" />\n                    <input type=\"hidden\" name=\"configure\" value=\"wifi\" />\n                    <input type=\"submit\" name=\"write\" value=\"Write tag\" onclick=\"$('#msgWiFi').text('Working...'); $.post('/tag', $('#tagWiFi').serialize()) .done(function() { $('#msgWiFi').text('Ok') }) .fail(function() { $('#msgWiFi').text('Failed') }); return false;\" />\n                    <span id=\"msgWiFi\"></span>\n                </form>\n            </li>\n        {{#payload.prints}}\n            <li><img src=\"{{{image_url}}}\"> {{name}}\n                <form action=\"/tag\" method=\"post\" id=\"tag{{id}}\">\n                    <input type=\"hidden\" name=\"url\" value=\"{{url}}\" />\n                    <input type=\"hidden\" name=\"id\" value=\"{{id}}\" />\n                    <input type=\"hidden\" name=\"audio\" value=\"{{brain_filename_audio}}\" />\n                    <input type=\"submit\" name=\"write\" value=\"Write tag\" onclick=\"$('#msg{{id}}').text('Working...'); $.post('/tag', $('#tag{{id}}').serialize()) .done(function() { $('#msg{{id}}').text('Ok') }) .fail(function() { $('#msg{{id}}').text('Failed') }); return false;\" />\n                    <span id=\"msg{{id}}\"></span>\n                </form>\n            </li>\n        {{/payload.prints}}\n        </ul>\n    </body>\n    <script src=\"vendor/vendor.js\"></script>\n</html>\n",
-        "x": 674,
-        "y": 376,
+        "x": 710,
+        "y": 500,
         "wires": [
             [
                 "94182766.541e68"
@@ -667,8 +667,8 @@
         "func": "msg.headers = { \"Content-Type\": \"text/html\" };\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 762,
-        "y": 433,
+        "x": 798,
+        "y": 557,
         "wires": [
             [
                 "c9624786.2ff3e"
@@ -699,8 +699,8 @@
         "repeat": "",
         "crontab": "",
         "once": false,
-        "x": 131,
-        "y": 590,
+        "x": 130,
+        "y": 700,
         "wires": [
             [
                 "b75c4abb.8231b8"
@@ -715,8 +715,8 @@
         "func": "msg.payload = [];\nmsg.payload.push({\"type\":\"Sp\", \"value\":\"https://mcqn.com/ibal151/\"});\nmsg.payload.push({\"type\":\"T\", \"value\":\"{\\\"name\\\":\\\"Bust of Violette Szabo\\\",\\\"audio\\\":\\\"violette.wav\\\"}\"});\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 324,
-        "y": 590,
+        "x": 323,
+        "y": 700,
         "wires": [
             [
                 "9e2b57dc.b17448",
@@ -729,8 +729,8 @@
         "type": "rpi-rfid write-ndef",
         "z": "afe19cbf.f80a18",
         "name": "",
-        "x": 574,
-        "y": 612,
+        "x": 573,
+        "y": 722,
         "wires": [
             [
                 "9e2b57dc.b17448",
@@ -746,8 +746,8 @@
         "active": true,
         "console": "false",
         "complete": "false",
-        "x": 771,
-        "y": 590,
+        "x": 770,
+        "y": 700,
         "wires": []
     },
     {
@@ -758,8 +758,8 @@
         "url": "/tag",
         "method": "get",
         "swaggerDoc": "",
-        "x": 97,
-        "y": 683,
+        "x": 96,
+        "y": 793,
         "wires": [
             [
                 "791150d5.04aae"
@@ -773,8 +773,8 @@
         "name": "",
         "filename": "/home/pi/miab/tag.html",
         "format": "utf8",
-        "x": 632,
-        "y": 683,
+        "x": 631,
+        "y": 793,
         "wires": [
             [
                 "507e8db4.8a3d1c"
@@ -786,8 +786,8 @@
         "type": "http response",
         "z": "afe19cbf.f80a18",
         "name": "",
-        "x": 806,
-        "y": 683,
+        "x": 805,
+        "y": 793,
         "wires": []
     },
     {
@@ -798,8 +798,8 @@
         "url": "/tag",
         "method": "post",
         "swaggerDoc": "",
-        "x": 98,
-        "y": 639,
+        "x": 97,
+        "y": 749,
         "wires": [
             [
                 "849337da.209338"
@@ -814,8 +814,8 @@
         "func": "var url = { \"type\":\"Sp\", \"value\": msg.payload.url };\nmsg.payload.url = undefined;\nmsg.payload.write = undefined;\nvar text = { \"type\":\"T\", \"value\": JSON.stringify(msg.payload) };\nmsg.payload = [url, text];\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 325,
-        "y": 639,
+        "x": 324,
+        "y": 749,
         "wires": [
             [
                 "1aebf3aa.c444f4"
@@ -828,8 +828,8 @@
         "z": "afe19cbf.f80a18",
         "name": "Write RFID tags",
         "info": "",
-        "x": 118,
-        "y": 542,
+        "x": 117,
+        "y": 652,
         "wires": []
     },
     {
@@ -1005,7 +1005,7 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 733,
+        "x": 1073,
         "y": 322,
         "wires": [
             [
@@ -1153,7 +1153,7 @@
         "type": "http response",
         "z": "afe19cbf.f80a18",
         "name": "",
-        "x": 450,
+        "x": 790,
         "y": 320,
         "wires": []
     },
@@ -1178,7 +1178,7 @@
         ],
         "checkall": "true",
         "outputs": 2,
-        "x": 310,
+        "x": 650,
         "y": 260,
         "wires": [
             [
@@ -1390,6 +1390,132 @@
         "wires": [
             [
                 "72069fd0.ea825"
+            ]
+        ]
+    },
+    {
+        "id": "24abfae1.0d7fde",
+        "type": "template",
+        "z": "afe19cbf.f80a18",
+        "name": "Format HTML page",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n<head>\n  <script type=\"text/javascript\">\n    window.addEventListener('message', function(event) {\n        console.log(event);\n        document.getElementById('box_id').value = event.data;\n    });\n  </script>\n</head>\n<body>\n    <h1>Upgrade</h1>\n    {{#payload}}\n        <p><strong>\n            {{payload}}\n        </strong></p>\n    {{/payload}}\n    <p>Set this box to be an existing box.  Useful when upgrading an old box.  If you want to\n    create a new box then head to <a href=\"/setup\">/setup</a>.</p>\n    <h2>Choose the box to upgrade from the list below:</h2>\n    <iframe width=\"100%\" height=\"300\" src=\"http://heart.museuminabox.org/heart/setup/boxes/\"></iframe>\n    <form action=\"/upgrade\" method=\"POST\">\n        <label for=\"box_id\">Box ID:</label>\n        <input id=\"box_id\" type=\"text\" size=\"40\" name=\"box_id\" />\n        <input id=\"save\" type=\"submit\" name=\"Save\" value=\"Save\" />\n    </form>\n</body>\n</html>\n",
+        "x": 680,
+        "y": 440,
+        "wires": [
+            [
+                "152973fa.46ac24"
+            ]
+        ]
+    },
+    {
+        "id": "abde7dd1.790a98",
+        "type": "http in",
+        "z": "afe19cbf.f80a18",
+        "name": "Upgrade box page",
+        "url": "/upgrade",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 440,
+        "wires": [
+            [
+                "70439c7c.d77bcc"
+            ]
+        ]
+    },
+    {
+        "id": "152973fa.46ac24",
+        "type": "function",
+        "z": "afe19cbf.f80a18",
+        "name": "Add response headers",
+        "func": "msg.headers = { \"Content-Security-Policy\": \"script-src 'self' 'unsafe-inline' 'unsafe-eval'\", \"Content-Type\": \"text/html\" };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 930,
+        "y": 440,
+        "wires": [
+            [
+                "9260c168.5f3808"
+            ]
+        ]
+    },
+    {
+        "id": "9260c168.5f3808",
+        "type": "http response",
+        "z": "afe19cbf.f80a18",
+        "name": "",
+        "x": 1130,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "959d40d6.3a1c9",
+        "type": "http in",
+        "z": "afe19cbf.f80a18",
+        "name": "Handle upgrade form submission",
+        "url": "/upgrade",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 320,
+        "wires": [
+            [
+                "79c7285f.9de09"
+            ]
+        ]
+    },
+    {
+        "id": "79c7285f.9de09",
+        "type": "function",
+        "z": "afe19cbf.f80a18",
+        "name": "Build URL",
+        "func": "msg.url = \"https://heart.museuminabox.org/api/boxes/\"+msg.payload.box_id+\".json\";\nmsg.method = \"GET\";\nmsg.payload = \"\";\nmsg.headers = [];\nreturn msg;",
+        "outputs": "1",
+        "noerr": 0,
+        "x": 140,
+        "y": 380,
+        "wires": [
+            [
+                "7a5faf27.1b8938",
+                "ec30111e.2defa8"
+            ]
+        ]
+    },
+    {
+        "id": "70439c7c.d77bcc",
+        "type": "function",
+        "z": "afe19cbf.f80a18",
+        "name": "Add warning if box ID already set",
+        "func": "if (context.global.box_settings) {\n    msg.payload = \"WARNING: This box has already been configured. Its ID is \"+\n    context.global.box_settings.id+\", with hardware ID of \"+\n    context.global.box_settings.hardware_id+\". Are you sure you want to change that?\";\n} else {\n    msg.payload = \"\";\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 400,
+        "y": 440,
+        "wires": [
+            [
+                "24abfae1.0d7fde"
+            ]
+        ]
+    },
+    {
+        "id": "6f669a6b.b3c81c",
+        "type": "function",
+        "z": "afe19cbf.f80a18",
+        "name": "Add warning if box ID already set",
+        "func": "if (context.global.box_settings) {\n    msg.payload = \"WARNING: This box has already been configured. Its ID is \"+\n    context.global.box_settings.id+\", with hardware ID of \"+\n    context.global.box_settings.hardware_id+\". Are you sure you want to change that?\";\n} else {\n    msg.payload = \"\";\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 340,
+        "y": 60,
+        "wires": [
+            [
+                "16dd1e16.1b381a"
             ]
         ]
     }
