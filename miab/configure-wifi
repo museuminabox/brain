@@ -3,7 +3,7 @@
 ps aux | grep wifi-connect | grep -v grep
 if [[ $? == 1 ]]; then
   echo "No wifi-connect found, spawn it"
-  wifi-connect --portal-ssid MuseumInABox --activity-timeout 120
+  wifi-connect --portal-ssid MuseumInABox --ui-directory /home/pi/miab/wifi-ui --activity-timeout 120
   # Now see if we can see the Internet or not
   (curl -I https://heart.museuminabox.org && /usr/bin/play /home/pi/miab/audio/WiFi_works.wav) || /usr/bin/play /home/pi/miab/audio/WiFi_failed.wav
 fi
