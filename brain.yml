@@ -21,6 +21,8 @@
     hostname: name="{{ brain_name }}"
   - name: Update hosts file too
     replace: dest=/etc/hosts regexp='raspberrypi' replace="{{ brain_name }}"
+  - name: Update default password
+    user: name=pi password="{{ pi_password }}"
   - name: Install sox (for audio brains)
     apt: name=sox state=present
   - name: Install omxplayer (for video brains)

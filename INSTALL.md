@@ -46,8 +46,10 @@
 1. Edit the ```hosts``` file so ansible knows which computer to configure.  Change the IP address in it to match the one you just found out.
 1. Check you can run commands on the Pi using Ansible
    ```ansible brain -i hosts -a "hostname" -u pi```
+1. Create a password for the `pi` user
+   ```mkpasswd --method=sha-512 > pwd.txt```
 1. Update the brain
-   ```ansible-playbook brain.yml -i hosts```
+   ```ansible-playbook brain.yml -e pi_password=`cat pwd.txt` -i hosts```
 
 ### Pre-rolled Image Install
 
