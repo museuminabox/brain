@@ -758,8 +758,8 @@
         "url": "/tag",
         "method": "get",
         "swaggerDoc": "",
-        "x": 96,
-        "y": 793,
+        "x": 100,
+        "y": 800,
         "wires": [
             [
                 "791150d5.04aae"
@@ -773,8 +773,8 @@
         "name": "",
         "filename": "/home/pi/miab/tag.html",
         "format": "utf8",
-        "x": 631,
-        "y": 793,
+        "x": 630,
+        "y": 800,
         "wires": [
             [
                 "507e8db4.8a3d1c"
@@ -786,8 +786,8 @@
         "type": "http response",
         "z": "afe19cbf.f80a18",
         "name": "",
-        "x": 805,
-        "y": 793,
+        "x": 850,
+        "y": 800,
         "wires": []
     },
     {
@@ -1517,6 +1517,39 @@
         "wires": [
             [
                 "16dd1e16.1b381a"
+            ]
+        ]
+    },
+    {
+        "id": "e50d2201.782e6",
+        "type": "catch",
+        "z": "afe19cbf.f80a18",
+        "name": "Catch any errors writing tags",
+        "scope": [
+            "1aebf3aa.c444f4"
+        ],
+        "x": 360,
+        "y": 860,
+        "wires": [
+            [
+                "9e2b57dc.b17448",
+                "97afb1d0.66cfe8"
+            ]
+        ]
+    },
+    {
+        "id": "97afb1d0.66cfe8",
+        "type": "function",
+        "z": "afe19cbf.f80a18",
+        "name": "Report errors",
+        "func": "msg.statusCode = 400;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 620,
+        "y": 860,
+        "wires": [
+            [
+                "507e8db4.8a3d1c"
             ]
         ]
     }
