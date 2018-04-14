@@ -17,19 +17,19 @@ then
         	echo 10 > /sys/class/gpio/export
         	echo out > /sys/class/gpio/gpio10/direction
         	echo 1 > /sys/class/gpio/gpio10/value
-        	sleep 2
+        	sleep 1.5
         	echo 24 > /sys/class/gpio/export
         	echo out > /sys/class/gpio/gpio24/direction
         	echo 1 > /sys/class/gpio/gpio24/value
-        	sleep 2
+        	sleep 1.5
         	echo 23 > /sys/class/gpio/export
         	echo out > /sys/class/gpio/gpio23/direction
         	echo 1 > /sys/class/gpio/gpio23/value
-        	sleep 2
+        	sleep 1.5
         	echo 22 > /sys/class/gpio/export
         	echo out > /sys/class/gpio/gpio22/direction
         	echo 1 > /sys/class/gpio/gpio22/value
-        	sleep 2
+        	sleep 1
         	echo 27 > /sys/class/gpio/export
         	echo out > /sys/class/gpio/gpio27/direction
         	echo 1 > /sys/class/gpio/gpio27/value
