@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>WiFi Connect</title>
+		<title>Museum in a Box - Connect your Box to wi-fi</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<!-- Latest compiled and minified CSS -->
@@ -36,7 +36,7 @@
 			<div class="container">
 				<div class="navbar-header">
 					<a class="navbar-brand"><img id="logo" height=30 src="/img/logo.png"></img></a>
-					<a class="navbar-brand">Museum in a Box WiFi</a>
+					<a class="navbar-brand">Museum in a Box wi-fi</a>
 				</div>
 			</div>
 		</nav>
@@ -44,7 +44,7 @@
 		<div class="container">
 			<div class="row before-submit">
 				<div class="col-lg-8 col-lg-offset-2">
-					<h3>Hi! Please choose your wifi from the list.</h3>
+					<h3>Hi! Please choose your wi-fi network from the list:</h3>
 				</div>
 			</div>
 			<div class="row before-submit">
@@ -57,7 +57,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="passphrase" class="control-label col-lg-2">passphrase</label>
+							<label for="passphrase" class="control-label col-lg-2">Password:</label>
 							<div class="col-lg-6">
 								<input type='password' class="form-control" name='passphrase'></input>
 							</div>
@@ -72,14 +72,17 @@
 			</div>
 			<div class="row hidden" id='submit-message'>
 				<div class="col-lg-8 col-lg-offset-2">
-					<h3>Applying changes...</h3>
-					<p>Your device will soon be online. If connection is unsuccessful, the Access Point will be back up in a few minutes, and reloading this page will allow you to try again.</p>
+					<h3>OK. Connecting... </h3>
+					<p>
+						Your Box is connecting to the network. 
+						If it doesn't work, we'll try refreshing the MuseumInABox network so you can try joining it again. (You'll need to refresh this page, please.)
+					</p>
 				</div>
 			</div>
 			<div class="row hidden" id='no-networks-message'>
 				<div class="col-lg-8 col-lg-offset-2">
-					<h3>No wifi networks available</h3>
-					<p>Please ensure there is a network within range and reboot the device.</p>
+					<h3>Hmm... We can't see any wi-fi networks.</h3>
+					<p>Can you please make sure your network is up and running? It might help to restart your Box, or your wi-fi router.</p>
 				</div>
 			</div>
 		</div>
