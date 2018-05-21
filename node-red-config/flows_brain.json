@@ -1838,5 +1838,376 @@
                 "4cd04be6.53574c"
             ]
         ]
+    },
+    {
+        "id": "eea5ae50.6df058",
+        "type": "http response",
+        "z": "afe19cbf.f80a18",
+        "name": "",
+        "x": 1130,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "91050097.a7c1f8",
+        "type": "function",
+        "z": "afe19cbf.f80a18",
+        "name": "Add response headers",
+        "func": "msg.headers = { \"Content-Security-Policy\": \"script-src 'self' 'unsafe-inline' 'unsafe-eval'\", \"Content-Type\": \"text/html\" };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 930,
+        "y": 1020,
+        "wires": [
+            [
+                "eea5ae50.6df058"
+            ]
+        ]
+    },
+    {
+        "id": "5a531f35.04eb78",
+        "type": "template",
+        "z": "afe19cbf.f80a18",
+        "name": "Format HTML page",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n<head>\n    <title>Museum in a Box Advanced WiFi Configuration</title>\n        <style type=\"text/css\">\n            body { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"; }\n            ul { list-style-type: none; }\n            li { width: 180px; height: 180px; float: left; display: block; margin: 10px; padding: 10px; background: #f6f6f0; }\n            li div { height: 100px; }\n            li img { height: 100px; }\n            li p { margin: 5px; height: 15px; text-align: center; }\n            .working { background: #eef; }\n            .ok { background: #dfd; }\n            .failed { background: #fbb; }\n            label { width: 20em; display: inline-block; text-align: right; }\n            input#save { background: #ff0; width: 120px; border: 0; border-radius: 10px; height: 40px; display: block; margin: 1em 22em; font-weight: bold; }\n            .failed p { color: red; font-weight: bold; }\n            .header h1 { font-weight: bold; font-size: 14pt; }\n            .header h1 a { font-weight: normal; }\n        </style>\n</head>\n<body>\n    <h1>Museum in a Box Advanced WiFi Configuration</h1>\n    <p>Enter the details for your WiFi network below.  If you do not have a username and password\n    for your WiFi, then use the <a href=\"http://box.local/\">basic WiFi setup page</a> instead.</p>\n    <h2>Choose the box to upgrade from the list below:</h2>\n    <form action=\"/wifi\" method=\"POST\">\n        <label for=\"ssid\">WiFi Network Name (SSID):</label>\n        <input id=\"ssid\" type=\"text\" size=\"40\" name=\"ssid\" /><br />\n        <label for=\"userid\">Username:</label>\n        <input id=\"userid\" type=\"text\" size=\"40\" name=\"userid\" /><br />\n        <label for=\"passwd\">Password:</label>\n        <input id=\"passwd\" type=\"password\" size=\"40\" name=\"passwd\" /><br />\n        <input id=\"save\" type=\"submit\" name=\"Save\" value=\"Save\" />\n    </form>\n</body>\n</html>\n",
+        "x": 680,
+        "y": 1020,
+        "wires": [
+            [
+                "91050097.a7c1f8"
+            ]
+        ]
+    },
+    {
+        "id": "6036175b.f12918",
+        "type": "http in",
+        "z": "afe19cbf.f80a18",
+        "name": "802.1x WiFi config page",
+        "url": "/wifi",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 1020,
+        "wires": [
+            [
+                "5a531f35.04eb78"
+            ]
+        ]
+    },
+    {
+        "id": "40b263d2.3fd47c",
+        "type": "debug",
+        "z": "afe19cbf.f80a18",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 1310,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "9c1db444.0c708",
+        "type": "http in",
+        "z": "afe19cbf.f80a18",
+        "name": "Save 802.1x WiFi config",
+        "url": "/wifi",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 1120,
+        "wires": [
+            [
+                "44be6096.0e933",
+                "40b263d2.3fd47c",
+                "1a233311.add105"
+            ]
+        ]
+    },
+    {
+        "id": "44be6096.0e933",
+        "type": "template",
+        "z": "afe19cbf.f80a18",
+        "name": "Format HTML page",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n<head>\n    <title>Museum in a Box Wifi Saved</title>\n        <style type=\"text/css\">\n            body { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"; }\n            ul { list-style-type: none; }\n            li { width: 180px; height: 180px; float: left; display: block; margin: 10px; padding: 10px; background: #f6f6f0; }\n            li div { height: 100px; }\n            li img { height: 100px; }\n            li p { margin: 5px; height: 15px; text-align: center; }\n            .working { background: #eef; }\n            .ok { background: #dfd; }\n            .failed { background: #fbb; }\n            label { width: 20em; display: inline-block; text-align: right; }\n            input#save { background: #ff0; width: 120px; border: 0; border-radius: 10px; height: 40px; display: block; margin: 1em 22em; font-weight: bold; }\n            .failed p { color: red; font-weight: bold; }\n            .header h1 { font-weight: bold; font-size: 14pt; }\n            .header h1 a { font-weight: normal; }\n        </style>\n</head>\n<body>\n    <h1>Museum in a Box Wifi Saved</h1>\n    <p>You Wifi details have been saved.</p>\n    <p>In a moment you will be disconnected from the MuseumInABox Wifi network so that your box\n    can try to use the new Wifi settings.  Your box will tell you if it works or not (it might\n    take up to two minutes).</p>\n</body>\n</html>\n",
+        "x": 460,
+        "y": 1120,
+        "wires": [
+            [
+                "ce1483d1.eb04c8"
+            ]
+        ]
+    },
+    {
+        "id": "ce1483d1.eb04c8",
+        "type": "function",
+        "z": "afe19cbf.f80a18",
+        "name": "Add response headers",
+        "func": "msg.headers = { \"Content-Security-Policy\": \"script-src 'self' 'unsafe-inline' 'unsafe-eval'\", \"Content-Type\": \"text/html\" };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 710,
+        "y": 1120,
+        "wires": [
+            [
+                "5e74cc94.8b716c"
+            ]
+        ]
+    },
+    {
+        "id": "5e74cc94.8b716c",
+        "type": "http response",
+        "z": "afe19cbf.f80a18",
+        "name": "",
+        "x": 910,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "59ff2d49.5cd364",
+        "type": "template",
+        "z": "afe19cbf.f80a18",
+        "name": "Format WiFi details file",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "[connection]\nid={{payload.ssid}}\nuuid={{payload.uuid}}\ntype=wifi\npermissions=\n\n[wifi]\nmode=infrastructure\nssid={{payload.ssid}}\n\n[wifi-security]\nkey-mgmt=wpa-eap\n\n[802-1x]\neap=peap;\nidentity={{payload.userid}}\npassword={{payload.passwd}}\nphase2-auth=mschapv2\n\n[ipv4]\ndns-search=\nmethod=auto\n\n[ipv6]\naddr-gen-mode=stable-privacy\ndns-search=\nmethod=auto",
+        "output": "str",
+        "x": 730,
+        "y": 1240,
+        "wires": [
+            [
+                "3d72323a.cc8686",
+                "6c606981.c3f6f"
+            ]
+        ]
+    },
+    {
+        "id": "3d72323a.cc8686",
+        "type": "file",
+        "z": "afe19cbf.f80a18",
+        "name": "",
+        "filename": "",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "true",
+        "x": 950,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "1a233311.add105",
+        "type": "function",
+        "z": "afe19cbf.f80a18",
+        "name": "Set filename and UUID",
+        "func": "// Generate a UUID\n// Derived from https://gist.github.com/jed/982883\n//var uuidv4 = ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c => (c^crypto.randomBytes(1)[0]&15>>c/4).toString(16));\nvar uuidv4 = ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c => (c^Math.random() * 16>>c/4).toString(16));\n\nmsg.filename = \"/etc/NetworkManager/system-connections/\"+msg.payload.ssid;\nmsg.payload.uuid = uuidv4;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 470,
+        "y": 1240,
+        "wires": [
+            [
+                "59ff2d49.5cd364",
+                "40b263d2.3fd47c"
+            ]
+        ]
+    },
+    {
+        "id": "6c606981.c3f6f",
+        "type": "delay",
+        "z": "afe19cbf.f80a18",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 700,
+        "y": 1320,
+        "wires": [
+            [
+                "cffff891.416e1",
+                "d2320293.7a53e"
+            ]
+        ]
+    },
+    {
+        "id": "cffff891.416e1",
+        "type": "change",
+        "z": "afe19cbf.f80a18",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "filename",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 890,
+        "y": 1320,
+        "wires": [
+            [
+                "d34ff403.d22868"
+            ]
+        ]
+    },
+    {
+        "id": "d34ff403.d22868",
+        "type": "exec",
+        "z": "afe19cbf.f80a18",
+        "command": "chmod 600",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "Set correct file permissions",
+        "x": 1160,
+        "y": 1320,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "b73e48f0.cfa45",
+        "type": "comment",
+        "z": "afe19cbf.f80a18",
+        "name": "Temporary 802.1x WiFi Config Opttion",
+        "info": "",
+        "x": 190,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "d2320293.7a53e",
+        "type": "exec",
+        "z": "afe19cbf.f80a18",
+        "command": "killall configure-wifi",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "Kill the normal configure Wifi script",
+        "x": 960,
+        "y": 1420,
+        "wires": [
+            [
+                "b7ebbdd8.7d6708"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "b7ebbdd8.7d6708",
+        "type": "exec",
+        "z": "afe19cbf.f80a18",
+        "command": "killall wifi-connect",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "And the hotspot it created",
+        "x": 930,
+        "y": 1500,
+        "wires": [
+            [
+                "75e2586a.ac7d58"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "57de3ef9.abb5e8",
+        "type": "delay",
+        "z": "afe19cbf.f80a18",
+        "name": "Give the Wifi time to find its feet",
+        "pauseType": "delay",
+        "timeout": "80",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 950,
+        "y": 1620,
+        "wires": [
+            [
+                "c32db8bc.c99ce"
+            ]
+        ]
+    },
+    {
+        "id": "c32db8bc.c99ce",
+        "type": "exec",
+        "z": "afe19cbf.f80a18",
+        "command": "(curl -I https://heart.museuminabox.org && /usr/bin/play /home/pi/miab/audio/WiFi_works.wav) || /usr/bin/play /home/pi/miab/audio/WiFi_failed.wav",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "See if we can see the Internet",
+        "x": 950,
+        "y": 1680,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "75e2586a.ac7d58",
+        "type": "exec",
+        "z": "afe19cbf.f80a18",
+        "command": "nmcli connection reload",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "Tell NetworkManager to reload its config",
+        "x": 980,
+        "y": 1560,
+        "wires": [
+            [
+                "57de3ef9.abb5e8"
+            ],
+            [],
+            []
+        ]
     }
 ]
