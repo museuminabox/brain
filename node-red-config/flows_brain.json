@@ -1873,7 +1873,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "<html>\n<head>\n    <title>Museum in a Box Advanced WiFi Configuration</title>\n        <style type=\"text/css\">\n            body { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"; }\n            ul { list-style-type: none; }\n            li { width: 180px; height: 180px; float: left; display: block; margin: 10px; padding: 10px; background: #f6f6f0; }\n            li div { height: 100px; }\n            li img { height: 100px; }\n            li p { margin: 5px; height: 15px; text-align: center; }\n            .working { background: #eef; }\n            .ok { background: #dfd; }\n            .failed { background: #fbb; }\n            label { width: 20em; display: inline-block; text-align: right; }\n            input#save { background: #ff0; width: 120px; border: 0; border-radius: 10px; height: 40px; display: block; margin: 1em 22em; font-weight: bold; }\n            .failed p { color: red; font-weight: bold; }\n            .header h1 { font-weight: bold; font-size: 14pt; }\n            .header h1 a { font-weight: normal; }\n        </style>\n</head>\n<body>\n    <h1>Museum in a Box Advanced WiFi Configuration</h1>\n    <p>Enter the details for your WiFi network below.  If you do not have a username and password\n    for your WiFi, then use the <a href=\"http://box.local/\">basic WiFi setup page</a> instead.</p>\n    <h2>Choose the box to upgrade from the list below:</h2>\n    <form action=\"/wifi\" method=\"POST\">\n        <label for=\"ssid\">WiFi Network Name (SSID):</label>\n        <input id=\"ssid\" type=\"text\" size=\"40\" name=\"ssid\" /><br />\n        <label for=\"userid\">Username:</label>\n        <input id=\"userid\" type=\"text\" size=\"40\" name=\"userid\" /><br />\n        <label for=\"passwd\">Password:</label>\n        <input id=\"passwd\" type=\"password\" size=\"40\" name=\"passwd\" /><br />\n        <input id=\"save\" type=\"submit\" name=\"Save\" value=\"Save\" />\n    </form>\n</body>\n</html>\n",
+        "template": "<html>\n<head>\n    <title>Museum in a Box Advanced WiFi Configuration</title>\n        <style type=\"text/css\">\n            body { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"; }\n            ul { list-style-type: none; }\n            li { width: 180px; height: 180px; float: left; display: block; margin: 10px; padding: 10px; background: #f6f6f0; }\n            li div { height: 100px; }\n            li img { height: 100px; }\n            li p { margin: 5px; height: 15px; text-align: center; }\n            .working { background: #eef; }\n            .ok { background: #dfd; }\n            .failed { background: #fbb; }\n            label { width: 20em; display: inline-block; text-align: right; }\n            input#save { background: #ff0; width: 120px; border: 0; border-radius: 10px; height: 40px; display: block; margin: 1em 22em; font-weight: bold; }\n            .failed p { color: red; font-weight: bold; }\n            .header h1 { font-weight: bold; font-size: 14pt; }\n            .header h1 a { font-weight: normal; }\n        </style>\n</head>\n<body>\n    <h1>Museum in a Box Advanced WiFi Configuration</h1>\n    <p>Enter the details for your WiFi network below.  If you do not have a username and password or a hidden\n    network for your WiFi, then use the <a href=\"http://box.local/\">basic WiFi setup page</a> instead.</p>\n    <h2>I have an Enterprise WPA or 802.1x wifi network:</h2>\n    <form action=\"/wifi\" method=\"POST\">\n        <label for=\"ssid\">WiFi Network Name (SSID):</label>\n        <input id=\"ssid\" type=\"text\" size=\"40\" name=\"ssid\" /><br />\n        <label for=\"userid\">Username:</label>\n        <input id=\"userid\" type=\"text\" size=\"40\" name=\"userid\" /><br />\n        <label for=\"passwd\">Password:</label>\n        <input id=\"passwd\" type=\"password\" size=\"40\" name=\"passwd\" /><br />\n        <input id=\"save\" type=\"submit\" name=\"Save\" value=\"Save\" />\n    </form>\n    <h2>I have a wifi network with a hidden SSID:</h2>\n    <form action=\"/wifi\" method=\"POST\">\n        <label for=\"ssid\">WiFi Network Name (SSID):</label>\n        <input id=\"ssid\" type=\"text\" size=\"40\" name=\"ssid\" /><br />\n        <input id=\"hidden\" type=\"hidden\" name=\"hidden\" value=\"true\" />\n        <label for=\"passwd\">Password:</label>\n        <input id=\"passwd\" type=\"password\" size=\"40\" name=\"passwd\" /><br />\n        <input id=\"save\" type=\"submit\" name=\"Save\" value=\"Save\" />\n    </form>\n</body>\n</html>\n",
         "x": 680,
         "y": 1020,
         "wires": [
@@ -1979,15 +1979,15 @@
         "id": "59ff2d49.5cd364",
         "type": "template",
         "z": "afe19cbf.f80a18",
-        "name": "Format WiFi details file",
+        "name": "Format 802.1x WiFi details file",
         "field": "payload",
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
         "template": "[connection]\nid={{payload.ssid}}\nuuid={{payload.uuid}}\ntype=wifi\npermissions=\n\n[wifi]\nmode=infrastructure\nssid={{payload.ssid}}\n\n[wifi-security]\nkey-mgmt=wpa-eap\n\n[802-1x]\neap=peap;\nidentity={{payload.userid}}\npassword={{payload.passwd}}\nphase2-auth=mschapv2\n\n[ipv4]\ndns-search=\nmethod=auto\n\n[ipv6]\naddr-gen-mode=stable-privacy\ndns-search=\nmethod=auto",
         "output": "str",
-        "x": 730,
-        "y": 1240,
+        "x": 710,
+        "y": 1320,
         "wires": [
             [
                 "3d72323a.cc8686",
@@ -2005,7 +2005,7 @@
         "createDir": false,
         "overwriteFile": "true",
         "x": 950,
-        "y": 1240,
+        "y": 1300,
         "wires": []
     },
     {
@@ -2016,12 +2016,12 @@
         "func": "// Generate a UUID\n// Derived from https://gist.github.com/jed/982883\n//var uuidv4 = ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c => (c^crypto.randomBytes(1)[0]&15>>c/4).toString(16));\nvar uuidv4 = ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c => (c^Math.random() * 16>>c/4).toString(16));\n\nmsg.filename = \"/etc/NetworkManager/system-connections/\"+msg.payload.ssid;\nmsg.payload.uuid = uuidv4;\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 470,
-        "y": 1240,
+        "x": 450,
+        "y": 1200,
         "wires": [
             [
-                "59ff2d49.5cd364",
-                "40b263d2.3fd47c"
+                "40b263d2.3fd47c",
+                "6b515da9.11889c"
             ]
         ]
     },
@@ -2041,7 +2041,7 @@
         "randomUnits": "seconds",
         "drop": false,
         "x": 700,
-        "y": 1320,
+        "y": 1380,
         "wires": [
             [
                 "cffff891.416e1",
@@ -2069,7 +2069,7 @@
         "to": "",
         "reg": false,
         "x": 890,
-        "y": 1320,
+        "y": 1380,
         "wires": [
             [
                 "d34ff403.d22868"
@@ -2088,7 +2088,7 @@
         "oldrc": false,
         "name": "Set correct file permissions",
         "x": 1160,
-        "y": 1320,
+        "y": 1380,
         "wires": [
             [],
             [],
@@ -2117,7 +2117,7 @@
         "oldrc": false,
         "name": "Kill the normal configure Wifi script",
         "x": 960,
-        "y": 1420,
+        "y": 1480,
         "wires": [
             [
                 "b7ebbdd8.7d6708"
@@ -2138,7 +2138,7 @@
         "oldrc": false,
         "name": "And the hotspot it created",
         "x": 930,
-        "y": 1500,
+        "y": 1560,
         "wires": [
             [
                 "75e2586a.ac7d58"
@@ -2163,7 +2163,7 @@
         "randomUnits": "seconds",
         "drop": false,
         "x": 950,
-        "y": 1620,
+        "y": 1680,
         "wires": [
             [
                 "c32db8bc.c99ce"
@@ -2182,7 +2182,7 @@
         "oldrc": false,
         "name": "See if we can see the Internet",
         "x": 950,
-        "y": 1680,
+        "y": 1740,
         "wires": [
             [],
             [],
@@ -2201,13 +2201,64 @@
         "oldrc": false,
         "name": "Tell NetworkManager to reload its config",
         "x": 980,
-        "y": 1560,
+        "y": 1620,
         "wires": [
             [
                 "57de3ef9.abb5e8"
             ],
             [],
             []
+        ]
+    },
+    {
+        "id": "e5e9e057.87eaf",
+        "type": "template",
+        "z": "afe19cbf.f80a18",
+        "name": "Format WiFi details file",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "[connection]\nid={{payload.ssid}}\nuuid={{payload.uuid}}\ntype=wifi\nautoconnect=true\npermissions=\n\n[wifi]\nhidden=true\nmode=infrastructure\nssid={{payload.ssid}}\n\n{{#payload.passwd}}\n[wifi-security]\nkey-mgmt=wpa-psk\nauth-alg=open\npsk={{payload.passwd}}\n{{/payload.passwd}}\n\n[ipv4]\nmethod=auto\n\n[ipv6]\nmethod=auto",
+        "output": "str",
+        "x": 730,
+        "y": 1260,
+        "wires": [
+            [
+                "6c606981.c3f6f",
+                "3d72323a.cc8686"
+            ]
+        ]
+    },
+    {
+        "id": "6b515da9.11889c",
+        "type": "switch",
+        "z": "afe19cbf.f80a18",
+        "name": "802.1x or hidden SSID?",
+        "property": "payload.hidden",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "true",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 1300,
+        "wires": [
+            [
+                "e5e9e057.87eaf"
+            ],
+            [
+                "59ff2d49.5cd364"
+            ]
         ]
     }
 ]
