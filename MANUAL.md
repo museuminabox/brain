@@ -10,7 +10,7 @@ The Box connects to the Internet over wifi, so you will need to tell the Box the
   1. That will create a `MuseumInABox` wifi network.  Connect to  that with your phone or laptop
   1. Usually that will automatically open this page which will let you enter the details for the network that the Box should use to connect to the Internet.  If this page fails to open, then visit [http://box.local/](http://box.local) (or if that fails to load, then [http://192.168.42.1](http://192.168.42.1)) in a web browser
 
-  [!configure-wifi.jpg]
+  ![](configure-wifi.jpg)
 
 You will then be disconnected from the `MuseumInABox` network while the Box tries to connect using its new settings.  It will then tell you whether or not it succeeded.
 
@@ -23,7 +23,7 @@ We now have initial support for hidden and WPA Enterprise (also known as 802.1x)
   1. Ignore the standard configure wifi screen.  Instead, open a web browser and go to [http://box.local:1880/wifi](http://box.local:1880/wifi) (or if that doesn't load, then [http://192.168.42.1:1880/wifi](http://192.168.42.1:1880/wifi))
   1. That will present you with the following screen.  Enter the details for the particular type of network that the Box should use to connect to the Internet and then hit `Save`
 
-  [!advanced-wifi-settings.jpg]
+  ![](advanced-wifi-settings.jpg)
 
 You will then be disconnected from the `MuseumInABox` network while the Box tries to connect using its new settings.  It will then tell you whether or not it succeeded.
 
