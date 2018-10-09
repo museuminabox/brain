@@ -13,7 +13,7 @@
 
 ## Assembly
 
-1. Attractively arrange componentry on a table
+1. Attractively arrange componentry on a table - _this requires considerably more information :)_
 1. Place micro-SD card into Raspberry Pi
 1. Put WiFi dongle into one of the USB ports on the Raspberry Pi
 1. Connect the short (6-way) end of the Pi-to-SL030 interconnect cable to the SL030 RFID reader.  The red wire should connect to the pin marked Vcc and the black wire should connect to the pin marked GND.
