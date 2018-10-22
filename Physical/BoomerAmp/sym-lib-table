@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name MB_boomer_amp-eagle-import)(type Legacy)(uri ${KIPRJMOD}/MB_boomer_amp-eagle-import.lib)(options "")(descr ""))
+)

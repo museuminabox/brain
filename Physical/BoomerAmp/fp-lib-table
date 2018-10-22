@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name MB_boomer_amp)(type KiCad)(uri "$(KIPRJMOD)/MB_boomer_amp.pretty")(options "")(descr ""))
+)

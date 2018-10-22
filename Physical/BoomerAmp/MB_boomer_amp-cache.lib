@@ -1,0 +1,155 @@
+EESchema-LIBRARY Version 2.4
+#encoding utf-8
+#
+# MB_boomer_amp-eagle-import_9MM_SNAP-IN_POT_
+#
+DEF MB_boomer_amp-eagle-import_9MM_SNAP-IN_POT_ VR 0 40 Y Y 1 L N
+F0 "VR" -200 -100 59 V V L BNN
+F1 "MB_boomer_amp-eagle-import_9MM_SNAP-IN_POT_" -100 -100 59 V V L BNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+P 2 1 0 0 -40 -150 50 -100 N
+P 2 1 0 0 -40 -50 50 0 N
+P 2 1 0 0 -40 50 50 100 N
+P 2 1 0 0 -40 150 0 180 N
+P 2 1 0 0 0 -200 0 -180 N
+P 2 1 0 0 0 -180 -40 -150 N
+P 2 1 0 0 0 180 0 200 N
+P 2 1 0 0 50 -100 -40 -50 N
+P 2 1 0 0 50 0 -40 50 N
+P 2 1 0 0 50 0 100 50 N
+P 2 1 0 0 50 100 -40 150 N
+P 2 1 0 0 55 -135 80 -85 N
+P 2 1 0 0 80 -185 80 -85 N
+P 2 1 0 0 80 -85 105 -135 N
+P 2 1 0 0 100 -50 50 0 N
+P 2 1 0 0 100 50 100 -50 N
+P 2 1 0 0 105 -135 55 -135 N
+X A 1 0 -300 100 U 0 0 1 0 P
+X S 2 200 0 100 L 0 0 1 0 P
+X E 3 0 300 100 D 0 0 1 0 P
+ENDDRAW
+ENDDEF
+#
+# MB_boomer_amp-eagle-import_C-EUC0805
+#
+DEF MB_boomer_amp-eagle-import_C-EUC0805 C 0 40 Y Y 1 L N
+F0 "C" 60 15 59 H V L BNN
+F1 "MB_boomer_amp-eagle-import_C-EUC0805" 60 -185 59 H V L BNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+S -80 -80 80 -60 1 0 0 F
+S -80 -40 80 -20 1 0 0 F
+P 2 1 0 0 0 -100 0 -80 N
+P 2 1 0 0 0 0 0 -20 N
+X 1 1 0 100 100 D 0 0 1 0 P
+X 2 2 0 -200 100 U 0 0 1 0 P
+ENDDRAW
+ENDDEF
+#
+# MB_boomer_amp-eagle-import_CAP_PAN_B
+#
+DEF MB_boomer_amp-eagle-import_CAP_PAN_B ~ 0 40 Y Y 1 L N
+F0 "" 40 25 59 H V L BNN
+F1 "MB_boomer_amp-eagle-import_CAP_PAN_B" 40 -165 59 H V L BNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+A 0 -199 159 900 1274 1 0 10 N 0 -40 -97 -72
+A 0 -198 159 519 900 1 0 10 N 98 -73 0 -39
+S -88 26 -53 31 1 0 0 F
+S -73 11 -68 46 1 0 0 F
+P 2 1 0 0 -100 0 100 0 N
+P 2 1 0 0 0 -40 0 -100 N
+X + + 0 100 100 D 0 0 1 0 P
+X - - 0 -200 100 U 0 0 1 0 P
+ENDDRAW
+ENDDEF
+#
+# MB_boomer_amp-eagle-import_GND
+#
+DEF MB_boomer_amp-eagle-import_GND #SUPPLY 0 40 Y Y 1 L P
+F0 "#SUPPLY" 0 0 50 H I C CNN
+F1 "MB_boomer_amp-eagle-import_GND" -75 -125 59 H V L BNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+P 2 1 0 0 -50 0 50 0 N
+P 2 1 0 0 0 -50 -50 0 N
+P 2 1 0 0 50 0 0 -50 N
+X GND 1 0 100 100 D 0 0 1 0 W
+ENDDRAW
+ENDDEF
+#
+# MB_boomer_amp-eagle-import_LM4860
+#
+DEF ~MB_boomer_amp-eagle-import_LM4860 ~ 0 40 Y Y 1 L N
+F0 "" 0 0 50 H I C CNN
+F1 "MB_boomer_amp-eagle-import_LM4860" 0 0 50 H I C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+T 0 -590 -270 85 0 1 0 + Normal 0 L B
+T 0 -600 200 85 0 1 0 - Normal 0 L B
+T 0 400 200 85 0 1 0 - Normal 0 L B
+T 0 700 100 85 0 1 0 VO1 Normal 0 L B
+T 0 700 -200 85 0 1 0 VO2 Normal 0 L B
+P 2 1 0 0 -500 -600 600 0 N
+P 2 1 0 0 -500 600 -500 -600 N
+P 2 1 0 0 600 0 -500 600 N
+X GND 1 100 -470 200 U 0 50 1 0 U
+X VO1 10 600 200 200 D 50 0 1 0 U
+X GAIN 11 -300 700 200 D 50 50 1 0 U
+X VDD 12 100 480 200 D 50 50 1 0 U
+X -IN 13 -700 300 200 R 50 0 1 0 U
+X +IN 14 -700 -300 200 R 50 0 1 0 U
+X VO2 15 600 -200 200 U 50 0 1 0 U
+X GND 16 100 -470 200 U 0 50 1 0 U
+X SD 2 400 -310 200 U 50 50 1 0 U
+X HPS 3 250 -390 200 U 50 50 1 0 U
+X GND 4 100 -470 200 U 0 50 1 0 U
+X BYPASS 5 -400 -740 200 U 50 50 1 0 U
+X HP1 6 -200 -640 200 U 50 50 1 0 U
+X HP2 7 0 -530 200 U 50 50 1 0 U
+X GND 8 100 -470 200 U 0 50 1 0 U
+X GND 9 100 -470 200 U 0 50 1 0 U
+ENDDRAW
+ENDDEF
+#
+# MB_boomer_amp-eagle-import_R-EU_R0805
+#
+DEF MB_boomer_amp-eagle-import_R-EU_R0805 R 0 40 Y Y 1 L N
+F0 "R" -150 59 59 H V L BNN
+F1 "MB_boomer_amp-eagle-import_R-EU_R0805" -150 -130 59 H V L BNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+P 2 1 0 0 -100 -35 -100 35 N
+P 2 1 0 0 -100 -35 100 -35 N
+P 2 1 0 0 100 -35 100 35 N
+P 2 1 0 0 100 35 -100 35 N
+X 1 1 -200 0 100 R 0 0 1 0 P
+X 2 2 200 0 100 L 0 0 1 0 P
+ENDDRAW
+ENDDEF
+#
+# MB_boomer_amp-eagle-import_SCREW-TERMINAL-GREEN(2P-3.5)
+#
+DEF MB_boomer_amp-eagle-import_SCREW-TERMINAL-GREEN(2P-3.5) J 0 40 Y Y 1 L N
+F0 "J" -250 250 42 H V L BNN
+F1 "MB_boomer_amp-eagle-import_SCREW-TERMINAL-GREEN(2P-3.5)" 0 250 42 H V L BNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+P 2 1 0 0 -100 -200 100 -200 N
+P 2 1 0 0 -100 200 -100 -200 N
+P 2 1 0 0 100 -200 100 200 N
+P 2 1 0 0 100 200 -100 200 N
+X 1 1 -200 100 100 R 50 0 1 0 U
+X 2 2 -200 -100 100 R 50 0 1 0 U
+ENDDRAW
+ENDDEF
+#
+#End Library
