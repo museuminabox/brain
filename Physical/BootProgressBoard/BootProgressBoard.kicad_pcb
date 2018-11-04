@@ -1,9 +1,6 @@
-(kicad_pcb (version 20170123) (host pcbnew no-vcs-found-1e25c47~58~ubuntu16.04.1)
+(kicad_pcb (version 20171130) (host pcbnew 5.0.1-33cea8e~67~ubuntu18.04.1)
 
   (general
-    (links 18)
-    (no_connects 0)
-    (area 90.191475 38.024999 165.810046 66.750001)
     (thickness 1.6)
     (drawings 13)
     (tracks 67)
@@ -61,11 +58,15 @@
     (pad_size 1.524 1.524)
     (pad_drill 0.762)
     (pad_to_mask_clearance 0.2)
+    (solder_mask_min_width 0.25)
     (aux_axis_origin 0 0)
     (visible_elements FFFFFF7F)
     (pcbplotparams
       (layerselection 0x010fc_ffffffff)
       (usegerberextensions false)
+      (usegerberattributes false)
+      (usegerberadvancedattributes false)
+      (creategerberjobfile false)
       (excludeedgelayer true)
       (linewidth 0.100000)
       (plotframeref false)
@@ -74,7 +75,7 @@
       (useauxorigin false)
       (hpglpennumber 1)
       (hpglpenspeed 20)
-      (hpglpendiameter 15)
+      (hpglpendiameter 15.000000)
       (psnegative false)
       (psa4output false)
       (plotreference true)
@@ -86,7 +87,7 @@
       (mirror false)
       (drillshape 0)
       (scaleselection 1)
-      (outputdirectory /home/adrian/sandbox/github/brain/Physical/BootProgressBoard/Output/))
+      (outputdirectory "/home/adrian/sandbox/github/brain/Physical/BootProgressBoard/Output/"))
   )
 
   (net 0 "")
@@ -167,10 +168,10 @@
   (module "MCQN Ltd:miab-logo-9x7mm" (layer B.Cu) (tedit 0) (tstamp 58E5066C)
     (at 154.432 61.722 180)
     (fp_text reference G*** (at 0 0 180) (layer B.SilkS) hide
-      (effects (font (thickness 0.3)) (justify mirror))
+      (effects (font (size 1.524 1.524) (thickness 0.3)) (justify mirror))
     )
     (fp_text value LOGO (at 0.75 0 180) (layer B.SilkS) hide
-      (effects (font (thickness 0.3)) (justify mirror))
+      (effects (font (size 1.524 1.524) (thickness 0.3)) (justify mirror))
     )
     (fp_poly (pts (xy 4.611512 -3.293533) (xy -4.608688 -3.293533) (xy -4.608688 -1.255324) (xy -3.7846 -1.255324)
       (xy -3.7846 -2.587977) (xy -1.969262 -2.587977) (xy -1.973457 -2.581627) (xy -1.976057 -2.577762)
@@ -280,7 +281,7 @@
     (pad 2 thru_hole circle (at 2.54 0) (size 2 2) (drill 1.00076) (layers *.Cu *.Mask B.SilkS)
       (net 4 "Net-(D2-Pad2)"))
     (model LEDs.3dshapes/LED-3MM.wrl
-      (at (xyz 0.05 0 0))
+      (offset (xyz 1.269999980926514 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 90))
     )
@@ -315,7 +316,7 @@
     (pad 2 thru_hole circle (at 2.54 0) (size 2 2) (drill 1.00076) (layers *.Cu *.Mask B.SilkS)
       (net 6 "Net-(D3-Pad2)"))
     (model LEDs.3dshapes/LED-3MM.wrl
-      (at (xyz 0.05 0 0))
+      (offset (xyz 1.269999980926514 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 90))
     )
@@ -350,7 +351,7 @@
     (pad 2 thru_hole circle (at 2.54 0) (size 2 2) (drill 1.00076) (layers *.Cu *.Mask B.SilkS)
       (net 8 "Net-(D4-Pad2)"))
     (model LEDs.3dshapes/LED-3MM.wrl
-      (at (xyz 0.05 0 0))
+      (offset (xyz 1.269999980926514 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 90))
     )
@@ -385,7 +386,7 @@
     (pad 2 thru_hole circle (at 2.54 0) (size 2 2) (drill 1.00076) (layers *.Cu *.Mask B.SilkS)
       (net 10 "Net-(D5-Pad2)"))
     (model LEDs.3dshapes/LED-3MM.wrl
-      (at (xyz 0.05 0 0))
+      (offset (xyz 1.269999980926514 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 90))
     )
@@ -420,7 +421,7 @@
     (pad 2 thru_hole circle (at 2.54 0) (size 2 2) (drill 1.00076) (layers *.Cu *.Mask B.SilkS)
       (net 12 "Net-(D6-Pad2)"))
     (model LEDs.3dshapes/LED-3MM.wrl
-      (at (xyz 0.05 0 0))
+      (offset (xyz 1.269999980926514 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 90))
     )
@@ -455,7 +456,7 @@
     (pad 2 thru_hole circle (at 2.54 0) (size 2 2) (drill 1.00076) (layers *.Cu *.Mask B.SilkS)
       (net 14 "Net-(D7-Pad2)"))
     (model LEDs.3dshapes/LED-3MM.wrl
-      (at (xyz 0.05 0 0))
+      (offset (xyz 1.269999980926514 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 90))
     )
@@ -490,7 +491,7 @@
     (pad 2 thru_hole circle (at 2.54 0) (size 2 2) (drill 1.00076) (layers *.Cu *.Mask B.SilkS)
       (net 16 "Net-(D8-Pad2)"))
     (model LEDs.3dshapes/LED-3MM.wrl
-      (at (xyz 0.05 0 0))
+      (offset (xyz 1.269999980926514 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 90))
     )
@@ -537,7 +538,7 @@
     (pad 9 thru_hole oval (at 20.32 0 180) (size 1.7272 2.032) (drill 1.016) (layers *.Cu *.Mask F.SilkS)
       (net 1 "Net-(D1-Pad2)"))
     (model Socket_Strips.3dshapes/Socket_Strip_Straight_1x09.wrl
-      (at (xyz 0.4 0 0))
+      (offset (xyz 10.15999984741211 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 180))
     )
@@ -576,7 +577,7 @@
     (descr "Through hole socket strip")
     (tags "socket strip")
     (path /577CD2FD)
-    (fp_text reference RR1 (at 0 -5.1 180) (layer F.SilkS)
+    (fp_text reference RR1 (at 0 -3.175 180) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (fp_text value RR8 (at 0 -3.1 180) (layer F.Fab)
@@ -612,7 +613,7 @@
     (pad 9 thru_hole oval (at 20.32 0 180) (size 1.7272 2.032) (drill 1.016) (layers *.Cu *.Mask F.SilkS)
       (net 17 "Net-(RR1-Pad9)"))
     (model Socket_Strips.3dshapes/Socket_Strip_Straight_1x09.wrl
-      (at (xyz 0.4 0 0))
+      (offset (xyz 10.15999984741211 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 180))
     )
@@ -621,10 +622,10 @@
   (module "MCQN Ltd:miab-logo-9x7mm" (layer F.Cu) (tedit 0) (tstamp 577CF0DF)
     (at 99.314 61.722)
     (fp_text reference G*** (at 0 0) (layer F.SilkS) hide
-      (effects (font (thickness 0.3)))
+      (effects (font (size 1.524 1.524) (thickness 0.3)))
     )
     (fp_text value LOGO (at 0.75 0) (layer F.SilkS) hide
-      (effects (font (thickness 0.3)))
+      (effects (font (size 1.524 1.524) (thickness 0.3)))
     )
     (fp_poly (pts (xy 4.611512 3.293533) (xy -4.608688 3.293533) (xy -4.608688 1.255324) (xy -3.7846 1.255324)
       (xy -3.7846 2.587977) (xy -1.969262 2.587977) (xy -1.973457 2.581627) (xy -1.976057 2.577762)
