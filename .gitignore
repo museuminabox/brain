@@ -1,3 +1,7 @@
 # Ignore Brain images
 brain*.img
 brain*.img.zip
+
+# Ignore Kicad backups
+*.bak
+*.kicad_pcb-bak
