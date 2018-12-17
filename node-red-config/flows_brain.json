@@ -147,7 +147,18 @@
                 ]
             }
         ],
-        "out": []
+        "out": [
+            {
+                "x": 1160,
+                "y": 240,
+                "wires": [
+                    {
+                        "id": "761e4520.6ac67c",
+                        "port": 2
+                    }
+                ]
+            }
+        ]
     },
     {
         "id": "e75d45d3.2600d8",
@@ -691,7 +702,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "<html>\n    <head>\n        <title>Write Print Tags</title>\n        <style type=\"text/css\">\n            body { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"; }\n            ul { list-style-type: none; }\n            li { width: 180px; height: 180px; float: left; display: block; margin: 10px; padding: 10px; background: #f6f6f0; }\n            li div { height: 100px; }\n            li img { height: 100px; }\n            li p { margin: 5px; height: 15px; text-align: center; }\n            .working { background: #eef; }\n            .ok { background: #dfd; }\n            .failed { background: #fbb; }\n            input { background: #ff0; width: 120px; border: 0; border-radius: 10px; height: 40px; display: block; margin: 10px auto; font-weight: bold; }\n            .failed p { color: red; font-weight: bold; }\n            .header h1 { font-weight: bold; font-size: 14pt; }\n            .header h1 a { font-weight: normal; }\n        </style>\n    </head>\n    <body>\n        <div class=\"header\">\n            <h1>box.local Write Tags | <a href=\"/setup\">Set up</a> | <a href=\"/upgrade\">Upgrade</a> | <a href=\"/\">Debug</a></h1>\n            <h2>{{box_settings.hardware_id}} / {{box_settings.exterior}}</h2>\n        </div>\n        <p>Place a print onto the brain, then click the \"Write tag\" button to write the tag.</p>\n        <ul>\n            <li id=\"liWiFi\">\n                <p id=\"msgWiFi\"></p>\n                <div class=\"print\" align=\"center\"><img src=\"\" alt=\"Configure WiFi admin totem\"></div>\n                <form action=\"/tag\" method=\"post\" id=\"tagWiFi\">\n                    <input type=\"hidden\" name=\"url\" value=\"http://www.museuminabox.org\" />\n                    <input type=\"hidden\" name=\"configure\" value=\"wifi\" />\n                    <input type=\"submit\" name=\"write\" value=\"Write\" onclick=\"$('#liWiFi')[0].classList = 'working'; $('#msgWiFi').text('Working...'); $.post('/tag', $('#tagWiFi').serialize()) .done(function() { $('#liWiFi')[0].classList = 'ok'; $('#msgWiFi').text('Ok') }) .fail(function() { $('#liWiFi')[0].classList = 'failed'; $('#msgWiFi').text('TRY AGAIN') }); return false;\" />\n                </form>\n            </li>\n            <li id=\"liUpgrade\">\n                <p id=\"msgUpgrade\"></p>\n                <div class=\"print\" align=\"center\"><img src=\"\" alt=\"Check for updates admin totem\"></div>\n                <form action=\"/tag\" method=\"post\" id=\"tagUpgrade\">\n                    <input type=\"hidden\" name=\"url\" value=\"http://www.museuminabox.org\" />\n                    <input type=\"hidden\" name=\"configure\" value=\"upgrade\" />\n                    <input type=\"submit\" name=\"write\" value=\"Write\" onclick=\"$('#liUpgrade')[0].classList = 'working'; $('#msgUpgrade').text('Working...'); $.post('/tag', $('#tagUpgrade').serialize()) .done(function() { $('#liUpgrade')[0].classList = 'ok'; $('#msgUpgrade').text('Ok') }) .fail(function() { $('#liUpgrade')[0].classList = 'failed'; $('#msgUpgrade').text('TRY AGAIN') }); return false;\" />\n                </form>\n            </li>\n        {{#payload.prints}}\n            <li id=\"li{{id}}\">\n                <p id=\"msg{{id}}\"></p>\n                <div class=\"print\" align=\"center\"><img src=\"{{{image_url}}}\" alt=\"{{name}}\"></div>\n                <form action=\"/tag\" method=\"post\" id=\"tag{{id}}\">\n                    <input type=\"hidden\" name=\"url\" value=\"{{url}}\" />\n                    <input type=\"hidden\" name=\"id\" value=\"{{id}}\" />\n                    <input type=\"hidden\" name=\"audio\" value=\"{{brain_filename_audio}}\" />\n                    <input type=\"submit\" name=\"write\" value=\"Write\" onclick=\"$('#li{{id}}')[0].classList = 'working'; $('#msg{{id}}').text('Working...'); $.post('/tag', $('#tag{{id}}').serialize()) .done(function() { $('#li{{id}}')[0].classList = 'ok'; $('#msg{{id}}').text('') }) .fail(function() { $('#li{{id}}')[0].classList = 'failed'; $('#msg{{id}}').text('TRY AGAIN') }); return false;\" />\n                </form>\n            </li>\n        {{/payload.prints}}\n        </ul>\n    </body>\n    <script src=\"vendor/vendor.js\"></script>\n</html>\n",
+        "template": "<html>\n    <head>\n        <title>Write Print Tags</title>\n        <style type=\"text/css\">\n            body { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"; }\n            ul { list-style-type: none; }\n            li { width: 180px; height: 180px; float: left; display: block; margin: 10px; padding: 10px; background: #f6f6f0; }\n            li div { height: 100px; }\n            li img { height: 100px; }\n            li p { margin: 5px; height: 15px; text-align: center; }\n            .working { background: #eef; }\n            .ok { background: #dfd; }\n            .failed { background: #fbb; }\n            input { background: #ff0; width: 120px; border: 0; border-radius: 10px; height: 40px; display: block; margin: 10px auto; font-weight: bold; }\n            #updateContent { padding: 0.5em; }\n            #updateContent input { width: 240px; display: inline-block; }\n            .failed p { color: red; font-weight: bold; }\n            .header h1 { font-weight: bold; font-size: 14pt; }\n            .header h1 a { font-weight: normal; }\n        </style>\n    </head>\n    <body>\n        <div class=\"header\">\n            <h1>box.local Write Tags | <a href=\"/setup\">Set up</a> | <a href=\"/upgrade\">Upgrade</a> | <a href=\"/\">Debug</a></h1>\n            <h2>{{box_settings.hardware_id}} / {{box_settings.exterior}}</h2>\n        </div>\n        <form action=\"/update-content\" method=\"post\" id=\"updateContent\">\n            <input type=\"submit\" name=\"check\" value=\"Check for new print audio\" onclick=\"$('#updateContent')[0].classList = 'working'; $('#msgUpdateContent').text('Working...'); $.post('/update-content') .done(function() { $('#updateContent')[0].classList = 'ok'; $('#msgUpdateContent').text('Ok') }) .fail(function() { $('#updateContent')[0].classList = 'failed'; $('#msgUpdateContent').text('Failed.  Try again') }); return false;\" />\n            <span id=\"msgUpdateContent\"></span>\n        </form>\n        <p>Place a print onto the brain, then click the \"Write tag\" button to write the tag.</p>\n        <ul>\n            <li id=\"liWiFi\">\n                <p id=\"msgWiFi\"></p>\n                <div class=\"print\" align=\"center\"><img src=\"\" alt=\"Configure WiFi admin totem\"></div>\n                <form action=\"/tag\" method=\"post\" id=\"tagWiFi\">\n                    <input type=\"hidden\" name=\"url\" value=\"http://www.museuminabox.org\" />\n                    <input type=\"hidden\" name=\"configure\" value=\"wifi\" />\n                    <input type=\"submit\" name=\"write\" value=\"Write\" onclick=\"$('#liWiFi')[0].classList = 'working'; $('#msgWiFi').text('Working...'); $.post('/tag', $('#tagWiFi').serialize()) .done(function() { $('#liWiFi')[0].classList = 'ok'; $('#msgWiFi').text('Ok') }) .fail(function() { $('#liWiFi')[0].classList = 'failed'; $('#msgWiFi').text('TRY AGAIN') }); return false;\" />\n                </form>\n            </li>\n            <li id=\"liUpgrade\">\n                <p id=\"msgUpgrade\"></p>\n                <div class=\"print\" align=\"center\"><img src=\"\" alt=\"Check for updates admin totem\"></div>\n                <form action=\"/tag\" method=\"post\" id=\"tagUpgrade\">\n                    <input type=\"hidden\" name=\"url\" value=\"http://www.museuminabox.org\" />\n                    <input type=\"hidden\" name=\"configure\" value=\"upgrade\" />\n                    <input type=\"submit\" name=\"write\" value=\"Write\" onclick=\"$('#liUpgrade')[0].classList = 'working'; $('#msgUpgrade').text('Working...'); $.post('/tag', $('#tagUpgrade').serialize()) .done(function() { $('#liUpgrade')[0].classList = 'ok'; $('#msgUpgrade').text('Ok') }) .fail(function() { $('#liUpgrade')[0].classList = 'failed'; $('#msgUpgrade').text('TRY AGAIN') }); return false;\" />\n                </form>\n            </li>\n        {{#payload.prints}}\n            <li id=\"li{{id}}\">\n                <p id=\"msg{{id}}\"></p>\n                <div class=\"print\" align=\"center\"><img src=\"{{{image_url}}}\" alt=\"{{name}}\"></div>\n                <form action=\"/tag\" method=\"post\" id=\"tag{{id}}\">\n                    <input type=\"hidden\" name=\"url\" value=\"{{url}}\" />\n                    <input type=\"hidden\" name=\"id\" value=\"{{id}}\" />\n                    <input type=\"hidden\" name=\"audio\" value=\"{{brain_filename_audio}}\" />\n                    <input type=\"submit\" name=\"write\" value=\"Write\" onclick=\"$('#li{{id}}')[0].classList = 'working'; $('#msg{{id}}').text('Working...'); $.post('/tag', $('#tag{{id}}').serialize()) .done(function() { $('#li{{id}}')[0].classList = 'ok'; $('#msg{{id}}').text('') }) .fail(function() { $('#li{{id}}')[0].classList = 'failed'; $('#msg{{id}}').text('TRY AGAIN') }); return false;\" />\n                </form>\n            </li>\n        {{/payload.prints}}\n        </ul>\n    </body>\n    <script src=\"vendor/vendor.js\"></script>\n</html>\n",
         "x": 710,
         "y": 500,
         "wires": [
@@ -741,7 +752,7 @@
         "crontab": "",
         "once": false,
         "x": 130,
-        "y": 700,
+        "y": 880,
         "wires": [
             [
                 "b75c4abb.8231b8"
@@ -757,7 +768,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 323,
-        "y": 700,
+        "y": 880,
         "wires": [
             [
                 "9e2b57dc.b17448",
@@ -771,7 +782,7 @@
         "z": "afe19cbf.f80a18",
         "name": "",
         "x": 573,
-        "y": 722,
+        "y": 902,
         "wires": [
             [
                 "9e2b57dc.b17448",
@@ -788,7 +799,7 @@
         "console": "false",
         "complete": "false",
         "x": 770,
-        "y": 700,
+        "y": 880,
         "wires": []
     },
     {
@@ -800,7 +811,7 @@
         "method": "get",
         "swaggerDoc": "",
         "x": 100,
-        "y": 800,
+        "y": 980,
         "wires": [
             [
                 "791150d5.04aae"
@@ -815,7 +826,7 @@
         "filename": "/home/pi/miab/tag.html",
         "format": "utf8",
         "x": 630,
-        "y": 800,
+        "y": 980,
         "wires": [
             [
                 "507e8db4.8a3d1c"
@@ -828,7 +839,7 @@
         "z": "afe19cbf.f80a18",
         "name": "",
         "x": 850,
-        "y": 800,
+        "y": 980,
         "wires": []
     },
     {
@@ -840,7 +851,7 @@
         "method": "post",
         "swaggerDoc": "",
         "x": 97,
-        "y": 749,
+        "y": 929,
         "wires": [
             [
                 "849337da.209338"
@@ -856,7 +867,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 324,
-        "y": 749,
+        "y": 929,
         "wires": [
             [
                 "1aebf3aa.c444f4"
@@ -870,7 +881,7 @@
         "name": "Write RFID tags",
         "info": "",
         "x": 117,
-        "y": 652,
+        "y": 832,
         "wires": []
     },
     {
@@ -886,7 +897,6 @@
         "wires": [
             [
                 "6d4612aa.78327c",
-                "a80cc45d.46bae",
                 "e27f63df.ebfb4"
             ]
         ]
@@ -1061,36 +1071,12 @@
         "z": "3e6589d1.eeda5e",
         "name": "",
         "active": true,
-        "console": "false",
+        "tosidebar": true,
+        "console": false,
         "complete": "false",
         "x": 450,
         "y": 40,
         "wires": []
-    },
-    {
-        "id": "a80cc45d.46bae",
-        "type": "change",
-        "z": "3e6589d1.eeda5e",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "url",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 450,
-        "y": 320,
-        "wires": [
-            []
-        ]
     },
     {
         "id": "f6d5f2f9.3bbaf",
@@ -1579,7 +1565,7 @@
             "1aebf3aa.c444f4"
         ],
         "x": 360,
-        "y": 860,
+        "y": 1040,
         "wires": [
             [
                 "9e2b57dc.b17448",
@@ -1596,7 +1582,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 620,
-        "y": 860,
+        "y": 1040,
         "wires": [
             [
                 "507e8db4.8a3d1c"
@@ -1870,7 +1856,7 @@
         "z": "afe19cbf.f80a18",
         "name": "",
         "x": 1130,
-        "y": 1020,
+        "y": 1180,
         "wires": []
     },
     {
@@ -1882,7 +1868,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 930,
-        "y": 1020,
+        "y": 1180,
         "wires": [
             [
                 "eea5ae50.6df058"
@@ -1900,7 +1886,7 @@
         "syntax": "mustache",
         "template": "<html>\n<head>\n    <title>Museum in a Box Advanced WiFi Configuration</title>\n        <style type=\"text/css\">\n            body { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"; }\n            ul { list-style-type: none; }\n            li { width: 180px; height: 180px; float: left; display: block; margin: 10px; padding: 10px; background: #f6f6f0; }\n            li div { height: 100px; }\n            li img { height: 100px; }\n            li p { margin: 5px; height: 15px; text-align: center; }\n            .working { background: #eef; }\n            .ok { background: #dfd; }\n            .failed { background: #fbb; }\n            label { width: 20em; display: inline-block; text-align: right; }\n            input#save { background: #ff0; width: 120px; border: 0; border-radius: 10px; height: 40px; display: block; margin: 1em 22em; font-weight: bold; }\n            .failed p { color: red; font-weight: bold; }\n            .header h1 { font-weight: bold; font-size: 14pt; }\n            .header h1 a { font-weight: normal; }\n        </style>\n</head>\n<body>\n    <h1>Museum in a Box Advanced WiFi Configuration</h1>\n    <p>Enter the details for your WiFi network below.  If you do not have a username and password or a hidden\n    network for your WiFi, then use the <a href=\"http://box.local/\">basic WiFi setup page</a> instead.</p>\n    <h2>I have an Enterprise WPA or 802.1x wifi network:</h2>\n    <form action=\"/wifi\" method=\"POST\">\n        <label for=\"ssid\">WiFi Network Name (SSID):</label>\n        <input id=\"ssid\" type=\"text\" size=\"40\" name=\"ssid\" /><br />\n        <label for=\"userid\">Username:</label>\n        <input id=\"userid\" type=\"text\" size=\"40\" name=\"userid\" /><br />\n        <label for=\"passwd\">Password:</label>\n        <input id=\"passwd\" type=\"password\" size=\"40\" name=\"passwd\" /><br />\n        <input id=\"save\" type=\"submit\" name=\"Save\" value=\"Save\" />\n    </form>\n    <h2>I have a wifi network with a hidden SSID:</h2>\n    <form action=\"/wifi\" method=\"POST\">\n        <label for=\"ssid\">WiFi Network Name (SSID):</label>\n        <input id=\"ssid\" type=\"text\" size=\"40\" name=\"ssid\" /><br />\n        <input id=\"hidden\" type=\"hidden\" name=\"hidden\" value=\"true\" />\n        <label for=\"passwd\">Password:</label>\n        <input id=\"passwd\" type=\"password\" size=\"40\" name=\"passwd\" /><br />\n        <input id=\"save\" type=\"submit\" name=\"Save\" value=\"Save\" />\n    </form>\n</body>\n</html>\n",
         "x": 680,
-        "y": 1020,
+        "y": 1180,
         "wires": [
             [
                 "91050097.a7c1f8"
@@ -1917,7 +1903,7 @@
         "upload": false,
         "swaggerDoc": "",
         "x": 150,
-        "y": 1020,
+        "y": 1180,
         "wires": [
             [
                 "5a531f35.04eb78"
@@ -1935,7 +1921,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 1310,
-        "y": 1160,
+        "y": 1320,
         "wires": []
     },
     {
@@ -1948,7 +1934,7 @@
         "upload": false,
         "swaggerDoc": "",
         "x": 170,
-        "y": 1120,
+        "y": 1280,
         "wires": [
             [
                 "44be6096.0e933",
@@ -1968,7 +1954,7 @@
         "syntax": "mustache",
         "template": "<html>\n<head>\n    <title>Museum in a Box Wifi Saved</title>\n        <style type=\"text/css\">\n            body { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"; }\n            ul { list-style-type: none; }\n            li { width: 180px; height: 180px; float: left; display: block; margin: 10px; padding: 10px; background: #f6f6f0; }\n            li div { height: 100px; }\n            li img { height: 100px; }\n            li p { margin: 5px; height: 15px; text-align: center; }\n            .working { background: #eef; }\n            .ok { background: #dfd; }\n            .failed { background: #fbb; }\n            label { width: 20em; display: inline-block; text-align: right; }\n            input#save { background: #ff0; width: 120px; border: 0; border-radius: 10px; height: 40px; display: block; margin: 1em 22em; font-weight: bold; }\n            .failed p { color: red; font-weight: bold; }\n            .header h1 { font-weight: bold; font-size: 14pt; }\n            .header h1 a { font-weight: normal; }\n        </style>\n</head>\n<body>\n    <h1>Museum in a Box Wifi Saved</h1>\n    <p>You Wifi details have been saved.</p>\n    <p>In a moment you will be disconnected from the MuseumInABox Wifi network so that your box\n    can try to use the new Wifi settings.  Your box will tell you if it works or not (it might\n    take up to two minutes).</p>\n</body>\n</html>\n",
         "x": 460,
-        "y": 1120,
+        "y": 1280,
         "wires": [
             [
                 "ce1483d1.eb04c8"
@@ -1984,7 +1970,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 710,
-        "y": 1120,
+        "y": 1280,
         "wires": [
             [
                 "5e74cc94.8b716c"
@@ -1997,7 +1983,7 @@
         "z": "afe19cbf.f80a18",
         "name": "",
         "x": 910,
-        "y": 1120,
+        "y": 1280,
         "wires": []
     },
     {
@@ -2012,7 +1998,7 @@
         "template": "[connection]\nid={{payload.ssid}}\nuuid={{payload.uuid}}\ntype=wifi\npermissions=\n\n[wifi]\nmode=infrastructure\nssid={{payload.ssid}}\n\n[wifi-security]\nkey-mgmt=wpa-eap\n\n[802-1x]\neap=peap;\nidentity={{payload.userid}}\npassword={{payload.passwd}}\nphase2-auth=mschapv2\n\n[ipv4]\ndns-search=\nmethod=auto\n\n[ipv6]\naddr-gen-mode=stable-privacy\ndns-search=\nmethod=auto",
         "output": "str",
         "x": 710,
-        "y": 1320,
+        "y": 1480,
         "wires": [
             [
                 "3d72323a.cc8686",
@@ -2030,7 +2016,7 @@
         "createDir": false,
         "overwriteFile": "true",
         "x": 950,
-        "y": 1300,
+        "y": 1460,
         "wires": [
             []
         ]
@@ -2044,7 +2030,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 450,
-        "y": 1200,
+        "y": 1360,
         "wires": [
             [
                 "40b263d2.3fd47c",
@@ -2068,7 +2054,7 @@
         "randomUnits": "seconds",
         "drop": false,
         "x": 700,
-        "y": 1380,
+        "y": 1540,
         "wires": [
             [
                 "cffff891.416e1",
@@ -2096,7 +2082,7 @@
         "to": "",
         "reg": false,
         "x": 890,
-        "y": 1380,
+        "y": 1540,
         "wires": [
             [
                 "d34ff403.d22868"
@@ -2115,7 +2101,7 @@
         "oldrc": false,
         "name": "Set correct file permissions",
         "x": 1160,
-        "y": 1380,
+        "y": 1540,
         "wires": [
             [],
             [],
@@ -2129,7 +2115,7 @@
         "name": "Temporary 802.1x WiFi Config Opttion",
         "info": "",
         "x": 190,
-        "y": 960,
+        "y": 1120,
         "wires": []
     },
     {
@@ -2144,7 +2130,7 @@
         "oldrc": false,
         "name": "Kill the normal configure Wifi script",
         "x": 960,
-        "y": 1480,
+        "y": 1640,
         "wires": [
             [
                 "b7ebbdd8.7d6708"
@@ -2165,7 +2151,7 @@
         "oldrc": false,
         "name": "And the hotspot it created",
         "x": 930,
-        "y": 1560,
+        "y": 1720,
         "wires": [
             [
                 "75e2586a.ac7d58"
@@ -2190,7 +2176,7 @@
         "randomUnits": "seconds",
         "drop": false,
         "x": 950,
-        "y": 1680,
+        "y": 1840,
         "wires": [
             [
                 "c32db8bc.c99ce"
@@ -2209,7 +2195,7 @@
         "oldrc": false,
         "name": "See if we can see the Internet",
         "x": 950,
-        "y": 1740,
+        "y": 1900,
         "wires": [
             [],
             [],
@@ -2228,7 +2214,7 @@
         "oldrc": false,
         "name": "Tell NetworkManager to reload its config",
         "x": 980,
-        "y": 1620,
+        "y": 1780,
         "wires": [
             [
                 "57de3ef9.abb5e8"
@@ -2249,7 +2235,7 @@
         "template": "[connection]\nid={{payload.ssid}}\nuuid={{payload.uuid}}\ntype=wifi\nautoconnect=true\npermissions=\n\n[wifi]\nhidden=true\nmode=infrastructure\nssid={{payload.ssid}}\n\n{{#payload.passwd}}\n[wifi-security]\nkey-mgmt=wpa-psk\nauth-alg=open\npsk={{payload.passwd}}\n{{/payload.passwd}}\n\n[ipv4]\nmethod=auto\n\n[ipv6]\nmethod=auto",
         "output": "str",
         "x": 730,
-        "y": 1260,
+        "y": 1420,
         "wires": [
             [
                 "6c606981.c3f6f",
@@ -2278,7 +2264,7 @@
         "repair": false,
         "outputs": 2,
         "x": 410,
-        "y": 1300,
+        "y": 1460,
         "wires": [
             [
                 "e5e9e057.87eaf"
@@ -2294,7 +2280,9 @@
         "z": "2c85e1fd.fde9ae",
         "x": 890,
         "y": 280,
-        "wires": []
+        "wires": [
+            []
+        ]
     },
     {
         "id": "f77c3880.8a7d78",
@@ -2320,7 +2308,9 @@
         "name": "Kick off a sync of any content too",
         "x": 380,
         "y": 560,
-        "wires": []
+        "wires": [
+            []
+        ]
     },
     {
         "id": "75886184.68af8",
@@ -2341,6 +2331,178 @@
         "wires": [
             [
                 "82266f95.fab95"
+            ]
+        ]
+    },
+    {
+        "id": "7c2d8340.034f84",
+        "type": "http in",
+        "z": "afe19cbf.f80a18",
+        "name": "",
+        "url": "/update-content",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 660,
+        "wires": [
+            [
+                "65597c0e.c88bcc"
+            ]
+        ]
+    },
+    {
+        "id": "480245cd.b20b9c",
+        "type": "subflow:3e6589d1.eeda5e",
+        "z": "afe19cbf.f80a18",
+        "name": "",
+        "x": 190,
+        "y": 740,
+        "wires": [
+            [
+                "7e8859e4.d6883"
+            ]
+        ]
+    },
+    {
+        "id": "209d5288.1deb3e",
+        "type": "http response",
+        "z": "afe19cbf.f80a18",
+        "name": "",
+        "x": 1330,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "7e8859e4.d6883",
+        "type": "switch",
+        "z": "afe19cbf.f80a18",
+        "name": "Check if the download succeeded",
+        "property": "payload.code",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 480,
+        "y": 740,
+        "wires": [
+            [
+                "3a0aae0f.b0e062"
+            ],
+            [
+                "f3bc3ce1.69a8a"
+            ]
+        ]
+    },
+    {
+        "id": "3a0aae0f.b0e062",
+        "type": "function",
+        "z": "afe19cbf.f80a18",
+        "name": "All ok!",
+        "func": "msg.payload = \"Print audio downloaded okay\";\nmsg.statusCode = 200;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 710,
+        "y": 720,
+        "wires": [
+            [
+                "bb6cc0cb.b5f778",
+                "52dff96c.f16c88"
+            ]
+        ]
+    },
+    {
+        "id": "f3bc3ce1.69a8a",
+        "type": "function",
+        "z": "afe19cbf.f80a18",
+        "name": "Something went wrong",
+        "func": "msg.payload = \"Problem with download.  Failed with code \"+msg.payload.code;\nmsg.statusCode = 500;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 770,
+        "y": 760,
+        "wires": [
+            [
+                "bb6cc0cb.b5f778",
+                "52dff96c.f16c88"
+            ]
+        ]
+    },
+    {
+        "id": "bb6cc0cb.b5f778",
+        "type": "debug",
+        "z": "afe19cbf.f80a18",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 990,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "65597c0e.c88bcc",
+        "type": "change",
+        "z": "afe19cbf.f80a18",
+        "name": "Save the response for later in the flow",
+        "rules": [
+            {
+                "t": "set",
+                "p": "update_response",
+                "pt": "flow",
+                "to": "res",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 660,
+        "wires": [
+            [
+                "480245cd.b20b9c"
+            ]
+        ]
+    },
+    {
+        "id": "52dff96c.f16c88",
+        "type": "change",
+        "z": "afe19cbf.f80a18",
+        "name": "Retrieve the response we saved earlier",
+        "rules": [
+            {
+                "t": "set",
+                "p": "res",
+                "pt": "msg",
+                "to": "update_response",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1080,
+        "y": 740,
+        "wires": [
+            [
+                "209d5288.1deb3e"
             ]
         ]
     }
