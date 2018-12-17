@@ -131,6 +131,25 @@
         "out": []
     },
     {
+        "id": "3e6589d1.eeda5e",
+        "type": "subflow",
+        "name": "Update/download Audio",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 80,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "6c987ced.c3ae94"
+                    }
+                ]
+            }
+        ],
+        "out": []
+    },
+    {
         "id": "e75d45d3.2600d8",
         "type": "debug",
         "z": "e8d65b2b.201058",
@@ -208,7 +227,9 @@
         "overwriteFile": "false",
         "x": 630,
         "y": 200,
-        "wires": []
+        "wires": [
+            []
+        ]
     },
     {
         "id": "3b6d686d.3eb03",
@@ -365,8 +386,7 @@
         "y": 100,
         "wires": [
             [
-                "5dc010f1.5ecf08",
-                "e27f63df.ebfb4"
+                "5dc010f1.5ecf08"
             ]
         ]
     },
@@ -401,7 +421,7 @@
         "y": 99,
         "wires": [
             [
-                "6c987ced.c3ae94"
+                "75886184.68af8"
             ]
         ]
     },
@@ -553,7 +573,9 @@
         "overwriteFile": "true",
         "x": 1034,
         "y": 190,
-        "wires": []
+        "wires": [
+            []
+        ]
     },
     {
         "id": "a9a1a5d6.e1f4a8",
@@ -609,11 +631,12 @@
         "url": "/prints",
         "method": "get",
         "swaggerDoc": "",
-        "x": 124,
-        "y": 501,
+        "x": 110,
+        "y": 500,
         "wires": [
             [
-                "7a0c0b65.061d24"
+                "7a0c0b65.061d24",
+                "9da8694e.88f39"
             ]
         ]
     },
@@ -853,34 +876,34 @@
     {
         "id": "6c987ced.c3ae94",
         "type": "function",
-        "z": "2c85e1fd.fde9ae",
+        "z": "3e6589d1.eeda5e",
         "name": "Build URL",
         "func": "// Return an entirely new message in case the existing\n// one has any remnants of prior web requests\nreturn { \n    url: \"https://heart.museuminabox.org/api/boxes/\"+context.global.box_settings.id+\"/sync.json\",\n    method: \"POST\",\n    payload: { \"software_version\": context.global.software_version }\n};\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 410,
-        "y": 190,
+        "x": 240,
+        "y": 100,
         "wires": [
             [
                 "6d4612aa.78327c",
-                "a80cc45d.46bae"
+                "a80cc45d.46bae",
+                "e27f63df.ebfb4"
             ]
         ]
     },
     {
         "id": "6d4612aa.78327c",
         "type": "http request",
-        "z": "2c85e1fd.fde9ae",
+        "z": "3e6589d1.eeda5e",
         "name": "Download prints list for this box",
         "method": "use",
         "ret": "obj",
         "url": "",
         "tls": "",
-        "x": 663,
-        "y": 189,
+        "x": 510,
+        "y": 100,
         "wires": [
             [
-                "e27f63df.ebfb4",
                 "27712e00.0d3722"
             ]
         ]
@@ -888,32 +911,32 @@
     {
         "id": "27712e00.0d3722",
         "type": "function",
-        "z": "2c85e1fd.fde9ae",
+        "z": "3e6589d1.eeda5e",
         "name": "Extract the audio content URLs",
-        "func": "var urls = [];\nfor (i=0; i < msg.payload.prints.length; i++)\n{\n    urls.push({ topic:\"url\", payload:msg.payload.prints[i].brain_url_audio });\n}\nreturn [urls];",
+        "func": "var urls = \"\";\nfor (i=0; i < msg.payload.prints.length; i++)\n{\n    urls = urls + \"\\n\" + msg.payload.prints[i].brain_url_audio;\n}\nmsg.payload = urls;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 465,
-        "y": 312,
+        "x": 310,
+        "y": 240,
         "wires": [
             [
-                "761e4520.6ac67c",
-                "e27f63df.ebfb4"
+                "f77c3880.8a7d78"
             ]
         ]
     },
     {
         "id": "761e4520.6ac67c",
         "type": "exec",
-        "z": "2c85e1fd.fde9ae",
+        "z": "3e6589d1.eeda5e",
         "command": "umask 013 && wget",
-        "addpay": true,
-        "append": "--timestamping --no-verbose --directory-prefix=/home/pi/miab/audio",
+        "addpay": false,
+        "append": "--timestamping --no-verbose --directory-prefix=/home/pi/miab/audio --input-file=/tmp/miab-content",
         "useSpawn": "",
         "timer": "",
+        "oldrc": false,
         "name": "Download media files",
-        "x": 712,
-        "y": 311,
+        "x": 960,
+        "y": 240,
         "wires": [
             [],
             [],
@@ -1035,19 +1058,19 @@
     {
         "id": "e27f63df.ebfb4",
         "type": "debug",
-        "z": "2c85e1fd.fde9ae",
+        "z": "3e6589d1.eeda5e",
         "name": "",
         "active": true,
         "console": "false",
         "complete": "false",
-        "x": 670,
-        "y": 380,
+        "x": 450,
+        "y": 40,
         "wires": []
     },
     {
         "id": "a80cc45d.46bae",
         "type": "change",
-        "z": "2c85e1fd.fde9ae",
+        "z": "3e6589d1.eeda5e",
         "name": "",
         "rules": [
             {
@@ -1063,12 +1086,10 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 240,
-        "y": 370,
+        "x": 450,
+        "y": 320,
         "wires": [
-            [
-                "e27f63df.ebfb4"
-            ]
+            []
         ]
     },
     {
@@ -1296,7 +1317,9 @@
         "overwriteFile": "false",
         "x": 670,
         "y": 180,
-        "wires": []
+        "wires": [
+            []
+        ]
     },
     {
         "id": "4672f700.22b518",
@@ -1430,7 +1453,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "<html>\n<head>\n  <script type=\"text/javascript\">\n    window.addEventListener('message', function(event) {\n        console.log(event);\n        document.getElementById('box_id').value = event.data;\n    });\n  </script>\n</head>\n<body>\n    <h1>Upgrade</h1>\n    {{#payload}}\n        <p><strong>\n            {{payload}}\n        </strong></p>\n    {{/payload}}\n    <p>Set this box to be an existing box.  Useful when upgrading an old box.  If you want to\n    create a new box then head to <a href=\"/setup\">/setup</a>.</p>\n    <h2>Choose the box to upgrade from the list below:</h2>\n    <iframe width=\"100%\" height=\"300\" src=\"http://heart.museuminabox.org/heart/setup/boxes/\"></iframe>\n    <form action=\"/upgrade\" method=\"POST\">\n        <label for=\"box_id\">Box ID:</label>\n        <input id=\"box_id\" type=\"text\" size=\"40\" name=\"box_id\" />\n        <input id=\"save\" type=\"submit\" name=\"Save\" value=\"Save\" />\n    </form>\n</body>\n</html>\n",
+        "template": "<html>\n<head>\n  <script type=\"text/javascript\">\n    window.addEventListener('message', function(event) {\n        console.log(event);\n        document.getElementById('box_id').value = event.data;\n    });\n  </script>\n</head>\n<body>\n    <h1>Upgrade</h1>\n    {{#payload}}\n        <p><strong>\n            {{payload}}\n        </strong></p>\n    {{/payload}}\n    <p>Set this box to be an existing box.  Useful when upgrading an old box.  If you want to\n    create a new box then head to <a href=\"/setup\">/setup</a>.</p>\n    <h2>Choose the box to upgrade from the list below:</h2>\n    <iframe width=\"100%\" height=\"300\" sandbox=\"allow-scripts allow-same-origin\" src=\"https://heart.museuminabox.org/heart/setup/boxes/\"></iframe>\n    <form action=\"/upgrade\" method=\"POST\">\n        <label for=\"box_id\">Box ID:</label>\n        <input id=\"box_id\" type=\"text\" size=\"40\" name=\"box_id\" />\n        <input id=\"save\" type=\"submit\" name=\"Save\" value=\"Save\" />\n    </form>\n</body>\n</html>\n",
         "x": 680,
         "y": 440,
         "wires": [
@@ -1461,7 +1484,7 @@
         "type": "function",
         "z": "afe19cbf.f80a18",
         "name": "Add response headers",
-        "func": "msg.headers = { \"Content-Security-Policy\": \"script-src 'self' 'unsafe-inline' 'unsafe-eval'\", \"Content-Type\": \"text/html\" };\nreturn msg;",
+        "func": "msg.headers = { \"Content-Security-Policy\": \"frame-src heart.museuminabox.org; script-src 'self' 'unsafe-inline' 'unsafe-eval'\", \"Content-Type\": \"text/html\" };\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 930,
@@ -1695,7 +1718,9 @@
         "overwriteFile": "true",
         "x": 970,
         "y": 40,
-        "wires": []
+        "wires": [
+            []
+        ]
     },
     {
         "id": "ce75e90.0ef2418",
@@ -2006,7 +2031,9 @@
         "overwriteFile": "true",
         "x": 950,
         "y": 1300,
-        "wires": []
+        "wires": [
+            []
+        ]
     },
     {
         "id": "1a233311.add105",
@@ -2258,6 +2285,62 @@
             ],
             [
                 "59ff2d49.5cd364"
+            ]
+        ]
+    },
+    {
+        "id": "82266f95.fab95",
+        "type": "subflow:3e6589d1.eeda5e",
+        "z": "2c85e1fd.fde9ae",
+        "x": 890,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "f77c3880.8a7d78",
+        "type": "file",
+        "z": "3e6589d1.eeda5e",
+        "name": "Save the URLs in a file to pass to wget",
+        "filename": "/tmp/miab-content",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "true",
+        "x": 640,
+        "y": 240,
+        "wires": [
+            [
+                "761e4520.6ac67c"
+            ]
+        ]
+    },
+    {
+        "id": "9da8694e.88f39",
+        "type": "subflow:3e6589d1.eeda5e",
+        "z": "afe19cbf.f80a18",
+        "name": "Kick off a sync of any content too",
+        "x": 380,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "75886184.68af8",
+        "type": "trigger",
+        "z": "2c85e1fd.fde9ae",
+        "op1": "1",
+        "op2": "0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "-23",
+        "extend": false,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "name": "Then periodically...",
+        "x": 630,
+        "y": 280,
+        "wires": [
+            [
+                "82266f95.fab95"
             ]
         ]
     }
