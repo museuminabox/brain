@@ -251,7 +251,7 @@
         "append": "",
         "useSpawn": "",
         "name": "",
-        "x": 540,
+        "x": 560,
         "y": 320,
         "wires": [
             [
@@ -282,24 +282,26 @@
         "type": "switch",
         "z": "b5898652.b556e",
         "name": "presented or removed?",
-        "property": "payload",
+        "property": "topic",
+        "propertyType": "msg",
         "rules": [
             {
                 "t": "eq",
-                "v": "0"
+                "v": "pi/rfid-presented",
+                "vt": "str"
             },
             {
-                "t": "eq",
-                "v": "1"
+                "t": "else"
             }
         ],
         "checkall": "true",
+        "repair": false,
         "outputs": 2,
-        "x": 291,
-        "y": 70,
+        "x": 310,
+        "y": 80,
         "wires": [
             [
-                "4de42538.df29cc"
+                "3d109ded.41f7ba"
             ],
             [
                 "3b6d686d.3eb03",
@@ -772,21 +774,7 @@
         "wires": [
             [
                 "9e2b57dc.b17448",
-                "1aebf3aa.c444f4"
-            ]
-        ]
-    },
-    {
-        "id": "1aebf3aa.c444f4",
-        "type": "rpi-rfid write-ndef",
-        "z": "afe19cbf.f80a18",
-        "name": "",
-        "x": 573,
-        "y": 902,
-        "wires": [
-            [
-                "9e2b57dc.b17448",
-                "791150d5.04aae"
+                "22ea60b7.c45d48"
             ]
         ]
     },
@@ -798,7 +786,7 @@
         "active": true,
         "console": "false",
         "complete": "false",
-        "x": 770,
+        "x": 890,
         "y": 880,
         "wires": []
     },
@@ -870,7 +858,7 @@
         "y": 929,
         "wires": [
             [
-                "1aebf3aa.c444f4"
+                "22ea60b7.c45d48"
             ]
         ]
     },
@@ -954,23 +942,6 @@
         ]
     },
     {
-        "id": "eaab59eb.e8618",
-        "type": "rpi-gpio in",
-        "z": "b5898652.b556e",
-        "name": "RFID present?",
-        "pin": "7",
-        "intype": "in",
-        "debounce": "",
-        "read": true,
-        "x": 84.5,
-        "y": 70,
-        "wires": [
-            [
-                "b170be0.3c60e4"
-            ]
-        ]
-    },
-    {
         "id": "50e784a7.b2a4b4",
         "type": "exec",
         "z": "b5898652.b556e",
@@ -991,27 +962,6 @@
             [
                 "7866ff92.1495d8"
             ]
-        ]
-    },
-    {
-        "id": "4de42538.df29cc",
-        "type": "exec",
-        "z": "b5898652.b556e",
-        "command": "/home/pi/miab/get_first_ndef_text_record",
-        "addpay": false,
-        "append": "",
-        "useSpawn": "",
-        "timer": "",
-        "name": "Read first text NDEF record",
-        "x": 580,
-        "y": 60,
-        "wires": [
-            [
-                "f536fa11.eebb68",
-                "dcf63ff6.45e4c8"
-            ],
-            [],
-            []
         ]
     },
     {
@@ -1343,7 +1293,7 @@
         "id": "cd38ed8b.96293",
         "type": "subflow:c4a92f1b.12287",
         "z": "b5898652.b556e",
-        "x": 560,
+        "x": 590,
         "y": 380,
         "wires": []
     },
@@ -2503,6 +2453,47 @@
         "wires": [
             [
                 "209d5288.1deb3e"
+            ]
+        ]
+    },
+    {
+        "id": "c502035.e14b98",
+        "type": "rpi-rc522-rfid in",
+        "z": "b5898652.b556e",
+        "name": "RFID present?",
+        "x": 100,
+        "y": 80,
+        "wires": [
+            [
+                "b170be0.3c60e4"
+            ]
+        ]
+    },
+    {
+        "id": "3d109ded.41f7ba",
+        "type": "rpi-rc522-rfid read-ndef",
+        "z": "b5898652.b556e",
+        "name": "Read first NDEF text record",
+        "x": 580,
+        "y": 60,
+        "wires": [
+            [
+                "dcf63ff6.45e4c8",
+                "f536fa11.eebb68"
+            ]
+        ]
+    },
+    {
+        "id": "22ea60b7.c45d48",
+        "type": "rpi-rc522-rfid write-ndef",
+        "z": "afe19cbf.f80a18",
+        "name": "",
+        "x": 610,
+        "y": 900,
+        "wires": [
+            [
+                "791150d5.04aae",
+                "9e2b57dc.b17448"
             ]
         ]
     }

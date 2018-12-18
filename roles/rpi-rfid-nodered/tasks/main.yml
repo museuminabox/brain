@@ -1,8 +1,45 @@
 # Install a base NodeRED system (on a Raspberry Pi)
 ---
 # FIXME use base-nodered as starting point, then install
+  - name: Get libbcm2835
+    get_url: url=http://www.airspayce.com/mikem/bcm2835/bcm2835-1.49.tar.gz dest=/home/pi/bcm2835.tar.gz
+    become: false
+  - name: Unpack libbcm2835
+    unarchive:
+      src: /home/pi/bcm2835.tar.gz
+      dest: /home/pi/
+      remote_src: yes
+    become: false
+  - name: Configure libbcm2835
+    command: ./configure
+    args:
+      chdir: /home/pi/bcm2835-1.49
+      creates: /home/pi/bcm2835-1.49/Makefile
+    become: false
+  - name: Build libbcm2835
+    command: make
+    args:
+      chdir: /home/pi/bcm2835-1.49
+      creates: /home/pi/bcm2835-1.49/libbcm2835.a
+    become: false
+  - name: Check build of libbcm2835
+    command: make check
+    args:
+      chdir: /home/pi/bcm2835-1.49
+  - name: Install libbcm2835
+    command: make install
+    args:
+      chdir: /home/pi/bcm2835-1.49
+      creates: /usr/local/lib/libbcm2835.a
+  - name: Install git # Only needed until node-red-contrib-nfc-rc522 is in npmjs
+    apt: name=git state=present
   - name: Install RFID/NFC NodeRED node
-    npm: name=node-red-contrib-nfc global=yes
+    #npm: name=node-red-contrib-nfc-rc522 global=yes
+    git: repo=git://github.com/museuminabox/node-red-contrib-nfc-rc522.git dest=/usr/lib/node_modules/node-red-contrib-nfc-rc522
+  - name: Install NFC NodeRED dependencies # Only needed until node-red-contrib-nfc-rc522 is in npmjs
+    command: npm i
+    args:
+      chdir: /usr/lib/node_modules/node-red-contrib-nfc-rc522
   - name: Set NodeRED to run as root
     replace: dest=/lib/systemd/system/nodered.service regexp='User=pi' replace='User=root'
     notify:
