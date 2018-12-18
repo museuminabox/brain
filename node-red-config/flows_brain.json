@@ -414,8 +414,8 @@
         "repeat": "",
         "crontab": "",
         "once": true,
-        "x": 140,
-        "y": 440,
+        "x": 120,
+        "y": 480,
         "wires": [
             [
                 "a9a1a5d6.e1f4a8"
@@ -446,8 +446,8 @@
         "active": true,
         "console": "false",
         "complete": "false",
-        "x": 750,
-        "y": 440,
+        "x": 1030,
+        "y": 480,
         "wires": []
     },
     {
@@ -498,7 +498,7 @@
         "type": "subflow:afe19cbf.f80a18",
         "z": "b5898652.b556e",
         "x": 110,
-        "y": 680,
+        "y": 660,
         "wires": []
     },
     {
@@ -594,13 +594,13 @@
         "id": "a9a1a5d6.e1f4a8",
         "type": "subflow:2c85e1fd.fde9ae",
         "z": "b5898652.b556e",
-        "x": 316,
-        "y": 440.5,
+        "x": 320,
+        "y": 480,
         "wires": [
             [
                 "7866ff92.1495d8",
                 "50c51caf.62ed44",
-                "a362cb60.df26e"
+                "50e784a7.b2a4b4"
             ]
         ]
     },
@@ -950,8 +950,8 @@
         "append": "/home/pi/miab/ready.wav",
         "useSpawn": "",
         "name": "We're ready now!",
-        "x": 710,
-        "y": 600,
+        "x": 590,
+        "y": 440,
         "wires": [
             [
                 "7866ff92.1495d8"
@@ -960,7 +960,8 @@
                 "7866ff92.1495d8"
             ],
             [
-                "7866ff92.1495d8"
+                "7866ff92.1495d8",
+                "3d109ded.41f7ba"
             ]
         ]
     },
@@ -972,8 +973,8 @@
         "field": "payload",
         "format": "handlebars",
         "template": "1",
-        "x": 520,
-        "y": 480,
+        "x": 600,
+        "y": 520,
         "wires": [
             [
                 "9f3230dc.005a2"
@@ -989,8 +990,8 @@
         "set": true,
         "level": "0",
         "out": "out",
-        "x": 730,
-        "y": 480,
+        "x": 830,
+        "y": 520,
         "wires": []
     },
     {
@@ -1296,29 +1297,6 @@
         "x": 590,
         "y": 380,
         "wires": []
-    },
-    {
-        "id": "a362cb60.df26e",
-        "type": "delay",
-        "z": "b5898652.b556e",
-        "name": "Allow time for the \"object not present, kill all audio\" check for RFID at startup to run",
-        "pauseType": "delay",
-        "timeout": "100",
-        "timeoutUnits": "milliseconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "x": 350,
-        "y": 540,
-        "wires": [
-            [
-                "50e784a7.b2a4b4"
-            ]
-        ]
     },
     {
         "id": "ec30111e.2defa8",
