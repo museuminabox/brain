@@ -434,7 +434,7 @@
         "y": 99,
         "wires": [
             [
-                "75886184.68af8"
+                "44ad67f.6239018"
             ]
         ]
     },
@@ -877,7 +877,7 @@
         "type": "function",
         "z": "3e6589d1.eeda5e",
         "name": "Build URL",
-        "func": "// Return an entirely new message in case the existing\n// one has any remnants of prior web requests\nreturn { \n    url: \"https://heart.museuminabox.org/api/boxes/\"+context.global.box_settings.id+\"/sync.json\",\n    method: \"POST\",\n    payload: { \"software_version\": context.global.software_version }\n};\n",
+        "func": "// Return an entirely new message in case the existing\n// one has any remnants of prior web requests\nreturn { \n    url: \"https://heart.museuminabox.org/api/boxes/\"+context.global.box_settings.id+\"/sync.json\",\n    method: \"POST\",\n    payload: { \"software_version\": context.global.software_version, \"mac_addr\": context.global.mac_addr }\n};\n",
         "outputs": 1,
         "noerr": 0,
         "x": 240,
@@ -2619,6 +2619,43 @@
         "wires": [
             [
                 "44be6096.0e933"
+            ]
+        ]
+    },
+    {
+        "id": "44ad67f.6239018",
+        "type": "exec",
+        "z": "2c85e1fd.fde9ae",
+        "command": "ip",
+        "addpay": false,
+        "append": "link show wlan0 | grep link",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "Work out our WiFi MAC address",
+        "x": 260,
+        "y": 200,
+        "wires": [
+            [
+                "8e98fdb5.ef8018"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "8e98fdb5.ef8018",
+        "type": "function",
+        "z": "2c85e1fd.fde9ae",
+        "name": "Extract the relevant part",
+        "func": "var addr = msg.payload.trim().split(\" \")[1];\ncontext.global.mac_addr = addr;\nmsg.payload = addr;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 570,
+        "y": 200,
+        "wires": [
+            [
+                "75886184.68af8"
             ]
         ]
     }
