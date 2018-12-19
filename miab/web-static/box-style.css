@@ -1,0 +1,98 @@
+body { 
+	font-family: Verdana, "Helvetica Neue", Arial, sans-serif;
+	padding: 50px; 
+}
+nav a {
+	vertical-align: middle;
+	margin: 0;
+	display: inline-block;
+	padding-right: 20px;
+}
+a {
+	color: #1EAEDB;
+}
+.header {
+	padding: 10px;
+	border-bottom: 1px dotted black;
+	margin-bottom: 20px;
+}
+.header img {
+	width: 40px;
+}
+.header h1 { 
+	font-weight: normal;
+	font-family: Monospace; 
+}
+.header h1 a { 
+	font-weight: normal; 
+}
+.admin {
+	background-color: #fcfcdd;
+}
+
+li {
+	line-height: 2em;
+}
+
+.object-list {
+	clear: both;
+	margin-top: 40px;
+}
+.object-list ul { 
+	list-style-type: none; 
+}
+.object-list li { 
+	text-align: center;
+	width: 180px; 
+	height: 180px; 
+	float: left; 
+	display: block; 
+	margin: 10px; 
+	padding: 10px; 
+	background: #f6f6f0; 
+}
+.object-list li div { 
+	height: 100px; 
+}
+.object-list li img { 
+	height: 100px; 
+}
+.object-list li p { 
+	margin: 5px; 
+	height: 15px; 
+	text-align: center; 
+}
+.object-list .print {
+	margin-bottom: 20px; 
+}
+.object-list .working, .working { 
+	background: #eef; 
+}
+.object-list .ok, .ok { 
+	background: #dfd; 
+}
+.object-list .failed, .failed { 
+	background: #fbb; 
+}
+label { 
+	width: 20em; 
+	display: inline-block; 
+	text-align: right; 
+}
+input {
+	font-size: 24px;
+}
+input#save { 
+	background: #ff0; 
+	width: 120px; 
+	border: 0; 
+	border-radius: 10px; 
+	height: 40px; 
+	display: block; 
+	margin: 1em 22em; 
+	font-weight: bold; 
+}
+.failed p { 
+	color: red; 
+	font-weight: bold; 
+}
