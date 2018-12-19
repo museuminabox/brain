@@ -961,7 +961,7 @@
             ],
             [
                 "7866ff92.1495d8",
-                "3d109ded.41f7ba"
+                "5ac2bc3e.9b6d9c"
             ]
         ]
     },
@@ -2564,6 +2564,29 @@
         "wires": [
             [
                 "e4735bdc.9b824"
+            ]
+        ]
+    },
+    {
+        "id": "5ac2bc3e.9b6d9c",
+        "type": "delay",
+        "z": "b5898652.b556e",
+        "name": "Pause briefly between \"ready\" and object audio",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 920,
+        "y": 400,
+        "wires": [
+            [
+                "3d109ded.41f7ba"
             ]
         ]
     }
