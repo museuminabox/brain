@@ -20,7 +20,7 @@
 
 module.exports = {
     // the tcp port that the Node-RED web server is listening on
-    uiPort: 80,
+    uiPort: 1880,
 
     editorTheme: { menu: { "menu-item-help": {
         label: "Node-RED Pi Website",
