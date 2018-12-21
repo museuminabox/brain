@@ -2648,7 +2648,7 @@
         "type": "function",
         "z": "2c85e1fd.fde9ae",
         "name": "Extract the relevant part",
-        "func": "var addr = msg.payload.trim().split(\" \")[1];\ncontext.global.mac_addr = addr;\nmsg.payload = addr;\nreturn msg;",
+        "func": "var addr = msg.payload.trim().split(\" \")[1];\nif (addr === undefined) {\n    // In case we're on a box with no WiFi (or the WiFi doesn't get parsed correctly)\n    addr = \"\";\n}\ncontext.global.mac_addr = addr;\nmsg.payload = addr;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 570,
