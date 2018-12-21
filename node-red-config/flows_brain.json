@@ -773,8 +773,7 @@
         "y": 1080,
         "wires": [
             [
-                "9e2b57dc.b17448",
-                "22ea60b7.c45d48"
+                "9e2b57dc.b17448"
             ]
         ]
     },
@@ -787,7 +786,7 @@
         "console": "false",
         "complete": "false",
         "x": 890,
-        "y": 1080,
+        "y": 1060,
         "wires": []
     },
     {
@@ -1490,14 +1489,15 @@
         "z": "afe19cbf.f80a18",
         "name": "Catch any errors writing tags",
         "scope": [
-            "1aebf3aa.c444f4"
+            "22ea60b7.c45d48"
         ],
         "x": 360,
         "y": 1240,
         "wires": [
             [
                 "9e2b57dc.b17448",
-                "97afb1d0.66cfe8"
+                "97afb1d0.66cfe8",
+                "33040026.c38fe"
             ]
         ]
     },
@@ -2376,7 +2376,7 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 990,
+        "x": 1010,
         "y": 960,
         "wires": []
     },
@@ -2471,7 +2471,8 @@
         "wires": [
             [
                 "791150d5.04aae",
-                "9e2b57dc.b17448"
+                "9e2b57dc.b17448",
+                "9633e75c.945018"
             ]
         ]
     },
@@ -2657,6 +2658,44 @@
             [
                 "75886184.68af8"
             ]
+        ]
+    },
+    {
+        "id": "33040026.c38fe",
+        "type": "exec",
+        "z": "afe19cbf.f80a18",
+        "command": "play",
+        "addpay": false,
+        "append": "/home/pi/miab/sticker-write-error.wav",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "Tell the user there was a problem too",
+        "x": 690,
+        "y": 1300,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "9633e75c.945018",
+        "type": "exec",
+        "z": "afe19cbf.f80a18",
+        "command": "play",
+        "addpay": false,
+        "append": "/home/pi/miab/sticker-written.wav",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "Tell the user we succeeded",
+        "x": 920,
+        "y": 1120,
+        "wires": [
+            [],
+            [],
+            []
         ]
     }
 ]
