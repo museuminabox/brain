@@ -14,6 +14,7 @@ version() {
 if [ -d /home/pi/miab ]
 then
         # Turn on the progress LEDs
+	sleep 0.5 # Pause briefly to give the soundcard time to be ready (issue #87)
         play /home/pi/miab/booting.wav
         sleep 1.5
 	# Check which version of the hardware we're running on
