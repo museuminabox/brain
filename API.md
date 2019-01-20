@@ -181,6 +181,9 @@ JSON:
   "prints": [
     {
       "id": 12,
+      "name": "thing_name",
+      "collection_id": 11,
+      "collection_name": "Ancient Egypt: Daily Lives"
       "url": "https://museuminabox.herokuapp.com/boxes/12/",
       "brain_type": "audio",
       "image_url": "https://museuminabox.s3.amazonaws.com/prints/images/95e5e0bd-a724-4ba2-8004-a2abb92896a5.jpg",
@@ -189,6 +192,9 @@ JSON:
      },
      {
       "id": "8e12b719-3c76-4a6a-9465-1087697acc61",
+      "name": "thing_name",
+      "collection_id": 110,
+      "collection_name": "Barnsley Museums - Collections 1-6"
       "url": "https://museuminabox.herokuapp.com/boxes/34/",
       "brain_type": "audio",
       "image_url": "https://museuminabox.s3.amazonaws.com/prints/images/95e5e0bd-a724-4ba2-8004-a2abb92896a5.jpg",
