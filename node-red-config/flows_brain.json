@@ -142,15 +142,15 @@
                 "y": 100,
                 "wires": [
                     {
-                        "id": "6c987ced.c3ae94"
+                        "id": "2c073438.5f643c"
                     }
                 ]
             }
         ],
         "out": [
             {
-                "x": 1160,
-                "y": 240,
+                "x": 1180,
+                "y": 420,
                 "wires": [
                     {
                         "id": "761e4520.6ac67c",
@@ -873,23 +873,6 @@
         "wires": []
     },
     {
-        "id": "6c987ced.c3ae94",
-        "type": "function",
-        "z": "3e6589d1.eeda5e",
-        "name": "Build URL",
-        "func": "// Return an entirely new message in case the existing\n// one has any remnants of prior web requests\nreturn { \n    url: \"https://heart.museuminabox.org/api/boxes/\"+context.global.box_settings.id+\"/sync.json\",\n    method: \"POST\",\n    payload: { \"software_version\": context.global.software_version, \"mac_addr\": context.global.mac_addr }\n};\n",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 240,
-        "y": 100,
-        "wires": [
-            [
-                "6d4612aa.78327c",
-                "e27f63df.ebfb4"
-            ]
-        ]
-    },
-    {
         "id": "6d4612aa.78327c",
         "type": "http request",
         "z": "3e6589d1.eeda5e",
@@ -898,8 +881,8 @@
         "ret": "obj",
         "url": "",
         "tls": "",
-        "x": 510,
-        "y": 100,
+        "x": 530,
+        "y": 280,
         "wires": [
             [
                 "27712e00.0d3722"
@@ -914,8 +897,8 @@
         "func": "var urls = \"\";\nfor (i=0; i < msg.payload.prints.length; i++)\n{\n    urls = urls + \"\\n\" + msg.payload.prints[i].brain_url_audio;\n}\nmsg.payload = urls;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 310,
-        "y": 240,
+        "x": 330,
+        "y": 420,
         "wires": [
             [
                 "f77c3880.8a7d78"
@@ -933,8 +916,8 @@
         "timer": "",
         "oldrc": false,
         "name": "Download media files",
-        "x": 960,
-        "y": 240,
+        "x": 980,
+        "y": 420,
         "wires": [
             [],
             [],
@@ -1025,8 +1008,8 @@
         "tosidebar": true,
         "console": false,
         "complete": "false",
-        "x": 450,
-        "y": 40,
+        "x": 470,
+        "y": 220,
         "wires": []
     },
     {
@@ -2222,8 +2205,8 @@
         "appendNewline": false,
         "createDir": false,
         "overwriteFile": "true",
-        "x": 640,
-        "y": 240,
+        "x": 660,
+        "y": 420,
         "wires": [
             [
                 "761e4520.6ac67c"
@@ -2697,6 +2680,60 @@
             [],
             [],
             []
+        ]
+    },
+    {
+        "id": "2c073438.5f643c",
+        "type": "exec",
+        "z": "3e6589d1.eeda5e",
+        "command": "ifconfig",
+        "addpay": false,
+        "append": "wlan0 | grep 'inet '",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "Work out our WiFi IP address",
+        "x": 290,
+        "y": 100,
+        "wires": [
+            [
+                "d189e3aa.aaf258"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "d189e3aa.aaf258",
+        "type": "function",
+        "z": "3e6589d1.eeda5e",
+        "name": "Extract the relevant part",
+        "func": "var addr = msg.payload.trim().split(\" \")[1];\nif (addr === undefined) {\n    // In case we're on a box with no WiFi (or the WiFi doesn't get parsed correctly)\n    addr = \"\";\n}\ncontext.global.box_ip = addr;\nmsg.payload = addr;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 590,
+        "y": 120,
+        "wires": [
+            [
+                "8ab251ae.531ab"
+            ]
+        ]
+    },
+    {
+        "id": "8ab251ae.531ab",
+        "type": "function",
+        "z": "3e6589d1.eeda5e",
+        "name": "Build URL",
+        "func": "// Return an entirely new message in case the existing\n// one has any remnants of prior web requests\nreturn { \n    url: \"https://heart.museuminabox.org/api/boxes/\"+context.global.box_settings.id+\"/sync.json\",\n    method: \"POST\",\n    payload: { \"software_version\": context.global.software_version, \"mac_addr\": context.global.mac_addr, \"box_ip\": context.global.box_ip }\n};\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 260,
+        "y": 240,
+        "wires": [
+            [
+                "e27f63df.ebfb4",
+                "6d4612aa.78327c"
+            ]
         ]
     }
 ]
