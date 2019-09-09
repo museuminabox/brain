@@ -1,0 +1,13 @@
+# Set up i2c Real Time Clock (RTC) module to track the date/time
+---
+  - name: Add the RTC device overlay
+    blockinfile:
+      dest: /boot/config.txt
+      block: |
+        dtoverlay=i2c-rtc,pcf8523
+  - name: Remove fake hwclock
+    apt: name=fake-hwclock state=absent
+  - name: Disable fake-hwclock service
+    service: name=fake-hwclock enabled=no
+  - name: Update clock script to skip early-exit-if-/run/systemd/system exists
+    replace: dest=/lib/udev/hwclock-set regexp='/run/systemd/system' replace="/non-existent-location-to-skip-this-test/run/systemd/system"
