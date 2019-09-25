@@ -2,7 +2,7 @@
 
 [Unit]
 Description=Museum in a Box boot progress
-Wants=local-fs.target
+Wants=sound.target paths.target setup-soundcard.service
 
 [Service]
 Type=simple

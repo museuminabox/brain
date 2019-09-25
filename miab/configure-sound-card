@@ -10,7 +10,7 @@ ALSA_CARD=`aplay -l | grep ALSA | cut -c 6 | uniq`
 HIFIBERRY_CARD=`aplay -l | grep hifiberry | cut -c 6 | uniq`
 
 # If we're on a Pi Zero, assume we're using a Phat DAC, otherwise assume ALSA
-if [[ "$PI_VERSION" == *Zero* ]]
+if [[ "$PI_VERSION" == *Zero* || "$PI_VERSION" == *A* ]]
 then
   USE_SOUND_CARD=$HIFIBERRY_CARD
 else
