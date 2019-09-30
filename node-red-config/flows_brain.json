@@ -2424,7 +2424,7 @@
         "type": "function",
         "z": "afe19cbf.f80a18",
         "name": "Group prints by collection",
-        "func": "// Group the prints by collection\nvar collections = {};\nfor (var i = 0; i < msg.payload.prints.length; i++)\n{\n    var obj = msg.payload.prints[i];\n    if (collections[obj.collection_id] === undefined) {\n        collections[obj.collection_id] = { name: obj.collection_name, prints: [] };\n    }\n    collections[obj.collection_id].prints.push(obj);\n}\n// Now we've got all the prints grouped by collection, flatten the collections into\n// an array because that's all that mustache (the template for formatting) can handle\nmsg.collections = [];\nfor (const key of Object.keys(collections)) {\n    msg.collections.push(collections[key]);\n}\nreturn msg;",
+        "func": "// Group the prints by collection\nvar collections = {};\nfor (var i = 0; i < msg.payload.prints.length; i++)\n{\n    var obj = msg.payload.prints[i];\n    if (collections[obj.collection_id] === undefined) {\n        collections[obj.collection_id] = { name: obj.collection_name, prints: [] };\n    }\n    collections[obj.collection_id].prints.push(obj);\n}\n// Now we've got all the prints grouped by collection, flatten the collections into\n// an array because that's all that mustache (the template for formatting) can handle\nmsg.collections = [];\nfor (var key of Object.keys(collections)) {\n    msg.collections.push(collections[key]);\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 750,
