@@ -148,8 +148,8 @@
         ],
         "out": [
             {
-                "x": 1180,
-                "y": 420,
+                "x": 1160,
+                "y": 480,
                 "wires": [
                     {
                         "id": "761e4520.6ac67c",
@@ -902,7 +902,8 @@
         "y": 420,
         "wires": [
             [
-                "f77c3880.8a7d78"
+                "f77c3880.8a7d78",
+                "71fa65d0.408d14"
             ]
         ]
     },
@@ -917,8 +918,8 @@
         "timer": "",
         "oldrc": false,
         "name": "Download media files",
-        "x": 980,
-        "y": 420,
+        "x": 960,
+        "y": 480,
         "wires": [
             [],
             [],
@@ -2209,9 +2210,7 @@
         "x": 660,
         "y": 420,
         "wires": [
-            [
-                "761e4520.6ac67c"
-            ]
+            []
         ]
     },
     {
@@ -2746,6 +2745,29 @@
                 "9e2b57dc.b17448",
                 "9633e75c.945018",
                 "791150d5.04aae"
+            ]
+        ]
+    },
+    {
+        "id": "71fa65d0.408d14",
+        "type": "delay",
+        "z": "3e6589d1.eeda5e",
+        "name": "Pause to give the file time to write",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 640,
+        "y": 480,
+        "wires": [
+            [
+                "761e4520.6ac67c"
             ]
         ]
     }
