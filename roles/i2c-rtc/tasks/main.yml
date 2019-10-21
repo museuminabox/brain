@@ -5,6 +5,7 @@
       dest: /boot/config.txt
       block: |
         dtoverlay=i2c-rtc,pcf8523
+      marker: '# Ansible Managed RTC block'
   - name: Remove fake hwclock
     apt: name=fake-hwclock state=absent
   - name: Disable fake-hwclock service
