@@ -16,7 +16,7 @@ then
         # Turn on the progress LEDs
 	sleep 0.5 # Pause briefly to give the soundcard time to be ready (issue #87)
 
-        if [-e /boot/box-config.json ]
+        if [ -f /boot/box-config.json ]
         then
                 play /home/pi/miab/box_no_config.wav  # play no config warning sound
         else
