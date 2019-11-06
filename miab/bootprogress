@@ -15,7 +15,14 @@ if [ -d /home/pi/miab ]
 then
         # Turn on the progress LEDs
 	sleep 0.5 # Pause briefly to give the soundcard time to be ready (issue #87)
-        play /home/pi/miab/booting.wav
+
+        if [-e /boot/box-config.json ]
+        then
+                play /home/pi/miab/box_no_config.wav  # play no config warning sound
+        else
+                play /home/pi/miab/booting.wav # all good
+        fi
+
         sleep 1.5
 	# Check which version of the hardware we're running on
 	if [ -f /home/pi/miab/version.txt ]
